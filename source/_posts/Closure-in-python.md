@@ -3,7 +3,6 @@ title: Closure in python
 toc: true
 date: 2020-03-12 14:09:42
 tags:
-- python
 - closure
 - decorator
 categories:

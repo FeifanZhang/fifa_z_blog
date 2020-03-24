@@ -3,7 +3,6 @@ title: REST Framework reflaction
 toc: true
 date: 2020-03-13 12:50:33
 tags:
-- python
 - django
 - restframework
 - reflection

@@ -1,7 +1,6 @@
 ---
 title: REST Framework token
 tags: 
-- python
 - django
 - restframework
 - token

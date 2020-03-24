@@ -2,7 +2,6 @@
 title: Python lambda expression
 toc: true
 tags:
-  - python
   - lambda
   - recursion
   - binary tree
