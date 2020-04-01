@@ -7,7 +7,7 @@ tags:
 - restframework
 - reflection
 categories:
-- [python, django,restframework]
+- [django, restframework, reflection]
 ---
 当我们不知到类里有没有需要的属性以及方法时，通过反射来判断是否存在。
 <!-- more -->

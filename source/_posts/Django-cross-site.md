@@ -7,7 +7,6 @@ tags:
   - cors
   - middleware
 categories:
-  - - python
     - django
     - middleware
 date: 2020-03-19 03:54:53

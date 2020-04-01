@@ -6,9 +6,9 @@ tags:
 - token
 toc: true
 categories:
-    - python
     - django
     - restframework
+    - token
 date: 2020-03-14 21:06:02
 ---
 

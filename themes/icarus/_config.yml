@@ -32,7 +32,7 @@ navbar:
         分类: /categories
         标签: /tags
         工具: /toolRecommand
-        思维导图: /mindmap
+        前端笔记: /frontend
         关于: /about
     # Navigation bar links to be shown on the right
     links:
@@ -114,12 +114,12 @@ sidebar:
     left:
         # Whether the left sidebar is sticky when page scrolls
         # https://ppoffice.github.io/hexo-theme-icarus/Configuration/Theme/make-a-sidebar-sticky-when-page-scrolls/
-        sticky: false
+        sticky: true
     # right sidebar settings
     right:
         # Whether the right sidebar is sticky when page scrolls
         # https://ppoffice.github.io/hexo-theme-icarus/Configuration/Theme/make-a-sidebar-sticky-when-page-scrolls/
-        sticky: false
+        sticky: true
 # Sidebar widget settings
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Widgets/
 widgets:
@@ -157,7 +157,7 @@ widgets:
         # Widget name
         type: toc
         # Where should the widget be placed, left or right
-        position: left
+        position: right
     -
         # Widget name
         type: links
@@ -178,16 +178,16 @@ widgets:
         type: tagcloud
         # Where should the widget be placed, left or right
         position: left
-        
+#    -
 #        # Widget name
 #        type: recent_posts
 #        # Where should the widget be placed, left or right
 #        position: right
-    -
-        # Widget name
-        type: archive
-        # Where should the widget be placed, left or right
-        position: left
+#    -
+#        # Widget name
+#        type: archive
+#        # Where should the widget be placed, left or right
+#        position: left
 #    -
 #        # Widget name
 #        type: tag
