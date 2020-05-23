@@ -33,6 +33,7 @@ navbar:
         标签: /tags
         工具: /toolRecommand
         前端笔记: /frontend
+        画几笔: /gallery
         关于: /about
     # Navigation bar links to be shown on the right
     links:

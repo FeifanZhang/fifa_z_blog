@@ -3,15 +3,13 @@ title: Vue笔记：v系列关键词
 date: 2020-03-24 03:49:21
 toc: true
 tags:
-- v-if
-- v-for
-- v-on
-- v-bind
-- v-model
+- v-templete
 categories:
 - [vue, templete]
 ---
 ## 简介
+v系列关键词即模板关键词，负责HTML元素和Vue框架内的变量进行互动
+<!-- more -->
 ## mustache
 将组件内定义的变量显示在模板里
 ```html 在组件 script 标签内声明变量
@@ -75,9 +73,11 @@ categories:
     }
 </script>
 ```
-v-bind是单向绑定，即data中绑定的变量改变，会引起对应DOM属性改变。而v-model则是双向绑定。
+v-bind是单向绑定，即data中绑定的变量改变，会引起对应DOM属性改变。而v-model则是双向绑定，且`v-blind`绑定的是data内变量和DOM属性。`v-model`则是DOM内显示的变量和data变量。
 ## v-model
-
+```html
+<input type="yourbirth" v-model="yourbirth" name="" placeholder="你的生日是什么时候?">
+```
 
 ## v-if和v-else
 当满足`v-if`的条件时，进行渲染，否则不渲染 `v-if` 和`v-else`和计算机语言中的`if else`一样
