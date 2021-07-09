@@ -29,7 +29,7 @@ Github三大工作区域的介绍以及三者的关系就介绍到这里，三�
 * 在准备上传的项目根目录下，使用`git init`初始化该项目的本地仓库，创建完毕后，通过`ls -al`指令可以看到多了两个文件：`.git`和`.gitignore`，`.git`负责记录版本控制，`.gitignore`内写明了项目中不需要上传的文件（如具体的项目环境依赖、hexo生成的public静态网页等）。
 * 使用命令`git add .`将已有项目的所有文件放入暂存区中,`git add filename`则是将指定文件放入暂存区。
 Hint: through “ls -al” to see if the project have .git file, which mean the project might in other git repository, using “rm -rf .git/” to remove the .git file so that the project would not belong to any repository.
-* 使用 `git commit -m "更新描述"` 提交暂存区代码至本地仓库。
+* 使用 `git commit -m "更新描述` 提交暂存区代码至本地仓库。
 * `git remote add 简写 远程仓库url` 建立本地仓库和远程仓库的连接，这一步骤需要两个参数：`简写`和`远程仓库url`,简写表示该分支的名称，一般为origin，`远程仓库url`是用户github账号下创建的远程仓库链接。
 * 使用`git push -u origin master`将本地仓库代码更新至远程仓库。
 * 可以使用 `git status`查看项目每个文件的当前状态（即文件目前是在工作区、暂存区还是在仓库中）。文件名显示为红色，且显示`untracked files或Changes not staged for commit`，表明该文件在工作区；文件名为绿色且显示`Changes to be committed`，表明文件是在暂存区。
