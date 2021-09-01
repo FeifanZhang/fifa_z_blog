@@ -67,4 +67,11 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
 
 ---
 ## 二：UML图语法
-画图没什么好说的，语法参考[官方文档](https://mermaid-js.github.io/mermaid/#/)。如果画图语法错误，没有报错，只会在文章中空白显示，这里推荐一个[在线mermaid编辑器](https://mermaidjs.github.io/mermaid-live-editor/ )检查语法，也可以将图转化为png或svg文件。网上的mermaid语法格式因为markdown编辑器不一而存在差异，本方法仅测试hexo下的可用性，其他种类的博客请酌情使用。
+### 官方文档
+1. 语法参考[官方文档](https://mermaid-js.github.io/mermaid/#/)。如果画图语法错误，没有报错，只会在文章中空白显示，图中不要使用中文标点符号，否则编译器无法进行识别。
+2. 以下是几种常用的官方教程：[流程图官方教程](https://mermaid-js.github.io/mermaid/#/flowchart)、[时序图官方教程](https://mermaid-js.github.io/mermaid/#/sequenceDiagram)、[类图官方教程](https://mermaid-js.github.io/mermaid/#/classDiagram)、[饼图官方教程](https://mermaid-js.github.io/mermaid/#/pie)、[甘特图官方教程](https://mermaid-js.github.io/mermaid/#/gantt)。
+   
+### 辅助画图神器
+1. 这里推荐一个[在线mermaid编辑器](https://mermaidjs.github.io/mermaid-live-editor/ )，可将图转化为png或svg文件。网上的mermaid语法格式因为markdown编辑器不一而存在差异，本方法仅测试hexo下的可用性，其他种类的博客请酌情使用。
+2. 强烈推荐：`vscode plugin for hexo`文中使用的插件`Markdown Preview Enhanced`内置mermaid渲染引擎，可以实时渲染编辑的UML图。
+

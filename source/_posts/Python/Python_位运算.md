@@ -1,13 +1,13 @@
 ---
-title: Python-bit-operation
+title: Python_位运算
 toc: true
 mathjax: true
 date: 2021-06-16 12:14:42
 tags:
 - python
-- bit-operation
+- bit-位运算
 categories:
-- [python,bit-operation]
+- [python,位运算]
 ---
 文章简述了位运算的操作逻辑、用法并通过leetcode中的算法题目进行举例
 <!-- more -->

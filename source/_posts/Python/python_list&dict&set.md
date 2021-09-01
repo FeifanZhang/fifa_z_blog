@@ -1,5 +1,5 @@
 ---
-title: python list&dict各种操作的时间复杂度比较
+title: Python_list&dict&set
 toc: true
 tags:
   - python
@@ -59,6 +59,8 @@ date: 2021-05-27 11:53:09
 | view         | d.keys()                         | O(1)       |                                                           |
 | constraction | dict(k:v)                        | O(len())   |                                                           |
 | iteration    | d.keys()                         | O(N)       |                                                           |
+|items()|for k, v in dic.items()|O(N)|和enumerate一样，遍历字典内键值对|
+|search the key|key in d OR key not in d|O(1)|返回值为Boolean|
 
 1. 字典插入和查找速度极快，不会因为数据的增多而降低效率。
 2. 其代价就是使用空间换取时间。

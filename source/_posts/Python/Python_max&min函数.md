@@ -1,5 +1,5 @@
 ---
-title: Python max and min method
+title: Python_max&min函数
 toc: true
 mathjax: true
 date: 2021-06-19 22:51:42
@@ -8,7 +8,7 @@ tags:
 - max()
 - min()
 categories:
-- [python,max()&min()]
+- [python,max&min函数]
 ---
 文章介绍了python中`max()`和`min()`面对不同数据类型是如何比较大小，文章包含如下内容：
 - [典型应用场景](#典型应用场景)

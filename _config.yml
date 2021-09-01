@@ -113,12 +113,12 @@ search:
   format: html
   limit: 10000
   
-photozoom:
-    enable: true
-    # Lower priority means that it will be executed first.
-    priority: 10
-    # Show caption at the bottom of photo, default is "true"
-    caption: true
-    # Class name of caption, default is "zoom-initial-caption"
-#    caption_class: 'my-caption'
+# photozoom:
+#     enable: true
+#     # Lower priority means that it will be executed first.
+#     priority: 10
+#     # Show caption at the bottom of photo, default is "true"
+#     caption: true
+#     # Class name of caption, default is "zoom-initial-caption"
+# #    caption_class: 'my-caption'
     

@@ -1,13 +1,13 @@
 ---
-title: Python lambda expression
+title: Python_匿名函数(lambda)
 toc: true
 tags:
-  - lambda
-  - recursion
-  - binary tree
+  - 匿名函数
+  - 递归
+  - 二叉树
 categories:
   - - python
-    - lambda
+    - 匿名函数
 date: 2020-03-15 20:17:09
 ---
 
