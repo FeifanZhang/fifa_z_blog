@@ -1,5 +1,5 @@
 ---
-title: Vue笔记：vuex
+title: Vue_vuex
 date: 2020-03-24 03:49:21
 toc: true
 tags:

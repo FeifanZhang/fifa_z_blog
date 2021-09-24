@@ -1,5 +1,5 @@
 ---
-title: Hexo UML diagram
+title: Hexo_mermaid插件
 date: 2020-03-15 04:49:21
 toc: true
 tags: 

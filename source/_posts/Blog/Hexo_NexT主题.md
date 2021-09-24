@@ -1,5 +1,5 @@
 ---
-title: Hexo theme NexT
+title: Hexo_NexT主题
 date: 2021-06-23 13:08:21
 toc: true
 tags: 
@@ -11,7 +11,7 @@ categories:
 在技术类博客中，会需要展示一些复杂的数学公式，NexT主题提供了第三方服务扩展来满足此类需求，仅对渲染器进行更换并在NexT主题包下的`config.yml`中进行适当修改即可。该文章[Hexo NexT 主题对数学公式的支持](https://www.jianshu.com/p/8424da4dd673)提到了`MathJax`与`KaTeX`两个渲染引擎的调用，本篇文章就着重介绍`MathJax`的使用。
 <!-- more -->
 
-# hexobo'ke
+# hexo博客框架
 ``` bash hexo博客架构
 .
 ├── .deploy          #部署文件夹

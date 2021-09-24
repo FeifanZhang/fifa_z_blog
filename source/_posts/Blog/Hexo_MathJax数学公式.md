@@ -1,5 +1,5 @@
 ---
-title: Hexo math formula
+title: Hexo_MathJax数学公式
 date: 2021-06-18 11:24:21
 toc: true
 tags: 
