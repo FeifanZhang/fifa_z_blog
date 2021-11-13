@@ -68,3 +68,5 @@ categories:
 2. [Hexo 搭建个人博客指南](https://www.jianshu.com/p/c9beedaf08e4)
 3. [MathJax 官网](https://www.mathjax.org/)   
 4. 文章[Mathjax与KaTex渲染数学公式](https://github.com/csjiabin/hexo-theme-next/blob/master/source/_posts/Mathjax%E4%B8%8EKaTex%E6%B8%B2%E6%9F%93%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F.md)介绍了`MathJax`和`KaTex`的使用场景以及两个引擎的底层语法。
+5. [Mahtjax公式教程](https://blog.csdn.net/dabokele/article/details/79577072)是一个快速上手教程
+6. [Mathjax矩阵乘法](https://blog.csdn.net/harrycomeon/article/details/96283564)

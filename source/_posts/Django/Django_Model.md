@@ -1,36 +1,22 @@
 ---
-title: Django model field
+title: Django_ORM
+toc: true
 tags:
-- python
-- django
-- rom
+  - django
+  - Model
 categories:
-- [python, django, rom]
+   - django
+   - Model
+date: 2021-10-08 15:17:53
 ---
-## ROM简介
-ROM (object relational mapping)对象关系映射，是指数据库数和后端之间，数据类型的映射。
-优点：减少数据库和后端的耦合，即使更改成其他数据库，也不会影响后端对数据库操作的代码。
-缺点：python的ROM类型转换为对应的数据库类型耗时，sql语句效率低。
-<!-- more -->
-## 增删查改语句
-### 增
-
-### 删
-通过`delete()`语句实现：
-`delete()`为硬删除，建议前端的删除操作为软删除，这样便于数据的恢复。如果数据确实无用，可在后台进行硬删除。
-以下是不同场景下所对应的`delete`语句：
-```python 检索id进行删除
-word_obj = Word.objects.get(id=word_id)
-word_obj.delete()  
-# 如果用filter，传入的id错误方法不会抛出异常，而且id唯一，所以可以使用get方法
-```
-```python 批量进行删除
-# 不使用get，因为拿到的数据数量大于1个就会报错
-```
-### 查
-### 改
-## 字段类型简介
-字段结构仅介绍每种字段类型的基础使用以及对应的python数据结构
+# 模型层
+* **模型层（Model）：** 负责与数据库进行沟通，Django自带 SQLite数据库，可用于测试，但实际生产中会用mysql数据库进行数据的存储。
+* **模型：** 
+  * python中的一个类，由django.db.models.Model派生而来。
+  * 一个模型类代表一张数据表
+  * 模型类中的属性与数据库的字段一一对应
+  * 模型是与数据交互的接口，是表示与操作数据库的方式
+## 模型层常用字段
 ### 关系字段
 #### Autofield
 作为表的的主键使用，是一个带有自增属性的Integer， 在models.py中不用去定义，django会自动生成
@@ -91,7 +77,10 @@ word = models.TextField("word", max_length=255, default="case_for_textfield", nu
 priority = models.IntegerField(default=0)
 ```
 #### DecimalField
-带有精度的十进制数字，两个关键词必须设置：`max_digits`（变量最大的位数：小数点前位数+小数点后位数）和`decimal_places`（小数点后位数最大值）
+带有精度的十进制数字，关键词`max_digits`以及`decimal_places`必须设置：
+* `max_digits`：位数总数：小数点前位数+小数点后位数
+* `decimal_places`：小数点后位数最大值
+* `max_digits`必须大于`decimal_places`
 ```python
 # 小数点前后位数相加最大为3，小数点后数位不能超过2
 models.DecimalField( max_digits=3, decimal_places=2 )
@@ -112,6 +101,11 @@ owner = models.BooleanField("owner", default=True)
 owner = models.NullBooleanField("owner")
 ```
 ### 时间类
+用来表示日期，时间类会有3个参数：
+* auto_now: 每次保存对象时，自动设置该字段为当前时间（取值为True/False）
+* auto_now_add: 对象第一次被创建时，自动设置当前时间（取值True/False）
+* default:设置当前时间(取值为字符串格式时间，如'2019-01-01')
+* 以上三个参数只能三选一
 #### DateField
 时间字段，只有年月日
 #### TimeField
@@ -120,13 +114,13 @@ owner = models.NullBooleanField("owner")
 时间字段，包括年月日和几时几分
 ```python
 # 设置了auto_now_add，使得DateTimeField的值为创建时的时间
-date_created = models.DateTimeField("date_created", auto_now_add=timezone.now)
+date_created = models.DateTimeField("date_created", auto_now_add=True)
 ```
 ### 文件类
 #### FileField
 #### ImageField
+该模型类对应数据库中的varchar，不是将图片存储为字符串 而是存储图片路径，图片本体需存储在media文件夹中
 ##### 创建media文件夹
-ImageField储存的是文件的路径，所以需要一个文件夹来储存真正的图片本体
 1. 在Django根目录下创建media文件夹（与static平级）
 2. 在setting.py文件末尾添加配置
 ```python
@@ -158,10 +152,17 @@ owner = models.CharField(choices=(('xiaohong', "female"), ('xiaoming', "male")),
 ```
 增删改查`owner`的时候，输入键值对的key（即`xiaohong`和`xiaoming`），来控制`owner`的值
 
----
-## 字段选项详解
-
----
+#### EmailField
+用于存储邮箱，在数据库中仍以varchar形式存储，但django会设计正则表达式使其满足邮箱格式
+## 字段选项
+* primary_key: 数据库的每张表都会默认设置id字段作为主键，若某列将其设置为true，则数据表会以此为主键。
+* null：该选项默认False，即加入`default`选项增添默认值；若设置为True，则允许该列为空
+* default：所在列的默认值，配合 `null = False`使用
+* db_index：设置为True，则为该列增加索引
+* unique：设置为True，表示该字段在数据库中的值唯一
+* db_column：指定该列的名称，不指定的话则列与属性同名
+* verbose_name：设置该字段在admin界面上显示的名称（默认为属性名称）
+* blank: 设置为True则该字段为可以空；False则该字段必须填写。
 ## 字段类型与python数据类型的对应关系
 | python数据类型 | Model字段类型     |
 | -------------- | ----------------- |
@@ -174,14 +175,55 @@ owner = models.CharField(choices=(('xiaohong', "female"), ('xiaoming', "male")),
 | Integer        | IntegerField()    |
 | Decimal        | DecimalField()    |
 | Float          | FloatField()      |
-| String         | FileString()      |
+| String         | FileField()      |
 | String         | ImageField()      |
+## 关系映射
+在设计数据库时，为了让数据库容易扩展，通常不会把所有数据放在一张表中，所以需要一种机制去表示各个表之间的数据关系
+### 一对一映射
+  * 例如：一个身份证号对应一个人
+  * 在ORM中，通过外键`oneToOneField(类名， on_delete=XXX)`进行数据关联
+  * 参数解释：
+    * **类名：** 就是要关联的模型类（又称被引用的数据类型）名称
+    * **on_delete=XXX:** 是级联删除规则,当被引用的类中数据删除时，与之一对一关联数据的删除规则
+      * models.CASCADE：模拟SQL的`ON DELETE CASCADE`:引用的数据删除后，会带着本条数据一起删除
+      * models.PROTECT：发现有关联的数据，直接抛出ProtectedError不予删除（等同于mysql的RESTINCT）
+      * SET_NULL: 被引用的数据删除后，该条数据直接将设置ForignKey为null，前提是要设置外键的`null = True`
+      * SET_DEFAULT：被引用的数据删除后，该条数据直接将设置ForignKey为默认值，前提是要设置外键的`default`值
+  ```python
+  class Author(model.Model):
+      name = models.CharField('作家',max_length=20)
+      ...
+  class Wife(model.Model):
+      name = models.CharField('妻子', max_length=20)
+      husband = models.oneToOneField(Author, on_delete=models.CASCADE)
+  ```
+### 一对多映射
+  * 例如：一个班级会有多个学生
+  * 一对多需要在 **'多'** 的那些表中设置外键`ForeignKey('类名', on_delete=XXX)`
+    ```python
+    class Publisher(models.Model):
+        name = models.CharField('出版社名称', max_length=20)
+    class Book(models.Model):
+        name = models.CharField('书籍名称', max_length=20)
+        publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+    ```
+### 多对多映射
+  * 如：作家与其著作的关系：一个作家可以有多本著作，一本著作也会有多个作家联名撰写
+  * 这种情况下，需要建立第三张表来维护这种数据关系，但Django通过`manyToMantField(MyModel)`字段自动生成
+  ```python
+  class Author (models.Model):
+      name = models.CharField('作家姓名', max_length = 20)
 
+  class Book(models.Model):
+      title = models.CharField('书名', max_length = 20)
+      authors = models.manyToManyField(Author)
+  ```
 ---
-## 参考
+# 参考
 
 [Django中的Model中的字段类型、字段选项与关系类型](https://blog.csdn.net/weixin_38654336/article/details/79843458)
 [Django的AutoField字段](https://blog.csdn.net/weixin_34013044/article/details/86014920)
 [django中的关系字段](https://www.cnblogs.com/Kingfan1993/p/9931447.html)
 [django 框架模型之models常用的Field，这些Field的参数、及常见错误原因及处理方案](https://blog.csdn.net/weixin_37773766/article/details/80330221)
+
 
