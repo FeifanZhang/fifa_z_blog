@@ -200,9 +200,34 @@ categories:
     print(re.sub(r'usa([\d]+)usa([\d]+)', '09', a))  # 090909usa
     # 第二个匹配中，括号没有任何效果，反而是将整个匹配到的字符串整体替换为09
   ```
-
+## split()方法
+* 将满足条件的字符串分割，返回列表，被匹配的字符串不会被返回
+  ```python
+    a = 'aa,bb,cc,dd'
+    print(re.split(r',', a))
+    # ['aa', 'bb', 'cc', 'dd']
+  ```
+* 希望被匹配的子串一起返回，使用`()`进行匹配
+  ```python
+    a = 'aa,bb,cc,dd'
+    print(re.split(r'(,)', a))
+    # ['aa', ',', 'bb', ',', 'cc', ',', 'dd']
+  ```
+* 通过`(?:XXX)`使得`()`中的子串不会被返回
+  ```python
+    a = 'aa,bb,cc,dd'
+    print(re.split(r'(?:,)', a))
+    # ['aa', 'bb', 'cc', 'dd']
+  ```
+* 若干单字符匹配分割时，若匹配字符相邻，返回的list中包含空字符
+    ```python
+        a = 'aa,.bb.cc,dd'
+        print(re.split(r',|\.', a))
+        print(re.split(r'[,\.]', a))
+        # ['aa', '', 'bb', 'cc', 'dd']
+    ```
 ---
 * [Python的re.match()和re.search()的使用和区别](https://blog.csdn.net/weixin_38819889/article/details/93846579)
-* 
+* [Python 中re.split()方法](https://blog.csdn.net/zdz0200/article/details/106003140/)
 
 

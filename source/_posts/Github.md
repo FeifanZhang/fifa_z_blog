@@ -13,6 +13,7 @@ categories:
   - [Git工作区域简介](#git工作区域简介)
   - [仓库的操作以及git协作流程](#仓库的操作以及git协作流程)
 - [Github创建首个项目](#github创建首个项目)
+  - [小问题](#小问题)
 - [常用Git小命令](#常用git小命令)
   - [`git log` 命令](#git-log-命令)
     - [命令简介](#命令简介)
@@ -68,6 +69,8 @@ n file changed, x insertions(+), y deletions(-)
 * `git remote add [简写] [远程仓库url]` 建立本地仓库和远程仓库的连接，这一步骤需要两个参数：`简写`和`远程仓库url`,简写表示该分支的名称，一般为origin，`远程仓库url`是用户github账号下创建的远程仓库链接。
 * 使用`git push -u origin master`将本地仓库代码更新至远程仓库。
 * 可以使用 `git status`查看目前所处项目分支、每个被修改文件的状态（即文件目前是在工作区、暂存区还是在仓库中）。文件名显示为红色，且显示`untracked files（文件首次创建从未被提交）或changes not staged for commit(文件已提交，但内部修改未提交)`，表明该文件在工作区，未被git管理，使用 `git add filename`添加至暂存区；文件名为绿色且显示`Changes to be committed`，表明文件是在暂存区，可通过`git commit`指令提交至本地库。
+## 小问题
+目前github支持通过ssh进行安全认证，而不再是用户名称和密码，官网给大家提供了在[本地生成ssh的方法](https://docs.github.com/cn/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)以及[将ssh添加到github账户的方法](https://docs.github.com/cn/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)。还是那句话，能上官网查就尽量去官网
 # 常用Git小命令
 ## `git log` 命令
 ### 命令简介

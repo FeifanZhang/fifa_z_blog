@@ -8,7 +8,7 @@ tags:
 categories:
 - [python,文件处理]
 ---
-# 文件路径操作模块：OS
+# 文件路径操作
 ## os.listdir
 * 显示path下所有文件(包含扩展名)以及文件夹名称（不包含路径）组成的list
 * 需要访问相应文件或目录需配合`os.path.join`组合成路径进行访问
@@ -66,6 +66,23 @@ categories:
         # /Users/feifanzhang/PycharmProjects/ai/freshMan.py
         # ('', '/Users/feifanzhang/PycharmProjects/ai/freshMan.py')
     ```
+### os.path.dirname
+* 返回文件/文件夹路径的上一级绝对目录
+* 无论输入的路径是否为绝对路径，返回的一律为绝对路径
+  ```python
+  abs_path = path.abspath(r'./Users/feifanzhang/PycharmProjects/ai')
+  abs_folder = (r'/Users/feifanzhang/PycharmProjects/ai')
+  print(path.dirname(abs_path))  # /Users/feifanzhang/PycharmProjects/ai
+  print(path.dirname(abs_folder))  # /Users/feifanzhang/PycharmProjects
+  ```
+### os.path.basename
+* 返回该路径所指的文件/文件夹的名称
+  ```python
+  abs_path = path.abspath(r'./testing.txt')
+  abs_folder = (r'/Users/feifanzhang/PycharmProjects/ai')
+  print(path.basename(abs_path))  # testing.txt
+  print(path.basename(abs_folder))  # ai
+  ```
 
 # 文本文件处理
 ## 文件权限
@@ -86,8 +103,12 @@ categories:
 * **w+:** 该模式下可以读取新写入的信息
 ### 追加模式
 * 任何追加权限下的文件不存在时会自动创建，默认是在文件的最后一个位置写入
+* 若文件不存在则自动创建
 * **a:** 可以追加写入，但无法读取
 * **a+:** 可以追加写入，可读取但指针`seek(0)`才可以从头读取
+### x模式
+* 该模式下，创建一个全新的可写入但不可读取的文件
+* 文件不存在直接创建，若存在则直接抛出异常
 ### b模式
 * 通过二进制进行读写
 * 除任何格式文件均可使用该模式
@@ -97,7 +118,7 @@ categories:
 * 仅针对文本文件
 * 必须指定 `encoding`参数
 ## 指针的操作
-* 无论是写，读还是追加操作，都是以指针为参照，对其后面的内容进行操作
+* 无论是写，读还是追加操作，都是以指针为基准，对其后面的内容进行操作
 * 写、读以及追加操作后，指针的位置也会发生改变
 * `tell`方法可以提供指针目前的位置，`seek`方法可以改变指针的位置，
 ### tell
@@ -110,9 +131,9 @@ categories:
     opqrst
     '''
     with open(os.path.join(abs_path, 'testing.txt'), mode='rb') as f:
-    f.seek(8, 0)
-    f.seek(3, 1)
-    print(f.tell())  # 11
+      f.seek(8, 0)
+      f.seek(3, 1)
+      print(f.tell())  # 11
   ```
 ### seek(移动的字符数，控制模式)
 * 控制模式0：以**文件开头**为参照使指针进行移动(b或t模式下都可使用)
@@ -124,16 +145,16 @@ categories:
     hijkmln
     '''
     with open(os.path.join(abs_path, 'testing.txt'), mode='rb') as f:
-    f.seek(8, 0)  # 以文件开头为参照，向后移动8个字符（到达第二行开头）
-    f.seek(3, 1)  # 以所在行为参照，向后移动三个字符
-    print(f.read())  #  b'kmln'
+      f.seek(8, 0)  # 以文件开头为参照，向后移动8个字符（到达第二行开头）
+      f.seek(3, 1)  # 以所在行为参照，向后移动三个字符
+      print(f.read())  #  b'kmln'
   ```
 * 控制模式2：以**文件结尾**为参照使指针移动(只能在b模式下使用)
 ## 文件内容处理
 ### with open
 * 通过该函数进行文件处理可免去关闭句柄的麻烦
 * **mode**是模式参数（前面提及的w, r, a, b, t等模式）
-* **encoding**是编码参数(b模式下为二进制编码，不得填写该参数，其余模式下例如`utf-8`,`gbk`等其他编码格式)
+* **encoding**是编码参数(b模式下为二进制编码，不得填写该参数，其余模式下可使用如`utf-8`,`gbk`等其他编码格式)
 * 通过`,`将希望同时操作的若干文件同时打开
   ```python
   with open(testing1_path, mode='w', encoding='utf-8') as f1, open(testing2_path, mode='rb') as f2:
@@ -188,7 +209,7 @@ categories:
         b'opqrst'
         '''
   ```
-### write readline
+### write writeline
 ### 音频文件处理
 ```python
 import os
