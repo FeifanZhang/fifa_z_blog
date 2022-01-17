@@ -226,8 +226,40 @@ categories:
         print(re.split(r'[,\.]', a))
         # ['aa', '', 'bb', 'cc', 'dd']
     ```
+## 可选标志修饰符
+* 正则表达式可以包含一些可选标志修饰符来控制匹配的模式。修饰符被指定为一个可选的标志。多个标志可以通过按位 OR(|) 它们来指定。如 re.I | re.M 被设置成 I 和 M 标志  
+
+  |修饰符|描述|
+  |--|--|
+  |re.I|匹配对大小写不敏感|
+  |re.L|做本地化识别（locale-aware）匹配|
+  |re.M|多行匹配，影响 ^ 和 $|
+  |re.S|使 . 匹配包括换行在内的所有字符|
+  |re.U|根据Unicode字符集解析字符。这个标志影响 \w, \W, \b, \B.|
+  |re.X|该标志通过给予你更灵活的格式以便你将正则表达式写得更易于理解。|
+
+### re.I
+  ```python
+  a = re.compile(r'a',re.I)
+  txt = "acbdA"
+  print(a.findall(txt))
+  # ['a', 'A']
+  ```
+
+### re.M
+  ```python
+  a = re.compile(r'^\d+',re.M)  # 匹配行首数字
+  txt = "12ab00\n34cd09\n56 88 "
+  print(a.findall(txt))
+  # ['12', '34', '56']
+
+  a = re.compile(r'\d+$',re.M)  # 匹配行末尾数字
+  txt = "12ab00\n34cd09\n56 88 "
+  print(a.findall(txt)) 
+  # ['00', '09']
+  ```
 ---
 * [Python的re.match()和re.search()的使用和区别](https://blog.csdn.net/weixin_38819889/article/details/93846579)
 * [Python 中re.split()方法](https://blog.csdn.net/zdz0200/article/details/106003140/)
-
+* [Python正则表达式中的re.S，re.M，re.I的作用](https://www.cnblogs.com/feifeifeisir/p/10627474.html)
 

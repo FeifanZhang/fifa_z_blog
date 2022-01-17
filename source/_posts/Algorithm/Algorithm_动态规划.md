@@ -1,5 +1,5 @@
 ---
-title: 爬楼梯(动态规划)
+title: Algorithm_动态规划
 toc: true
 tags:
   - python
@@ -10,6 +10,64 @@ categories:
     - dynamic_programing
 date: 2021-09-05 17:21:09
 ---
+# 动态规划
+## 题目特点
+* 计数
+  * 多少种方式走到右下角
+  * 多少种方法选出k个数使得和为sum
+* 求最值
+  * 左上到右下角路径的最大数字和
+  * 最长上升子序列长度
+* 存在性问题
+  * 取石子游戏，先手是否必胜
+  * 能否选出K个数使得和为sum
+# Coin Change
+有三种硬币：2，5，7。每种硬币数量不限，一本书27块钱，用最少的硬币组合凑出27元且不用老板找钱
+## 解题思路
+1. 确定状态
+   1. 动态规划解题时一定会开数组，弄清楚数组内每个元素(`f[i]` or `f[i][j]`)的含义
+   2. 确定状态需要有两种意识
+      1. 最后一步
+         1. 虽然不知道最优策略是啥，但它的最后一步一定是K枚硬币，$a_1, a_2, ..., a_k$相加得27
+         2. 那么倒数第二步(即K-1枚硬币)相加得$27-a_k$，由此可得出**子问题**
+      2. 子问题
+         1. 最少多少枚硬币可以拼出$27-a_k$
+         2. 函数$f(x)$：最少用多少硬币拼出x
+         3. 最后一枚硬币的可能性如下所示
+            1. 最有一个是2：$f(27) = f(27-2) + 1$
+            2. 最后一个是5：$f(27) = f(27-5) + 1$
+            3. 最后一个是7：$f(27) = f(27-7) + 1$
+            4. 所以最少的硬币数：$f(27) = min(f(27-2), f(27-5), (27-7))+1$
+            5. 所以可以确定出一个公式，称其为**状态转移方程**
+      3. 状态转移方程
+         1. $f[x]= min(f(x-2), f(x-5), (x-7))+1$
+      4. 确定初始情况 & 边界情况
+         1. `f[0]` & `f[1]` & `f[3]` & `f[6]`无法拼凑 设为正无穷
+         2. `f[2]` & `f[5]` & `f[7]`设置为1
+# Unique Path
+* 给定m * n 网格，机器人从(0,0)出发，每一步只能向下 or 向右，有多少种方式走到右下角
+## 解题思路
+**最后一步** ：当机器人走到$(m, n)$时，因为只能向下或向右，所以是通过$(m, n-1)$ or $(m-1,n)$过来的。也就是说走到$(m,n)$的方法是走到$(m-1,n)$与$(m,n-1)$的方法和，所以**状态转移方程**为 `f[m][n] = f[m-1][n] + f[m][n-1]`。最后**确定初始情况 & 边界情况**:当$m=0$ 或$n=0$时，走到这些位置的方法只有1种
+```python
+
+def num_of_way(m, n):
+    # 初始化一个 m*n的矩阵 默认值为 0
+    dp = [[0 for _ in range(m)]] * n
+    dp[0] = [1, 1, 1, 1]
+
+    # 边界情况
+    for idx, num in enumerate(dp):
+        dp[idx][0] = 1
+
+    # 子问题计算
+    for i in range(n):
+        for j in range(m):
+            if i != 0 and j != 0:
+                # 状态转移方程
+                dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    # 返回最终结果
+    return dp[-1][-1]
+```
 # 爬楼梯
 ## 题目简介
 假设你正在爬楼梯。需要 n 阶你才能到达楼顶，每次可以爬 1 或 2 个台阶，有几种不同的方法可以爬到楼顶呢？
@@ -41,10 +99,10 @@ def stair(sta_num: int) -> int:
         dp[i] = dp[i-1] + dp[i-2]
     return dp[-1]
 ```
-# 进阶版爬楼梯
+## 进阶版爬楼梯
 假设你正在爬楼梯，每次最大可跨越stp个台阶，有几种不同的方法可以爬到第n个阶梯呢？
-## 算法思路
-## 代码实现
+### 算法思路
+### 代码实现
 ```python
 # 动态规划爬楼梯
 def stair(sta_num: int, stp: int) -> int:
@@ -99,4 +157,33 @@ def stair(sta_num: int, stp: int) -> int:
         dp[i] = sum(dp[i-stp:i])
 
     return dp[-1]
+```
+
+# 股票买入
+## [基础版](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock)
+* 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。只能买一次，卖一次，而且是先买后卖，设计一个算法来计算你所能获取的最大利润。返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
+```python
+def maxProfit(self, prices: List[int]) -> int:
+    # 0:当天未持股的利润·；1：当天持股的利润
+    dp = [[0,0]for _ in range(len(prices))]
+    dp[0][0], dp[0][1] = 0, -prices[0]
+    for idx in range(1, len(prices)):
+        dp[idx][0] = max(dp[idx-1][0], dp[idx-1][1]+prices[idx])
+        dp[idx][1] = max(dp[idx-1][1], -prices[idx])
+    return dp[-1][0] if dp[-1][0] > 0 else 0
+```
+
+## [进阶版](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii)
+* 给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
+设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。但必须在再次购买前出售掉之前的股票。
+```python
+def maxProfit(self, prices: List[int]) -> int:
+    # dp[i][0]:第i天手中无股票的收益
+    # dp[i][1]:第i天手中有股票的收益
+    dp = [[0, 0] for _ in range(len(prices))]
+    dp[0][0], dp[0][1] = 0, -prices[0]
+    for i in range(1, len(prices)):
+        dp[i][1] = max(dp[i-1][0] - prices[i], dp[i-1][1])
+        dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+    return dp[-1][0] if(dp[-1][0]) > 0 else 0
 ```

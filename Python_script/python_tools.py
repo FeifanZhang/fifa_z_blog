@@ -3,74 +3,96 @@ from os import path, walk, mkdir
 import re
 import time
 import requests
-
-
-# http://www.useragentstring.com/pages/useragentstring.php?name=Chrome  user agent 网站
-headers = {
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
-    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
-}
-proxies = {'http': None, 'https': None}
-requests.adapters.DEFAULT_RETRIES = 5
-
-source = path.abspath(r'./source')
-log_rt = r'./logs'
+import random
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def gen_log(func):
-    def inner_func():
+    log_rt = r'./logs'
+    def inner_func(self, *args):
         log_path = path.join(log_rt, func.__name__)
         if not path.exists(log_path):
             mkdir(log_path)
-        with open(path.join(log_path, time.strftime('%Y_%m_%d_%H:%M:%S', time.localtime(time.time()))+'.log'), 'w', encoding='utf-8') as f:
-            f.write(func())   
+        
+        with open(path.join(log_path, f"{time.strftime('%Y_%m_%d_%H:%M:%S')}.log"), 'w', encoding='utf-8') as f:  
+            o = func(self, *args)
+            f.write(o)   
     return inner_func
 
-@gen_log
-def check_url():
-    check_lst = []
-    result = ''
-    # ssl._create_default_https_context = ssl._create_unverified_context
+class CheckMD(object):
 
-    for i in walk(source):
-        check_lst += [path.join(i[0], f) for f in i[2] if re.search(r'.(\.md|\.html)$', f) is not None ]
-    for i in check_lst:
-        pattern = re.compile(r'\[.+?\]\(([^#].+?)\)')
-        print('checking ', i, ' file')
-        with open(i, 'r', encoding='utf-8') as f:
-            max_connt = 2
-            for line in f:
-                url, cnt = pattern.search(line), 0
-                if url is None:
-                    continue
-                while cnt <= max_connt:
-                    try:
-                        # 防止某些网站ssl失效或不信任
-                        # https://www.cnblogs.com/liu-ke/p/14319803.html
-                        requests.packages.urllib3.disable_warnings()
-                        resp = requests.get(url.group(1), headers=headers,proxies=proxies,timeout=20, verify=False)
-                        if resp.status_code != requests.codes.ok:
-                            result +='\t'.join([i, url.group(1), str(resp.status_code)]) + '\n'
-                        break
-                    except Exception as e:
-                        if cnt == max_connt:
-                            result += '\t'.join([i, url.group(1), str(e)]) + '\n'
-                        else:
-                            time.sleep(3)
-                        continue
-                    finally:
-                        cnt += 1
-    return result
+    headers = {
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    }
+    proxies = {'http': None, 'https': None}
 
-def check_MathJax():
-    pass
+    requests.adapters.DEFAULT_RETRIES = 3
+    requests.packages.urllib3.disable_warnings()
 
-def check_mermaid():
-    pass
+    def __get_file_lst():
+        file_lst_ = []
+        for i in walk(path.abspath(r'./source')):
+            file_lst_  += [path.join(i[0], f) for f in i[2] if re.search(r'.(\.md|\.html)$', f) is not None ] 
+        return file_lst_ 
+
+    file_lst = __get_file_lst()
 
 
-def gen_log():
-    pass
+    def __init__(self) -> None:
+        self.url_pattern = re.compile(r'\[.+?\]\(([^#].+?)\)')
+        self.mermaid_pattern = None
+        self.mathjax_pattern = None
+        super().__init__()
+
+
+    def __get_pattern(self, file_path, pattern_):
+        match_lst = []
+        with open(file_path, 'r', encoding='utf-8') as f:
+            match_lst += pattern_.findall(f.read())
+        return [(file_path, url) for url in match_lst]
+
+    def __check_pattern_status(self, match):
+        res = ''
+        try:
+            respon = requests.get(match[1], 
+                                headers=CheckMD.headers,
+                                proxies=CheckMD.proxies,
+                                timeout=10, 
+                                verify=False)
+            if respon.status_code != requests.codes.ok:
+                res +='\t'.join(list(match) + [str(respon.status_code)]) + '\n'
+        except Exception as e:
+            res += '\t'.join(list(match) + [str(e)]) + '\n'
+        finally:
+            time.sleep(random.randrange(1, 4))
+        return res
+        
+    @gen_log
+    def check_URL(self):
+        result = ''
+
+        with ThreadPoolExecutor() as pool:
+            match_lst = pool.map(self.__get_pattern, CheckMD.file_lst, [self.url_pattern]*len(CheckMD.file_lst))
+            match_lst = [i for item in match_lst for i in item ]
+
+        with ThreadPoolExecutor() as pool:
+            futures = [pool.submit(self.__check_pattern_status, i )for i in match_lst]
+            for idx, future in enumerate(as_completed(futures)):
+                schedule = (idx+1) / len(futures) * 100
+                print("\rchecking process: {:.2f}%".format(schedule), end='')
+                result += future.result()
+
+        print(f'check finished')
+        return ''.join(result)
+
+
+
+    def check_MathJax(self):
+        pass
+
+    def check_mermaid(self):
+        pass
 
 if __name__ == '__main__':
-    check_url()
+    a = CheckMD().check_URL()
