@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color:burlywood;
+            width: 600px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="box"></canvas>
+</body>
+<script>
+    // canvas中画图，需要在js中实现
+    // 从页面中获取 canvas 组件
+    let box = document.getElementById('box')
+    // 从 box 中获取画图工具箱(2d表示平面绘制)
+    let toolBox = box.getContext('2d')
+    // 设置直线
+    // moveTo 为起点坐标
+    toolBox.moveTo(100, 100)
+    // lineTo 为终点坐标
+    toolBox.lineTo(200, 100)
+    // 绘制设置的直线(默认为黑色)
+    toolBox.lineWidth = 2
+    toolBox.stroke()
+</script>
+</html>

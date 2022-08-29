@@ -1,0 +1,5 @@
+* [Spring_IOCBean生命周期](./Content/Article/技术笔记/Java/Spring/IOC/XML注入/Spring_IOCBean生命周期.md)
+* [Spring_IOC内、外部方式注入](./Content/Article/技术笔记/Java/Spring/IOC/XML注入/Spring_IOC内、外部方式注入.md)
+* [Spring_IOC工厂bean](./Content/Article/技术笔记/Java/Spring/IOC/XML注入/Spring_IOC工厂bean.md)
+* [Spring_IOC有参构造](./Content/Article/技术笔记/Java/Spring/IOC/XML注入/Spring_IOC有参构造.md)
+* [Spring_IOC集合注入](./Content/Article/技术笔记/Java/Spring/IOC/XML注入/Spring_IOC集合注入.md)

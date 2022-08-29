@@ -1,0 +1,6 @@
+* [Pytorch_安装](./Content/Article/技术笔记/Python/Pytorch/Pytorch_安装.md)
+* [Pytorch_张量](./Content/Article/技术笔记/Python/Pytorch/Pytorch_张量.md)
+* [Pytorch_模型训练原理](./Content/Article/技术笔记/Python/Pytorch/Pytorch_模型训练原理.md)
+* [Pytorch_神经网络简介](./Content/Article/技术笔记/Python/Pytorch/Pytorch_神经网络简介.md)
+* [Pytorch_线性回归](./Content/Article/技术笔记/Python/Pytorch/Pytorch_线性回归.md)
+* [Pytorch_语音识别简介](./Content/Article/技术笔记/Python/Pytorch/Pytorch_语音识别简介.md)
