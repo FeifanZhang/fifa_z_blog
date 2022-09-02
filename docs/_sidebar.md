@@ -10,6 +10,8 @@
 		* [Hexo_NexT主题](./Content/Article/博客/Hexo/Hexo_NexT主题.md)
 		* [Hexo_VSCode插件](./Content/Article/博客/Hexo/Hexo_VSCode插件.md)
 		* [Hexo_使用指南](./Content/Article/博客/Hexo/Hexo_使用指南.md)
+* **开发平台**
+	* [VSCode](./Content/Article/开发平台/VSCode.md)
 * **我的世界**
 	* [MCSkin3D](./Content/Article/我的世界/MCSkin3D.md)
 	* [MC_下载RTX材质包](./Content/Article/我的世界/MC_下载RTX材质包.md)
@@ -152,6 +154,7 @@
 * **版本管理**
 	* **Git**
 		* [Github](./Content/Article/版本管理/Git/Github.md)
+		* [Git_安装](./Content/Article/版本管理/Git/Git_安装.md)
 	* **SVN**
 		* [SVN_基础操作](./Content/Article/版本管理/SVN/SVN_基础操作.md)
 * **计算机基础**
@@ -162,10 +165,12 @@
 	* **算法**
 		* [Algorithm_动态规划](./Content/Article/计算机基础/算法/Algorithm_动态规划.md)
 		* [摩尔投票法](./Content/Article/计算机基础/算法/摩尔投票法.md)
+		* [算法_位运算](./Content/Article/计算机基础/算法/算法_位运算.md)
 		* [阿拉伯数字转汉字读法](./Content/Article/计算机基础/算法/阿拉伯数字转汉字读法.md)
 	* **网络信息安全**
 		* [MD5](./Content/Article/计算机基础/网络信息安全/MD5.md)
 	* **设计模式**
+		* [设计模式_代理模式](./Content/Article/计算机基础/设计模式/设计模式_代理模式.md)
 		* [设计模式_单例模式](./Content/Article/计算机基础/设计模式/设计模式_单例模式.md)
 		* [设计模式_命令模式](./Content/Article/计算机基础/设计模式/设计模式_命令模式.md)
 		* [设计模式_工厂方法模式](./Content/Article/计算机基础/设计模式/设计模式_工厂方法模式.md)

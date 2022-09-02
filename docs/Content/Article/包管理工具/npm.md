@@ -2,6 +2,7 @@
 * [node.js 安装地址](https://nodejs.org/en/)
 * 目前版本的node.js本身自带npm
 * 安装完成之后，输入`node -v`与 `npm -v`进行检查
+
 ```shell
 PS C:\windows\system32> node -v
 v16.17.0
@@ -10,8 +11,9 @@ PS C:\windows\system32> npm -v
 PS C:\windows\system32>
 ```
 
-# 遇到的问题：系统上禁止脚本运行
+# 遇到的问题(Win10 & Win11)：系统上禁止脚本运行
 * 当执行npm下载的包的命令时，发生如下报错
+
 ```shell
 PS C:\Users\25384\FIFA_Z_Blog\docs> docsify serve docs
 docsify : 无法加载文件 C:\Users\25384\AppData\Roaming\npm\docsify.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅 https:/go.microsoft.com/fwlink/?LinkID=
@@ -36,6 +38,7 @@ docsify : 无法加载文件 C:\Users\25384\AppData\Roaming\npm\docsify.ps1，�
     中的 about_Execution_Policies 帮助主题所述。是否要更改执行策略?
     [Y] 是(Y)  [A] 全是(A)  [N] 否(N)  [L] 全否(L)  [S] 暂停(S)  [?] 帮助 (默认值为“N”): Y
     ```
+
   * 输入`get-ExecutionPolicy`，若返回`RemoteSigned`则证明成功
     ```shell
     PS C:\windows\system32> get-ExecutionPolicy

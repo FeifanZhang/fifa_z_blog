@@ -150,9 +150,6 @@
     ```
 ## 导航栏
 * [Docsify导航栏教程](https://docsify.js.org/#/custom-navbar)
-## 侧边栏
-* []()
-### 导航栏 + 侧边栏
+
 ## 全局搜索
 * [Docsify全局搜索教程](https://docsify.js.org/#/plugins?id=full-text-search)
-# Docsify 部署

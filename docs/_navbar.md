@@ -2,6 +2,7 @@
 * [博客](./Content/Article/博客/)
 	* [Docsify](./Content/Article/博客/Docsify/)
 	* [Hexo](./Content/Article/博客/Hexo/)
+* [开发平台](./Content/Article/开发平台/)
 * [我的世界](./Content/Article/我的世界/)
 * [技术笔记](./Content/Article/技术笔记/)
 	* [Canvas](./Content/Article/技术笔记/Canvas/)
