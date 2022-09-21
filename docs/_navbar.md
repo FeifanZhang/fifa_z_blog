@@ -9,7 +9,6 @@
 	* [CSharp](./Content/Article/技术笔记/CSharp/)
 	* [Java](./Content/Article/技术笔记/Java/)
 	* [Python](./Content/Article/技术笔记/Python/)
-	* [SQL](./Content/Article/技术笔记/SQL/)
 	* [Vue](./Content/Article/技术笔记/Vue/)
 * [数据库](./Content/Article/数据库/)
 	* [Redis](./Content/Article/数据库/Redis/)

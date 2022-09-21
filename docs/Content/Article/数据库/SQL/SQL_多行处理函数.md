@@ -4,14 +4,15 @@
 * **使用区域**：分组函数不得直接使用在`where`中，因为sql关键字的执行顺序：`from -> where -> group by -> select -> order by`，分组函数必须在`group by`之后使用(如果没有group by分组，则默认整个表为一组)，所以可以使用分组函数的关键词有:`select`, `order by`
 
 # 多行处理函数汇总
-|函数名|用途|参数|
-|--|--|--|
-|count|计数|
-|sum|求和|
-|avg|求均值|
-|max|最大值|
-|min|最小值|
-|concat|字符串拼接|`concat(字符串1, 字符串2, ...)`|
+|函数名|用途|参数|适用数据类型|
+|--|--|--|--|
+|count|计数||所有|
+|sum|求和||数字|
+|avg|求均值||数字|
+|max|最大值||数字，时间|
+|min|最小值||数字，时间|
+|concat|字符串拼接|`concat(字符串1, 字符串2, ...)`|字符串|
+|group_concat|字段内容拼接| `group_concat(字段名 order by 字段 DESC/ASC SEPARATOR '*')`|所有|
 * 注意：分组函数的使用，必须先分组，再使用；若没有进行分组，则整张表默认为一组
 
 ## count
@@ -36,14 +37,25 @@
 ## max
 * 找出员工中的最高工资
   * `select ename, max(sal) from emp;`
+* 时间类型：可以通过该函数找到时间最晚的数据
 
 ## min
 * 找出员工的最低工资
   * `select ename, min(sal) from emp;`
+* 时间类型：可以通过该函数找到时间最早的数据
 
 ## concat
 * 字符串拼接
 * `select concat(ename, empno) from emp;`
+
+## group_concat
+* 通过`group by`进行分类，并将结果进行拼接
+* 用法：`group_concat(字段1 order by 字段2 DESC/ASC SEPARATOR 'char')`
+  * 字段1: 进行拼接的字段,通过`group by`之后，会将每个group的结果拼接成一条数据
+  * 字段2：在`group by`之后，指明哪个字段对每个group的结果进行排序
+  * char：一个字符，指明拼接时，用来隔离各种结果的字符
+  * 切记：一定要和`group by`一起使用
+* 示例：[1484. 按日期分组销售产品](https://leetcode.cn/problems/group-sold-products-by-the-date/)
 
 # group by
 * 又称分组函数，用于将给定的字段进行分组
@@ -96,6 +108,9 @@
     having avg(sal) > 2500  # 此时未执行select，所以不能使用avgsal
     order by avgsal desc;  # 先执行的select 在执行 order by 所以可以使用 avgsal
     ```
+
+# 参考
+* [MySQL group_concat()详解](https://blog.csdn.net/weixin_46544385/article/details/120563650)
 
 
 

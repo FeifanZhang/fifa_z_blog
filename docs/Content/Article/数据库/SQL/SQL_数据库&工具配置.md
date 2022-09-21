@@ -5,6 +5,7 @@
 
 # MySql WorkBench
 * MySql WorkBench 是MySql数据库的图形化管理工具
+
 ## 安装
 * 在[官网](https://dev.mysql.com/downloads/workbench/)下载MySql WorkBench
 * 安装不多说，一路next即可

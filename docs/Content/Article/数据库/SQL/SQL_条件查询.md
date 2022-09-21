@@ -25,7 +25,9 @@
   |or|或者|
   |in|包含，相当于多个 or|
   |not|not可以取非，应用于is和in中|
+  |Exists()|关键词括号里的sql语句执行后有数据时，则exists判断为true|
   |like|like为模糊匹配支持`%`,`_`匹配，`%`匹配任一字符，一个`_`匹配一个字符 |
+  |is not|和`<>`与`!=` 相比，多了一个判断是否为null|
 
 ## 等于，不等于，大于，小于，大于等于，小于等于
 * 查询工资为800的员工
@@ -80,6 +82,7 @@
   ```
 
 ## in & not in
+### 用法
 * 查询职级为 SALESMAN 以及 MANAGER 两个级别的员工
   * `select * from emp where job in ('MANAGER', 'SALESMAN');`
 * 查询薪资为 800 & 5000的员工信息
@@ -88,6 +91,37 @@
   * `select * from emp where job not in ('MANAGER', 'SALESMAN');`
 * 注意：
   * in 后面的参数并不是一个区间，而是条件的枚举（区间用`between and`）
+
+### in & not in 条件包含空值
+* 当 `in()`或`not in()`中包含null时，需要单独考虑
+* 比如：下表名为`Names`
+
+  |id|name|
+  |--|--|
+  |1|null|
+  |2|Jack|
+  |3|Nick|
+  |4|Philip|
+  ```sql
+  select id from names where name in (null)  /*即使有name为空的id，返回值仍为空*/
+
+  select id from names where name in (null, 1)  /*只会返回1，会直接无视掉name为null的数据*/
+
+  select id from names where name not in (null) /*只要not in 中包含null，直接返回空*/
+
+  select id from names where name not in (null, 1, 2) /*只要not in 中包含null，直接返回空*/
+  ```
+
+
+## Exists & not Exists
+* 与 `in & not in`相近，当`Exists`后面的表达式有返回值时，则对该条数据的判断为true
+* 判断客户表（Customers）中，有哪些人没有订单（Order）[LeetCode 183. 从不订购的客户](https://leetcode.cn/problems/customers-who-never-order/submissions/)
+  ```sql
+    select name as Customers from Customers C where not exists (
+      select 1 from Orders O where O.CustomerId = C.id
+    )
+  ```
+  `select 1`表明不关心`exists`里面的细节，只要有返回值则为true
 
 ## like (模糊查询)
 * `select 字段名 from 表名 where 字段名 like '条件';`
@@ -106,5 +140,5 @@
 * 找出名字中带有下划线的人
   * `select * from emp where ename like '%\_%';`
 
-
-
+# 参考
+* [SQL语句中in和not in条件包含null的注意点](https://blog.csdn.net/zijikanwa/article/details/116121998)

@@ -5,19 +5,38 @@
 * 任何出现了字段名的地方，都可以添加单行处理函数，如 select where等关键词后
 
 # 单行处理函数汇总
-|函数名|用途|用法|
-|--|--|--|
-|lower|转换小写|`lower(字段名)`|
-|upper|转换大写|`upper(字段名)`|
-|substr|取子串|`substr(字段名,截取起始下标，截取长度)`|
-|length|取长度|`length(字段名)`|
-|trim|去空格|`trim(字段名)` & `trim(字符串)`|
-|str_to_date|字符串转日期|`str_to_date(str, '格式')`|
-|date_format|日期格式化（日期转字符串）|
-|format|设置千分位|
-|round|四舍五入|`round(数字, 保留小数点后几位)`|
-|rand()|生成随机数|
-|ifnull|null转换为一个具体值|`ifnull(字段名, null转换成的具体值)`|
+|函数名|用途|用法|适用的数据库|
+|--|--|--|--|
+|lower|转换小写|`lower(字段名/字符串)`|mysql & oracle|
+|upper|转换大写|`upper(字段名/字符串)`|mysql & oracle|
+|substr|取子串|`substr(字段名/字符串,截取起始下标，截取长度)`|mysql & oracle|
+|left|从字符串左侧取子串|`left(字段名/字符串, 截取长度)`|mysql & oracle|
+|right|从字符串右侧取子串|`right(字段名/字符串, 截取长度)`|mysql & oracle|
+|concat|字符串拼接|`concat(字段名1/字符串1, 字段名2/字符串2)`|mysql & oracle|
+|length|取长度|`length(字段名)`|mysql & oracle|
+|trim|去空格|`trim(字段名)` & `trim(字符串)`|mysql & oracle|
+|str_to_date|字符串转日期|`str_to_date(str, '格式')`|mysql & oracle|
+|diffdate()|日期差值|`DIFFDATE(日期单位,startdate,enddate)`|mysql & oracle|
+|day,month,year|获取日期的天、月、年|`day(字段名)`|mysql|
+|datepart|获取日期的信息|`datepart(时间单位, 日期字段)`|
+|dateadd|日期增加|`dateadd(日期单位, 增加的日期长度,时间字段)`||
+|date_sub|日期减少|`date_sub(日期单位, 减少的日期长度,时间字段)`||
+|datename|获取日期的信息（同`datepart`）|||
+|getdate|获取当前日期|`getdate()`||
+|quarter|获取日期的季度值（返回值为1~4）|`quarter(日期字段/日期值)`||
+|date_format|日期格式化（日期转字符串）||mysql & oracle|
+|format|设置千分位||mysql & oracle|
+|round|四舍五入|`round(数字, 保留小数点后几位)`|mysql & oracle|
+|MOD|取余数|`MOD(除数, 被除数)`|mysql & oracle|
+|rand()|生成随机数||mysql & oracle|
+|rank()|跳跃的，带有间断的排名（数据中出现**3个并列第一**，**1个第二**；则结果的rank为:1，1，1，4）|`rand() over(partition by 字段名1 order by 字段名2 desc/asc)`|mysql|
+|dense_rank()|普通情况下的排名（数据中出现**3个并列第一**，**1个第二**；则结果的rank为:1，1，1，2）|`dense_rand() over(partition by 字段名1 order by 字段名2 desc/asc)`|mysql|
+|row_number()|连续的排名（数据中出现**3个并列第一**，**1个第二**；则结果的rank为:1，2，3，4）|`row_number() over(partition by 字段名1 order by 字段名2 desc/asc)`|mysql|
+|ifnull|对应字段为`null`,则用`defaultValue`代替|`ifnull(字段名, defaultValue)`|mysql|
+|isnull|若`exper`为空返回1，非空返回0|`isnull(exper) `|mysql|
+|nullif|`exper1`=`exper2`，则返回null,其余的返回`exper1`|`nullif(exper1, exper2)`|mysql & oracle|
+|nvl|oracle版`ifnull`，表达的意思，输入参数与`ifnull`完全一样|`nvl(字段名, defaultValue)`|oracle|
+|nvl2|如果`value1`为null，返回`value3`, 否则返回`value2`|`nvl2(value1, value2, value3)`|oracle|
 
 ## lower
 * 将所有人名字转成小写
@@ -56,6 +75,47 @@
 * 当 date = '2020-11'：`str_to_date(date, '%Y')` -> 2020-00-00
 * 若在查询以外的语句进行使用，很有可能会因为字符串`年月日缺失`或`年月日的格式问题`直接报错`error 1292: Truncated incorrect date value`
 
+## DIFFDATE()
+* 函数用于计算两个日期之间的差值`DATEDIFF(日期单位,startdate,enddate)`
+  * `日期单位`: 表明返回的日期单位（年，月，日等）
+    |参数|缩写|备注|
+    |--|--|--|
+    |year|yy, yyyy|年|
+    |quarter|qq,q|季度|
+    |month|mm,m|月|
+    |dayofyear|dy,y|一年中的第几天|
+    |day|dd,d|日|
+    |week|wk，ww|一年中的第几周|
+    |weekday|dw|星期几|
+    |Hour|hh|小时|
+    |minute|mi,n|分钟|
+    |second|ss,s|秒|
+    |millisecond|ms|毫秒|
+    |mns|mns|微秒|
+    |ns|ns|纳秒|
+
+  * `startdate` & `enddate`: 起始日期 & 结束日期
+* `SELECT DATEDIFF(day,'2008-12-29','2008-12-30') AS DiffDate`
+  * 结果
+  |DiffDate|
+  |--|
+  |1|
+
+* `SELECT DATEDIFF(day,'2008-12-30','2008-12-29') AS DiffDate`
+  * 结果
+  |DiffDate|
+  |--|
+  |-1|
+
+## dateadd & date_sub
+* 函数用于增加 / 减少当前时间: `dateadd(日期单位, 增加的日期长度,时间字段)` & `date_sub(日期单位, 增加的日期长度,时间字段)`
+  * 日期单位：单位以`DIFFDATE`中的日期单位为准
+  * 增加的日期长度：数字，正负皆可
+* `dateadd(year, 1, create_time)`: create_time + 1年
+* `dateadd(year, -1, create_time)`: create_time - 1年
+* `date_sub(m, 2, create_time)`: create_time + 2月
+* `date_sub(m, -2, create_time)`: create_time - 2月
+
 ## case
 * 相当于`switch`关键字
 * `case 字段名 when 字段满足条件1 then doSth1 when 字段满足条件2 then doSth2 else doSth3 end`
@@ -64,8 +124,20 @@
     select 
       job,
       ename,
-      (case job when 'manager' then sal * 1.1 when 'salesname' then sal * 1.5 else sal end) as newSal,
-    from emp ;
+      (case job when 'manager' then sal * 1.1 when 'salesname' then sal * 1.5 else sal end) as newSal
+    from emp;
+    ```
+* 除了上述的简单条件判断以外，还可以通过`and`进行复杂条件判断
+  * `case when 条件1 and 条件2 then doSth0 when 条件3 and 条件4 then doSth1 else doSth2 end`
+  * 员工工作`岗位为manager` 且`工资<3000`时，工资上调 10%；`岗位为salesman` 且 `工资<1000`时，工资上调 50%。**注意**：(不修改数据库，仅修改显示的数据)
+    ```sql
+    select
+      job,
+      ename,
+      (case
+      when job = 'manager' and sal < 3000 then sal*1.1
+      then job = 'salesman' and sal <1000 then sal*1.5) as newSal
+      from emp;
     ```
 
 ## round
@@ -83,11 +155,57 @@
 * `rand()` -> 随机生成(0 ~ 1) 之间小数
 * `round(rand()*100, 0)` -> 随机生成(0 ~ 100)之间的浮点数并四舍五入保留到整数位
 
+## rank & dense_rank & row_rank
+* 用法：`rank()/dense_rank()/row_rank() over (partition by 字段1 order by 字段2)`
+* 举例表格(rank)如下所示
+
+  |id|name|score|
+  |--|--|--|
+  |1|a|100|
+  |2|a|90|
+  |3|a|90|
+  |4|b|80|
+  |5|b|70|
+  |6|c|60|
+  |7|d|50|
+
+* `order by`表示以哪个字段值为依据进行排序
+    * `select score, rank() over(order by score desc) as 'rank' from rank`
+    |score|rank|
+    |--|--|
+    |100|1|
+    |90|2|
+    |90|2|
+    |80|4|
+    |70|5|
+    |60|6|
+    |50|7|
+
+* `partition by`为可选参数，先将数据分成若干分区，并**分别**对**每个分区**内的数据进行排名
+  * `select score, rank() over(partition by name order by score desc) as 'rank' from rank`
+    |name|score|rank|
+    |--|--|--|
+    |a|100|1|
+    |a|90|2|
+    |a|90|2|
+    |b|80|1|
+    |b|70|2|
+    |c|60|1|
+    |d|50|1|
+  * 首先将数据根据`name`字段进行分割成不同group，每个group中**独立排序**
+
 ## ifnull
 * `ifnull`为空处理函数：将null转换成具体值
 * 由于在数据库运算中 有null参与的数学运算最后结果都为null，所以需要`ifnull`将null转化为可计算的值
 * 计算员工每个月拿到的工资 + 补助，若没有补助则数据库中`comm`显示`null`
   * `select sal + ifnull(comm, 0) as realSal from emp;`
+* 注意：oracle中关键字为`nvl()`
+  * `select sal + nvl(comm, 0) as realSal from emp;`
+
+# 参考
+* [SQL-DATEDIFF()](https://blog.csdn.net/qq_43223477/article/details/118960747)
+* [SQL 日期函数 day() 、month()、year() 各种使用方法](https://blog.csdn.net/LQZ8888/article/details/113681410)
+* [Mysql常用函数之Rank排名函数](https://blog.csdn.net/weixin_42272869/article/details/116372776)
 
 
 

@@ -86,7 +86,8 @@ tb.Rows.Add(row);
 ```
 
 ## 将DataRow赋值给其他table
-* DataRow无法直接赋值给其他DataTable，需要将Row转换成数组进行赋值，需保证两张表的Columns完全一致
+* DataRow无法直接赋值给其他DataTable，需要将Row通过`ItemArray()`函数转换成数组进行赋值，需保证两张表的Columns完全一致
+* 使用`ItemArray()`该函数时，务必保证两张表Column的顺序，名称，类型完全一致才可以使用
     ```cs
     // 新建一张表 & 插入数据
     var tb = new DataTable("Datas");
