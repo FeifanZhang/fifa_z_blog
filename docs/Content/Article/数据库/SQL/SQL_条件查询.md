@@ -112,6 +112,8 @@
   select id from names where name not in (null, 1, 2) /*只要not in 中包含null，直接返回空*/
   ```
 
+* 多个字段使用`in` + 子查询
+  * [LeetCode184. 部门工资最高的员工](https://leetcode.cn/problems/department-highest-salary/)
 
 ## Exists & not Exists
 * 与 `in & not in`相近，当`Exists`后面的表达式有返回值时，则对该条数据的判断为true

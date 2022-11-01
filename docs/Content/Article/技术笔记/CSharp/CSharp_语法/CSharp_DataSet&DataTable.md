@@ -132,6 +132,30 @@ tb.Rows.Add(row);
     var idList = (infoTable.AsEnumerable()).Select(i => i["ID"]).ToList();
     ```
 
+## DataTable join
+* 主表（`dtMain`）与子表（`dtChild`）进行join，其中主表的`ID`与子表`FK_ID`相关联
+
+    ```csharp
+    // 将两个DataTable进行join操作
+    var query = from rowM in dtMain.AsEnumerable()
+                join rowC in dtChild.AsEnumerable() on rowM["ID"] equals rowC["FK_ID"]
+                select rowM.ItemArray.Concat(rowC.ItemArray).ToArray();
+
+    // 将两张表的表头进行拼接
+    var res = dtPlanning.Clone();
+    foreach (DataColumn colChild in dtChild.Columns)
+    {
+        res.Columns.Add(new DataColumn(colChild.ColumnName));
+    }
+
+    // 将拼接的数据赋值给新拼接的表中
+    foreach(var dr in query.ToList())
+    {
+        res.Rows.Add(dr);
+    }
+    ```
+* 代码限制：未考虑主子表字段名相同时如何处理
+
 # DataSet
 * 由多个DataTable组成
     ```csharp

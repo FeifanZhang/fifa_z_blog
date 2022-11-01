@@ -124,6 +124,8 @@
 	* **Redis**
 		* [Redis_安装](./Content/Article/数据库/Redis/Redis_安装.md)
 	* **SQL**
+		* [MySql_公共表达式](./Content/Article/数据库/SQL/MySql_公共表达式.md)
+		* [MySql_窗口函数](./Content/Article/数据库/SQL/MySql_窗口函数.md)
 		* [Oracle基础表介绍](./Content/Article/数据库/SQL/Oracle基础表介绍.md)
 		* [Oracle用户管理](./Content/Article/数据库/SQL/Oracle用户管理.md)
 		* [SQL_union&limit](./Content/Article/数据库/SQL/SQL_union&limit.md)
@@ -148,6 +150,11 @@
 		* [HTTP](./Content/Article/计算机基础/Http/HTTP.md)
 		* [Http_状态码](./Content/Article/计算机基础/Http/Http_状态码.md)
 		* [HTTP_请求方法](./Content/Article/计算机基础/Http/HTTP_请求方法.md)
+	* **其他小知识**
+		* [数据格式](./Content/Article/计算机基础/其他小知识/数据格式.md)
+	* **操作系统**
+		* [cmd命令](./Content/Article/计算机基础/操作系统/cmd命令.md)
+		* [Liunx实用命令](./Content/Article/计算机基础/操作系统/Liunx实用命令.md)
 	* **算法**
 		* [Algorithm_动态规划](./Content/Article/计算机基础/算法/Algorithm_动态规划.md)
 		* [摩尔投票法](./Content/Article/计算机基础/算法/摩尔投票法.md)
@@ -166,3 +173,5 @@
 		* [设计模式_策略模式](./Content/Article/计算机基础/设计模式/设计模式_策略模式.md)
 		* [设计模式_适配器模式](./Content/Article/计算机基础/设计模式/设计模式_适配器模式.md)
 		* [设计模式_面向对象设计](./Content/Article/计算机基础/设计模式/设计模式_面向对象设计.md)
+* **钢铁**
+	* [炼钢流程](./Content/Article/钢铁/炼钢流程.md)

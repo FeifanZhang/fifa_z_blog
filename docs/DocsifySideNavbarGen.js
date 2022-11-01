@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-// 外部输入
+// max level for nav bar
 const maxLevel = 2;
 
 // generate sidebar in every level
@@ -63,7 +63,6 @@ function genReadme(curPath){
             let readMePath = path.join(curNamePath, "README.md")
             fs.statSync
             // 该文件夹下不存在 README.md 文件，则直接创建
-            // 
             try {
                 fs.statSync(readMePath)
             } catch (error) {

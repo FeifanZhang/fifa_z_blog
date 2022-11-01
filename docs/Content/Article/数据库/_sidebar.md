@@ -1,6 +1,8 @@
 * **Redis**
 	* [Redis_安装](./Content/Article/数据库/Redis/Redis_安装.md)
 * **SQL**
+	* [MySql_公共表达式](./Content/Article/数据库/SQL/MySql_公共表达式.md)
+	* [MySql_窗口函数](./Content/Article/数据库/SQL/MySql_窗口函数.md)
 	* [Oracle基础表介绍](./Content/Article/数据库/SQL/Oracle基础表介绍.md)
 	* [Oracle用户管理](./Content/Article/数据库/SQL/Oracle用户管理.md)
 	* [SQL_union&limit](./Content/Article/数据库/SQL/SQL_union&limit.md)

@@ -24,14 +24,12 @@
 |datename|获取日期的信息（同`datepart`）|||
 |getdate|获取当前日期|`getdate()`||
 |quarter|获取日期的季度值（返回值为1~4）|`quarter(日期字段/日期值)`||
+|dayOfWeek|回去当前日期为星期几|`dayOfWeek()`||
 |date_format|日期格式化（日期转字符串）||mysql & oracle|
 |format|设置千分位||mysql & oracle|
 |round|四舍五入|`round(数字, 保留小数点后几位)`|mysql & oracle|
 |MOD|取余数|`MOD(除数, 被除数)`|mysql & oracle|
 |rand()|生成随机数||mysql & oracle|
-|rank()|跳跃的，带有间断的排名（数据中出现**3个并列第一**，**1个第二**；则结果的rank为:1，1，1，4）|`rand() over(partition by 字段名1 order by 字段名2 desc/asc)`|mysql|
-|dense_rank()|普通情况下的排名（数据中出现**3个并列第一**，**1个第二**；则结果的rank为:1，1，1，2）|`dense_rand() over(partition by 字段名1 order by 字段名2 desc/asc)`|mysql|
-|row_number()|连续的排名（数据中出现**3个并列第一**，**1个第二**；则结果的rank为:1，2，3，4）|`row_number() over(partition by 字段名1 order by 字段名2 desc/asc)`|mysql|
 |ifnull|对应字段为`null`,则用`defaultValue`代替|`ifnull(字段名, defaultValue)`|mysql|
 |isnull|若`exper`为空返回1，非空返回0|`isnull(exper) `|mysql|
 |nullif|`exper1`=`exper2`，则返回null,其余的返回`exper1`|`nullif(exper1, exper2)`|mysql & oracle|
@@ -86,7 +84,7 @@
     |dayofyear|dy,y|一年中的第几天|
     |day|dd,d|日|
     |week|wk，ww|一年中的第几周|
-    |weekday|dw|星期几|
+    |weekday|dw|星期几（返回`1`为周日，`2`为周一 ... 7为周六）|
     |Hour|hh|小时|
     |minute|mi,n|分钟|
     |second|ss,s|秒|
@@ -154,45 +152,6 @@
 * 生成随机数(0 ~ 1)之间
 * `rand()` -> 随机生成(0 ~ 1) 之间小数
 * `round(rand()*100, 0)` -> 随机生成(0 ~ 100)之间的浮点数并四舍五入保留到整数位
-
-## rank & dense_rank & row_rank
-* 用法：`rank()/dense_rank()/row_rank() over (partition by 字段1 order by 字段2)`
-* 举例表格(rank)如下所示
-
-  |id|name|score|
-  |--|--|--|
-  |1|a|100|
-  |2|a|90|
-  |3|a|90|
-  |4|b|80|
-  |5|b|70|
-  |6|c|60|
-  |7|d|50|
-
-* `order by`表示以哪个字段值为依据进行排序
-    * `select score, rank() over(order by score desc) as 'rank' from rank`
-    |score|rank|
-    |--|--|
-    |100|1|
-    |90|2|
-    |90|2|
-    |80|4|
-    |70|5|
-    |60|6|
-    |50|7|
-
-* `partition by`为可选参数，先将数据分成若干分区，并**分别**对**每个分区**内的数据进行排名
-  * `select score, rank() over(partition by name order by score desc) as 'rank' from rank`
-    |name|score|rank|
-    |--|--|--|
-    |a|100|1|
-    |a|90|2|
-    |a|90|2|
-    |b|80|1|
-    |b|70|2|
-    |c|60|1|
-    |d|50|1|
-  * 首先将数据根据`name`字段进行分割成不同group，每个group中**独立排序**
 
 ## ifnull
 * `ifnull`为空处理函数：将null转换成具体值

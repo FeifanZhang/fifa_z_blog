@@ -1,5 +1,3 @@
-# 创建Docsify
-
 # Docsify 插件
 ## 代码高亮
 * [Docsify原生高亮（Prism）简介](https://docsify.js.org/#/language-highlight)，默认支持如下语言代码高亮

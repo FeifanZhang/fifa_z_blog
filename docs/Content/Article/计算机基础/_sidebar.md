@@ -2,6 +2,11 @@
 	* [HTTP](./Content/Article/计算机基础/Http/HTTP.md)
 	* [Http_状态码](./Content/Article/计算机基础/Http/Http_状态码.md)
 	* [HTTP_请求方法](./Content/Article/计算机基础/Http/HTTP_请求方法.md)
+* **其他小知识**
+	* [数据格式](./Content/Article/计算机基础/其他小知识/数据格式.md)
+* **操作系统**
+	* [cmd命令](./Content/Article/计算机基础/操作系统/cmd命令.md)
+	* [Liunx实用命令](./Content/Article/计算机基础/操作系统/Liunx实用命令.md)
 * **算法**
 	* [Algorithm_动态规划](./Content/Article/计算机基础/算法/Algorithm_动态规划.md)
 	* [摩尔投票法](./Content/Article/计算机基础/算法/摩尔投票法.md)

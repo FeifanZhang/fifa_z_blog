@@ -55,3 +55,18 @@ def myprint(str__):
 myprint("ahahaha")
 ```
 Django中，局部注销/添加 csrf token用到了带参数的装饰器。
+
+# 实现一个类中的装饰器
+```python
+class Tool:
+    def upd_log_file(func):
+        def inner(self):
+            func(self)
+            with open('./log.txt', mode='w', encoding='utf-8') as f:
+                f.write('FIFA ! ')
+        return inner
+
+    @upd_log_file
+    def func_test(self):
+        print('in to func_test !')
+```
