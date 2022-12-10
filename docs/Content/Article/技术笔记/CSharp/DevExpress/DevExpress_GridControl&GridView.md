@@ -67,10 +67,11 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
                 col.OptionsColumn.ReadOnly = true;
             }
 
-            // 审批状态中存储的是数字，需要通过文字进行显示
-            if (col.FieldName.Equals(审批状态)) 
+            // 审批状态中存储的是数字编码，需要通过文字进行显示
+            if (col.FieldName.Equals("状态")) 
             { 
                 DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookUpEditSymbol = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+                // 通过DataTable 建立数字状态码与文字的对应关系
                 DataTable dt = new DataTable();
                 dt.Columns.Add("VAL");
                 dt.Columns.Add("DISPLAY");
@@ -81,7 +82,7 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
                 dt.Rows.Add(4, "未提交");
                 lookUpEditSymbol.DataSource = dt;
                 // .DisplayMember就是显示给用户的那一列的列名
-                lookUpEditSymbol.DisplayMember = "DISPLAY"; // DISPLAY这一列将会展示给用户
+                lookUpEditSymbol.DisplayMember = "DISPLAY"; // 将DISPLAY这一列将展示给用户
 
                 // .ValueMember是表中真实存储的那一列的列名
                 lookUpEditSymbol.ValueMember = "VAL";  // 通过VAL这一列与表中的数据进行匹配，当匹配到一行的VAL与表中的数据相等时，将该行的DISPLAY呈现出来
@@ -98,6 +99,68 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
     
 }
 ```
+# 拖拽DataRow时，鼠标悬浮的行高亮显示
+遇见行拖拽的需求，通常会要求在拖拽发生时，高亮显示鼠标所到达的行，以表明该行会是鼠标释放后，被拖拽行所放置的位置
+* 状态记录：鼠标在某一行悬浮时，有两种状态：鼠标按下和没有按下；仅需要拖拽（鼠标按下）时，进行高亮显示，所以需要一个全局变量对鼠标状态进行记录，鼠标按下时的状态记录为1 抬起时记录为0
+* 高亮的配置代码：给`gridControl`添加Paint方法，并在需要`Paint`时调用`gridControl.Refresh()`；该事件在`gridControl`的拖拽事件（`dragOver`）中进行调用
+
+```csharp
+public class TestForm : BaseForm
+{
+    int mouseStatus = 0;  // 记录鼠标状态：0未按下 1按下
+
+    public TestForm()
+    {
+        InitializeComponent();
+        DrawRowLine(gcShow);    
+    }
+    private void gridControl_DragOver(object sender, DragEventArgs e)  // 重写gridControl的拖拽事件，当拖拽发生时，实时调用refresh方法，让gridControl可以及时刷新
+    {
+        gcShow.Refresh();
+    }
+
+    void DrawRowLine(DevExpress.XtraGrid.GridControl grid)
+    {
+        grid.Paint += (s, e) =>
+        {
+            var gridView = grid.FocusedView as GridView;
+            GridViewInfo viewInfo = gridView.GetViewInfo() as GridViewInfo;
+            GridViewRects gridViewRects = viewInfo.ViewRects;
+            // 获取坐标
+            Point gvPoint = gcRollPlan.PointToClient(Control.MousePosition);
+            var idx = gridView.CalcHitInfo(gvPoint);
+            if (idx == null || idx.RowHandle < 0)
+            {
+                return;
+            }
+            var focusedRowInfo = gridViewRects.ViewInfo.RowsInfo.GetInfoByHandle(idx.RowHandle);
+            if (focusedRowInfo != null)
+            {
+                // 高亮行的绘制代码，基于GDI+进行绘制，这里的高亮时对鼠标悬浮行的底边进行黑色加粗
+                var r = focusedRowInfo.DataBounds;
+                Point p1 = new Point(r.X, r.Y + r.Height);
+                Point p2 = new Point(r.X + r.Width, r.Y + r.Height);
+                // 当mouseStatus == 1(即摁下时)，row的底边绘制一条粗的黑线
+                var pen = mouseStatus == 0 ? new Pen(Color.Transparent) : new Pen(Color.Black);
+                pen.Width = mouseStatus == 0 ? 0 : 4;
+                e.Graphics.DrawLine(pen, p1, p2);
+            };
+        };
+
+        (grid.FocusedView as GridView).MouseDown += (s, e) => // 鼠标按下时 记录状态
+        {
+            mouseStatus = 1;
+        };
+        
+        (grid.FocusedView as GridView).MouseUp += (s, e) =>  // 鼠标抬起时 记录状态 并刷新一次gridControl
+        {
+            mouseStatus = 0;
+            grid.Refresh();
+        };
+    }
+}
+```
+
 ---
 # 参考
 - [DevExpress控件之GridControl、GridView](https://blog.csdn.net/weixin_30602505/article/details/95029134)

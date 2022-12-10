@@ -67,15 +67,11 @@
   * `select * from emp where ename = trim('    SMITH  ');`
   * 在实际应用中，匹配的员工姓名是从后台传入的，可能会带有空格，所以需要通过`trim`去除
 
-## str_to_date
-在MySql中格式化输出日期的信息至少是年月日，如果字符串中的信息只有年或年月，函数会自动进行补全
-* 当 date = '2020-11'：`str_to_date(date, '%Y-%m')` -> 2020-11-00
-* 当 date = '2020-11'：`str_to_date(date, '%Y')` -> 2020-00-00
-* 若在查询以外的语句进行使用，很有可能会因为字符串`年月日缺失`或`年月日的格式问题`直接报错`error 1292: Truncated incorrect date value`
+## 日期相关函数
+### 日期单位
+做日期之间的加减法，最后的结果会因为单位不同,而返回值不同（日期`2022-12-10`与`2021-12-10`相减，以`天`为单位,则返回365，以`年`为单位，则返回1）。**日期单位**会以第一个参数的形式传递给时间操作函数(`dateDiff()、datepart()、dateAdd()`)
+*  `日期单位`: 表明返回的日期单位（年，月，日等）
 
-## DIFFDATE()
-* 函数用于计算两个日期之间的差值`DATEDIFF(日期单位,startdate,enddate)`
-  * `日期单位`: 表明返回的日期单位（年，月，日等）
     |参数|缩写|备注|
     |--|--|--|
     |year|yy, yyyy|年|
@@ -92,27 +88,39 @@
     |mns|mns|微秒|
     |ns|ns|纳秒|
 
-  * `startdate` & `enddate`: 起始日期 & 结束日期
-* `SELECT DATEDIFF(day,'2008-12-29','2008-12-30') AS DiffDate`
-  * 结果
-  |DiffDate|
-  |--|
-  |1|
+### str_to_date
+在MySql中格式化输出日期的信息至少是年月日，如果字符串中的信息只有年或年月，函数会自动进行补全
+* 当 date = '2020-11'：`str_to_date(date, '%Y-%m')` -> 2020-11-00
+* 当 date = '2020-11'：`str_to_date(date, '%Y')` -> 2020-00-00
+* 若在查询以外的语句进行使用，很有可能会因为字符串`年月日缺失`或`年月日的格式问题`直接报错`error 1292: Truncated incorrect date value`
 
-* `SELECT DATEDIFF(day,'2008-12-30','2008-12-29') AS DiffDate`
+### dateDiff()
+* 函数用于计算两个日期之间的差值`dateDiff(日期单位,startDate,endDate)`
+  * 日期单位：前文已经有解释
+  * `startDate` & `endDate`: 起始日期 & 结束日期
+* `SELECT dateDiff(day,'2008-12-29','2008-12-30') AS DiffDate`
   * 结果
-  |DiffDate|
-  |--|
-  |-1|
 
-## dateadd & date_sub
+    |DiffDate|
+    |--|
+    |1|
+
+* `SELECT dateDiff(day,'2008-12-30','2008-12-29') AS DiffDate`
+  * 结果
+
+    |DiffDate|
+    |--|
+    |-1|
+
+### dateadd & date_sub
 * 函数用于增加 / 减少当前时间: `dateadd(日期单位, 增加的日期长度,时间字段)` & `date_sub(日期单位, 增加的日期长度,时间字段)`
-  * 日期单位：单位以`DIFFDATE`中的日期单位为准
+  * 日期单位：以上文介绍的`日期单位`为准
   * 增加的日期长度：数字，正负皆可
 * `dateadd(year, 1, create_time)`: create_time + 1年
 * `dateadd(year, -1, create_time)`: create_time - 1年
 * `date_sub(m, 2, create_time)`: create_time + 2月
 * `date_sub(m, -2, create_time)`: create_time - 2月
+
 
 ## case
 * 相当于`switch`关键字

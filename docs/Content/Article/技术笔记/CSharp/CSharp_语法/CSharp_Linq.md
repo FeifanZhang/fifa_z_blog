@@ -98,6 +98,7 @@
 * Take: 对返回的信息条数做限制
 * Skip: 跳过一定数量的元素
 * SkipWhile：跳过不满足条件的元素，直到遇见第一个满足条件的元素后，返回该元素和后面的元素
+
 ```csharp
 var intList = List<int>() {0, 3, 2, 7, 6, 9, 3, 7};
 var query1 = intList.Take(3); // 返回前三条信息: 0, 3, 2
@@ -105,14 +106,16 @@ var query2 = intList.Skip(4); // 跳过前4个元素，返回剩下的元素 6, 
 var query3 = intList.SkipWhile(i => i < 4); // 遇见 < 4的元素就跳过；直到遇见第一个大于4的元素（7）时，返回该元素和剩下的元素(7,6,9,3,7)
 ```
 * `SkipWhile` 与 `Where` 区别：
-|方法名|退出时机|返回的元素|
-|--|--|--|
-|`SkipWhile`|第一个不满足条件的元素|退出时，剩下的元素|
-|`Where`|全部元素遍历完|所有满足条件的元素|
+
+    |方法名|退出时机|返回的元素|
+    |--|--|--|
+    |`SkipWhile`|第一个不满足条件的元素|退出时，剩下的元素|
+    |`Where`|全部元素遍历完|所有满足条件的元素|
 
 # Any & All
 * `Any` 表示集合中任一元素满足条件，返回true
 * `All` 表示集合中全部元素满足条件，返回true
+
 ```csharp
 // 任何一个 chartId > 3 就返回 true
 bool res1= chartList.Any(chart => chart.Id > 3);

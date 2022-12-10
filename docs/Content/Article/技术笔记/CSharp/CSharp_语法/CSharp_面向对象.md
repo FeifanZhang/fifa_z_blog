@@ -204,6 +204,27 @@
     }
     ```
 
+### 子类构造函数参数与父类不同
+- 父类需要如下参数初始化：`int a, int b, string c`；但在子类中，`int b`默认为2，仅需初始化`int a & string c`
+
+```csharp
+public partial class Father
+{
+    public FrmFlowApprovalEdit(int a, int b, string c = null)
+    {
+        
+    }
+}
+
+public partial class Child : Father
+{
+    public Child(int a, string c = null ): base(outterA, 2, outterStr)
+    {
+
+    }
+}
+```
+
 ## 重载
 * 同一个类中，几个方法的**参数名相同**，**返回类型相同**，只是**输入的参数不同**，这些方法互为重载方法
     ```csharp

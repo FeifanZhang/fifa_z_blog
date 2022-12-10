@@ -19,8 +19,11 @@
 		* [CSharp_项目创建](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_项目创建.md)
 	* **DevExpress**
 		* [DevExpress_GridControl&GridView](./Content/Article/技术笔记/CSharp/DevExpress/DevExpress_GridControl&GridView.md)
+	* **GDI+**
+		* [GDI+_闪烁](./Content/Article/技术笔记/CSharp/GDI+/GDI+_闪烁.md)
 	* **WinForm**
 		* [WinForm_三层架构](./Content/Article/技术笔记/CSharp/WinForm/WinForm_三层架构.md)
+		* [WinForm_嵌入Chrome浏览器](./Content/Article/技术笔记/CSharp/WinForm/WinForm_嵌入Chrome浏览器.md)
 		* [WinForm_常用控件](./Content/Article/技术笔记/CSharp/WinForm/WinForm_常用控件.md)
 		* [WinForm_窗体控件](./Content/Article/技术笔记/CSharp/WinForm/WinForm_窗体控件.md)
 		* [WinForm_组件](./Content/Article/技术笔记/CSharp/WinForm/WinForm_组件.md)
@@ -66,6 +69,10 @@
 		* [Django_url](./Content/Article/技术笔记/Python/Django/Django_url.md)
 		* [REST-Framework-reflection](./Content/Article/技术笔记/Python/Django/REST-Framework-reflection.md)
 		* [REST-Framework-token](./Content/Article/技术笔记/Python/Django/REST-Framework-token.md)
+	* **PyautoGui**
+		* [PyautoGui_问题笔记](./Content/Article/技术笔记/Python/PyautoGui/PyautoGui_问题笔记.md)
+	* **Pynput**
+		* [Pynput_组件笔记](./Content/Article/技术笔记/Python/Pynput/Pynput_组件笔记.md)
 	* **Python语法**
 		* [Python_bit_operation](./Content/Article/技术笔记/Python/Python语法/Python_bit_operation.md)
 		* [Python_closure](./Content/Article/技术笔记/Python/Python语法/Python_closure.md)

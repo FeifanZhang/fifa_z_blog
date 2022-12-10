@@ -10,6 +10,8 @@
 		* [Hexo_NexT主题](./Content/Article/博客/Hexo/Hexo_NexT主题.md)
 		* [Hexo_VSCode插件](./Content/Article/博客/Hexo/Hexo_VSCode插件.md)
 		* [Hexo_使用指南](./Content/Article/博客/Hexo/Hexo_使用指南.md)
+* **小项目**
+	* [按键精灵](./Content/Article/小项目/按键精灵.md)
 * **开发平台**
 	* [VSCode](./Content/Article/开发平台/VSCode.md)
 * **我的世界**
@@ -39,8 +41,11 @@
 			* [CSharp_项目创建](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_项目创建.md)
 		* **DevExpress**
 			* [DevExpress_GridControl&GridView](./Content/Article/技术笔记/CSharp/DevExpress/DevExpress_GridControl&GridView.md)
+		* **GDI+**
+			* [GDI+_闪烁](./Content/Article/技术笔记/CSharp/GDI+/GDI+_闪烁.md)
 		* **WinForm**
 			* [WinForm_三层架构](./Content/Article/技术笔记/CSharp/WinForm/WinForm_三层架构.md)
+			* [WinForm_嵌入Chrome浏览器](./Content/Article/技术笔记/CSharp/WinForm/WinForm_嵌入Chrome浏览器.md)
 			* [WinForm_常用控件](./Content/Article/技术笔记/CSharp/WinForm/WinForm_常用控件.md)
 			* [WinForm_窗体控件](./Content/Article/技术笔记/CSharp/WinForm/WinForm_窗体控件.md)
 			* [WinForm_组件](./Content/Article/技术笔记/CSharp/WinForm/WinForm_组件.md)
@@ -86,6 +91,10 @@
 			* [Django_url](./Content/Article/技术笔记/Python/Django/Django_url.md)
 			* [REST-Framework-reflection](./Content/Article/技术笔记/Python/Django/REST-Framework-reflection.md)
 			* [REST-Framework-token](./Content/Article/技术笔记/Python/Django/REST-Framework-token.md)
+		* **PyautoGui**
+			* [PyautoGui_问题笔记](./Content/Article/技术笔记/Python/PyautoGui/PyautoGui_问题笔记.md)
+		* **Pynput**
+			* [Pynput_组件笔记](./Content/Article/技术笔记/Python/Pynput/Pynput_组件笔记.md)
 		* **Python语法**
 			* [Python_bit_operation](./Content/Article/技术笔记/Python/Python语法/Python_bit_operation.md)
 			* [Python_closure](./Content/Article/技术笔记/Python/Python语法/Python_closure.md)
@@ -120,6 +129,8 @@
 		* [Vue_自定义事件](./Content/Article/技术笔记/Vue/Vue_自定义事件.md)
 		* [Vue_计算属性](./Content/Article/技术笔记/Vue/Vue_计算属性.md)
 		* [Vue_钩子函数&option](./Content/Article/技术笔记/Vue/Vue_钩子函数&option.md)
+* **操作系统**
+	* [Linux_简介](./Content/Article/操作系统/Linux_简介.md)
 * **数据库**
 	* **Redis**
 		* [Redis_安装](./Content/Article/数据库/Redis/Redis_安装.md)
@@ -128,6 +139,7 @@
 		* [MySql_窗口函数](./Content/Article/数据库/SQL/MySql_窗口函数.md)
 		* [Oracle基础表介绍](./Content/Article/数据库/SQL/Oracle基础表介绍.md)
 		* [Oracle用户管理](./Content/Article/数据库/SQL/Oracle用户管理.md)
+		* [SqlServer_日期操作](./Content/Article/数据库/SQL/SqlServer_日期操作.md)
 		* [SQL_union&limit](./Content/Article/数据库/SQL/SQL_union&limit.md)
 		* [SQL_单行处理函数](./Content/Article/数据库/SQL/SQL_单行处理函数.md)
 		* [SQL_多行处理函数](./Content/Article/数据库/SQL/SQL_多行处理函数.md)
@@ -150,7 +162,12 @@
 		* [HTTP](./Content/Article/计算机基础/Http/HTTP.md)
 		* [Http_状态码](./Content/Article/计算机基础/Http/Http_状态码.md)
 		* [HTTP_请求方法](./Content/Article/计算机基础/Http/HTTP_请求方法.md)
+	* **代码规范**
+		* [代码规范_Function](./Content/Article/计算机基础/代码规范/代码规范_Function.md)
+		* [代码规范_命名规则](./Content/Article/计算机基础/代码规范/代码规范_命名规则.md)
+		* [代码规范_注释](./Content/Article/计算机基础/代码规范/代码规范_注释.md)
 	* **其他小知识**
+		* [不同语言注释符](./Content/Article/计算机基础/其他小知识/不同语言注释符.md)
 		* [数据格式](./Content/Article/计算机基础/其他小知识/数据格式.md)
 	* **操作系统**
 		* [cmd命令](./Content/Article/计算机基础/操作系统/cmd命令.md)

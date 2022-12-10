@@ -10,6 +10,10 @@
 	* [Django_url](./Content/Article/技术笔记/Python/Django/Django_url.md)
 	* [REST-Framework-reflection](./Content/Article/技术笔记/Python/Django/REST-Framework-reflection.md)
 	* [REST-Framework-token](./Content/Article/技术笔记/Python/Django/REST-Framework-token.md)
+* **PyautoGui**
+	* [PyautoGui_问题笔记](./Content/Article/技术笔记/Python/PyautoGui/PyautoGui_问题笔记.md)
+* **Pynput**
+	* [Pynput_组件笔记](./Content/Article/技术笔记/Python/Pynput/Pynput_组件笔记.md)
 * **Python语法**
 	* [Python_bit_operation](./Content/Article/技术笔记/Python/Python语法/Python_bit_operation.md)
 	* [Python_closure](./Content/Article/技术笔记/Python/Python语法/Python_closure.md)

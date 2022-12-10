@@ -86,8 +86,9 @@ tb.Rows.Add(row);
 ```
 
 ## 将DataRow赋值给其他table
-* DataRow无法直接赋值给其他DataTable，需要将Row通过`ItemArray()`函数转换成数组进行赋值，需保证两张表的Columns完全一致
-* 使用`ItemArray()`该函数时，务必保证两张表Column的顺序，名称，类型完全一致才可以使用
+* 将Row通过`ItemArray()`函数转换成数组赋值给新的表，需保证两张表的Columns完全一致，
+* 使用`ItemArray()`该函数时，务必保证两张表Column的顺序，名称，类型完全一致才可以使用。故不推荐
+* `dataTable.ImportRow(dataRow)`可避免以上问题，推荐使用
     ```cs
     // 新建一张表 & 插入数据
     var tb = new DataTable("Datas");
@@ -98,7 +99,8 @@ tb.Rows.Add(row);
     // 将 tb 的数据赋值给 newTb
     var newTb = tb.Clone();  // 克隆tb的表结构，返回一张无数据的新表
     foreach (DataRow row in tb.Rows){
-        newTb.Rows.Add(row.ItemArray);
+        newTb.Rows.Add(row.ItemArray);  // 该语句会把row转换成list 按插进新的datataTable,如果新表与原表列的数量 & 顺序出现差异 会插入失败
+        newTb.ImportRow(row); // 不用担心 itemArray 出现的列差异导致插入失败
     }
     ```
 
@@ -183,6 +185,9 @@ tb.Rows.Add(row);
             
     //DataView 排序
     dv.Sort = "字段 asc";
+
+    // 可以多个字段进行排序
+    dv.Sort = "字段1, 字段2, 字段3";
             
     //dt只想要dv中的某几列
     DataTable dataTablene = dv.ToTable(false, new string[] { "字段1", "字段2" });

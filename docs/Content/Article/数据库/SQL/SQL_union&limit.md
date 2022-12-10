@@ -44,6 +44,9 @@
 * 通过输入页码`page_num`和每页显示的信息条数`page_size`来得出`limit`的参数
 * `page_num`和`page_size`是从前端传来
 * 通用公式：`limit (page_num-1) * page_size, page_size`
+* oracle处理分页
+  * oracle没有`limit`语句，所以一般使用`rownum`关键字进行分页，`rownum`是数据的临时id，从0开始
+  * `where rownum >= (page_num-1) * page_size and rownum <= page_num * page_size`
 
 ## limit与 offset一起使用
 * `offset n`表示从头除去前n条数据: `offset 1`表示除去前一条数据；`offset 2`表示除去前二条数据
