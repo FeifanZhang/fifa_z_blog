@@ -6,7 +6,7 @@ select getdate()
 ```
 
 ## 日期相减
-* 语法: `datediff(时间单位, startDate, endDate)`
+* 语法: `dateDiff(时间单位, startDate, endDate)`
   * 时间单位
     |参数|缩写|备注|
     |--|--|--|
@@ -29,13 +29,13 @@ select getdate()
 ## 每周相关数据
 因为数据库中的一周从**上周日**到**本周六**，所以做与每周日期相关逻辑时 要`日期 - 1天`（使用前一天的日期），将真实日期与数据库每周的边界日期对齐
 
-### 获取本周一日期
+### 获取本周一的日期
 ```sql
 select dateAdd(week, dateDiff(week,0, GETDATE() - 1),0)
 ```
 
-### 获取本周日日期
-* 在本周一时间的基础上 + 6天
+### 获取本周日的日期
+* 在`本周一的日期`的基础上 `+ 6天`
     ```sql
     select dateAdd(day, 6, dateAdd(week, dateDiff(week,0, GETDATE() - 1),0))
     ```
