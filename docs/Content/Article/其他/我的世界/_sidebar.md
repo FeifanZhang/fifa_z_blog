@@ -1,4 +1,6 @@
 * [MCSkin3D](./Content/Article/其他/我的世界/MCSkin3D.md)
 * [MC_下载RTX材质包](./Content/Article/其他/我的世界/MC_下载RTX材质包.md)
+* [MC_原生行为包和材质包下载](./Content/Article/其他/我的世界/MC_原生行为包和材质包下载.md)
+* [MC_工具简介](./Content/Article/其他/我的世界/MC_工具简介.md)
 * [MinecraftGameTest](./Content/Article/其他/我的世界/MinecraftGameTest.md)
 * [Minecraft存档管理](./Content/Article/其他/我的世界/Minecraft存档管理.md)

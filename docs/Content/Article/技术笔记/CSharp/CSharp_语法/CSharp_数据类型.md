@@ -105,6 +105,17 @@ aaaaaaaa";
   }
   ```
 
+## 字符串补位
+* `PadLeft`在左侧补位；`PadRight`在右侧补位
+* `PadLeft(int overallLen , char paddingChar)`
+  * `overallLen`补位后的总长度
+  * `paddingChar`补位用的字符
+
+```csharp
+var a = "hello".PadLeft(8, '0');  //左侧补充三个0 000hello
+var b = "hello".PadLeft(7, 'Q');  //右侧补充2个Q helloQQ
+```
+
 # 空类型
 * STILL SAME AS PYTHON !
 * null instead of None

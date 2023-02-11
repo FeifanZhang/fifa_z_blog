@@ -125,6 +125,7 @@ tb.Rows.Add(row);
     // 模糊匹配 (name 包含 zhang 的全部DataRow)
     var res3 = dt.Select($" name like '{Value}% ' "):
     ```
+* `DataTabe`下的`Select`方法，返回的是满足条件的`DataRow`, 与`Linq`的`Where`方法类似; 单盒`Linq`的`Select`方法有很大不同！
 
 ## Linq 筛选数据
 * 将`DataTable`强转成`Enumerable`后，可使用[Linq](./CSharp_Linq.md)的所有方法

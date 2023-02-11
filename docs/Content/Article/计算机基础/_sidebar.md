@@ -12,6 +12,8 @@
 * **操作系统**
 	* [cmd命令](./Content/Article/计算机基础/操作系统/cmd命令.md)
 	* [Liunx实用命令](./Content/Article/计算机基础/操作系统/Liunx实用命令.md)
+* **正则表达式**
+	* [正则表达式案例](./Content/Article/计算机基础/正则表达式/正则表达式案例.md)
 * **算法**
 	* [Algorithm_动态规划](./Content/Article/计算机基础/算法/Algorithm_动态规划.md)
 	* [摩尔投票法](./Content/Article/计算机基础/算法/摩尔投票法.md)

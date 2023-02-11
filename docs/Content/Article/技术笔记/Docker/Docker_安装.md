@@ -3,7 +3,11 @@
   ```shell
   uname -r
   ```
-
+* 安装gcc相关工具，用于docker调试
+  ```shell
+  sudo yum -y install gcc
+  sudo yum -y install gcc-c++
+  ```
 * Docker已包含在Centos-Extra 软件源，可直接通过yum下载
   ```shell
   yum -y install docker

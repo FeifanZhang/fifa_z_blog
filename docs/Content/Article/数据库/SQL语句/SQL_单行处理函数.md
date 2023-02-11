@@ -9,7 +9,7 @@
 |--|--|--|--|
 |lower|转换小写|`lower(字段名/字符串)`|mysql & oracle|
 |upper|转换大写|`upper(字段名/字符串)`|mysql & oracle|
-|substr|取子串|`substr(字段名/字符串,截取起始下标，截取长度)`|mysql & oracle|
+|substr|截取字符串|`substr(字段名/字符串,截取起始下标，截取长度)` 或 `substr(字段名/字符串,截取起始下标)`，mysql中可以用`substring()`替换|mysql & oracle|
 |left|从字符串左侧取子串|`left(字段名/字符串, 截取长度)`|mysql & oracle|
 |right|从字符串右侧取子串|`right(字段名/字符串, 截取长度)`|mysql & oracle|
 |concat|字符串拼接|`concat(字段名1/字符串1, 字段名2/字符串2)`|mysql & oracle|
@@ -33,8 +33,7 @@
 |ifnull|对应字段为`null`,则用`defaultValue`代替|`ifnull(字段名, defaultValue)`|mysql|
 |isnull|若`exper`为空返回1，非空返回0|`isnull(exper) `|mysql|
 |nullif|`exper1`=`exper2`，则返回null,其余的返回`exper1`|`nullif(exper1, exper2)`|mysql & oracle|
-|nvl|oracle版`ifnull`，表达的意思，输入参数与`ifnull`完全一样|`nvl(字段名, defaultValue)`|oracle|
-|nvl2|如果`value1`为null，返回`value3`, 否则返回`value2`|`nvl2(value1, value2, value3)`|oracle|
+
 
 ## lower
 * 将所有人名字转成小写
@@ -47,15 +46,35 @@
   * 通过`as`参数修改字段名：`select upper(ename) as upper_name from emp;`
 
 ## substr
-* `substr(字段名,截取起始下标，截取长度)`
 * 起始下标从1开始 不是0
-* 截取员工姓名的首字母
-  * `select substr(ename, 1, 1) from emp;`
-* 查询员工首字母为a的人名
-  * `select ename from emp where substr(ename, 1, 1) = 'A';`
-  * 模糊查询：`select ename from emp where ename like 'A%';`
-* 获取员工姓名首字母的小写（单行处理函数可嵌套）
-  * `select upper(substr(ename, 1, 1)) from emp;`
+* 空格也算1个长度
+* 起始下标为负数，表示从后往前截取
+* `substr(字段名,截取起始下标，截取长度)`
+  * 截取员工姓名的首字母
+    * `select substr(ename, 1, 1) from emp;`
+  * 查询员工首字母为a的人名
+    * `select ename from emp where substr(ename, 1, 1) = 'A';`
+    * 模糊查询：`select ename from emp where ename like 'A%';`
+  * 获取员工姓名首字母的小写（单行处理函数可嵌套）
+    * `select upper(substr(ename, 1, 1)) from emp;`
+  * 从后往前截取字符串
+    ```sql
+    select substr('HelloWorld',-1,3) value from dual; --返回结果：d （代码原意为从后面倒数第一位开始往后取3个字符，但倒数第一位后面字符长度不够3，所以仅返回最后一个字符）
+    select substr('HelloWorld',-2,3) value from dual; --返回结果：ld （仅返回2个字符的原因同上）
+    select substr('HelloWorld',-3,3) value from dual; --返回结果：rld （从后面倒数第三位开始往后取3个字符）
+    select substr('HelloWorld',-4,3) value from dual; --返回结果：orl （从后面倒数第四位开始往后取3个字符）
+    ```
+* `substr(字段名,截取起始下标)`
+  * 截取该下标后面的全部字符串
+    ```sql
+    select substr('HelloWorld',0) value from dual;  --返回结果：HelloWorld，截取所有字符
+    select substr('HelloWorld',1) value from dual;  --返回结果：HelloWorld，截取所有字符
+    select substr('HelloWorld',2) value from dual;  --返回结果：elloWorld，截取从“e”开始之后所有字符
+    select substr('HelloWorld',3) value from dual;  --返回结果：lloWorld，截取从“l”开始之后所有字符
+    select substr('HelloWorld',-1) value from dual;  --返回结果：d，从最后一个“d”开始 往回截取1个字符
+    select substr('HelloWorld',-2) value from dual;  --返回结果：ld，从最后一个“d”开始 往回截取2个字符
+    select substr('HelloWorld',-3) value from dual;  --返回结果：rld，从最后一个“d”开始 往回截取3个字符
+    ```
 
 ## length
 * 获取员工姓名长度
@@ -173,6 +192,7 @@
 * [SQL-DATEDIFF()](https://blog.csdn.net/qq_43223477/article/details/118960747)
 * [SQL 日期函数 day() 、month()、year() 各种使用方法](https://blog.csdn.net/LQZ8888/article/details/113681410)
 * [Mysql常用函数之Rank排名函数](https://blog.csdn.net/weixin_42272869/article/details/116372776)
+* [Oracle中的substr()函数 详解及应用](https://www.cnblogs.com/dshore123/p/7805050.html)
 
 
 
