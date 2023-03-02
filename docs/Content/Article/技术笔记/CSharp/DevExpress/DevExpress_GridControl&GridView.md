@@ -1,10 +1,12 @@
 # GridControl
 - `GridControl`是一个组件，本身不显示数据，而是作为容器对内部的组件（如`GridView`/`CardView`/`XXXXView`）进行控制
 - 添加数据源
-```csharp
-var dataTable = new DataTable
-gridControl.DataSource = dataTable;
-```
+
+    ```csharp
+    var dataTable = new DataTable();
+    gridControl.DataSource = dataTable;
+    ```
+
 - 绑定数据源后，对数据源的增删查改操作都会直接反应在GridView和GridControl中,无论是`dataTable`或是`gridView`中的row发生了改变（`add`、`delete`以及`insert`），都会触发"`focusRowChanged`方法"
 
 # GridView
@@ -15,22 +17,22 @@ gridControl.DataSource = dataTable;
 DataRow selectedRow = gvCommit.GetFocusedDataRow();
 // 当gridView初始化时，默认获取第一行数据
 ```
-- 获取选中的行（多选）
+## 获取选中的行（多选）
 ```csharp
 foreach (int handle in gridView.GetSelectedRows())
 {
     DataRow dr = gvCommitCandi.GetDataRow(handle);
 }
 ```
-- 将选中的行设置为未选中
+## 将选中的行设置为未选中
 ```csharp
 gridView.ClearSelection();
 ```
-- 选中全部行
+## 选中全部行
 ```csharp
 gridView.SelectAll();
 ```
-- cell中数据过多，需要多行显示
+## cell中数据过多，需要多行显示
 ```csharp
 // 指定哪一列可以多行显示
 gridView.Columns["CONTRACTREQUIRE"].ColumnEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
@@ -38,7 +40,22 @@ gridView.Columns["CONTRACTREQUIRE"].ColumnEdit = new DevExpress.XtraEditors.Repo
 gridView.Columns["CONTRACTREQUIRE"].MaxWidth = 550;
 ```
 
-# 完整的初始化GridControl + GridView的实例
+## 用户数据保存
+用户在`GridView`中输入数据后，数据不会立刻进入表格，在该行失去焦点后，才会更新至表格中；有很多用户喜欢写完数据后，直接点击保存按钮（即未让该行失去焦点），这是表格中的数据仍是修改前的，为了应对这种情况的发生，`GridView`的`UpdateCurrentRow()`、`PostEditor()`、`CloseEditor()`三个方法
+
+|方法名|是否关闭编辑功能|是否将数据保存至gridView|行状态|说明|
+|--|--|--|--|--|
+|`UpdateCurrentRow`|否|是|更新至`DataRowstate.Modified`状态|使用该方法之前，务必先用`CloseEditor`|
+|`PostEditor`|否|是|不更新状态||
+|`CloseEditor`|是|否|不更新行状态||
+
+```cs
+// 数据保存之前，需执行如下两行代码
+gridView.CloseEditor();
+gridView.UpdateCurrentRow();
+```
+# GridView + GridControl 代码案例
+## 完整的初始化GridControl + GridView的实例
 ```csharp
 public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref DevExpress.XtraGrid.GridControl gridControl)
 {
@@ -63,7 +80,7 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
                 col.ColumnEdit.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
                 col.ColumnEdit.DisplayFormat.FormatType = FormatType.Custom;
                 // 设置该列不允许修改 & 只读
-                col.OptionsColumn.AllowEdit = false;
+                col.OptionsColumn.AllowEdit = false;  // 不管 gridView.OptionsBehavior.Editable 如何设置，单元格是否可编辑仅基于这一条语句
                 col.OptionsColumn.ReadOnly = true;
             }
 
@@ -99,7 +116,34 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
     
 }
 ```
-# 拖拽DataRow时，鼠标悬浮的行高亮显示
+
+## GridView 对列进行排序
+将表格的列，按照`A、B、C、D、E`排序显示
+```cs
+var colOrderList = "A;B;C;D;E".Split(';');
+for (var i = 0; i < colOrderList.Length; i++)
+{
+    var colName = colOrderList[i];
+    gridView.Columns[colName].VisibleIndex = i;  // 数字越小，越靠前
+}
+```
+
+## GridView编辑数据时，仅授权编辑部分列
+* 编辑数据时，仅授权编辑A、B两列数据
+* 当设置了整个GridView`gridView.OptionsBehaviour.Editable = true`后， 再设置列的编辑权限`gridColumns.OptionsColumn.AllowEdit = false`时，该列仍不可编辑
+```csharp
+private void gridView_EditMode()
+{
+    var colsCannotEdit = "A;B".Split(';');
+    foreach (GridColumn col in gridView.Columns)
+    {
+        col.OptionsColumn.AllowEdit = !colsCannotEdit.Contains(col.FieldName);
+    }
+}
+```
+
+
+## 拖拽DataRow时，鼠标悬浮的行高亮显示
 遇见行拖拽的需求，通常会要求在拖拽发生时，高亮显示鼠标所到达的行，以表明该行会是鼠标释放后，被拖拽行所放置的位置
 * 状态记录：鼠标在某一行悬浮时，有两种状态：鼠标按下和没有按下；仅需要拖拽（鼠标按下）时，进行高亮显示，所以需要一个全局变量对鼠标状态进行记录，鼠标按下时的状态记录为1 抬起时记录为0
 * 高亮的配置代码：给`gridControl`添加Paint方法，并在需要`Paint`时调用`gridControl.Refresh()`；该事件在`gridControl`的拖拽事件（`dragOver`）中进行调用

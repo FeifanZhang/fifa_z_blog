@@ -89,6 +89,7 @@
 ## 类声明
 * 具体可参照函数修饰符
 * 子类的修饰符与父类保持一致
+* `class`关键词不添加修饰符时，默认为`internal`
     ```cs
     internal class Demo1{  // 仅在该程序集中使用
 
@@ -103,7 +104,7 @@
         ...;
     }
 
-    class Demo{  // 不加类权限默认为私有类private
+    class Demo{  // 不加类权限默认为私有类 internal
         ...;
     }
     ```

@@ -33,9 +33,8 @@ class Program
 ## 泛型类
 
 # 反射调用方法
-## 反射直接获取构造方法
-* 获取某个类的构造方法
-- `GetConstructors()`只能查询public成员，要查询其他成员（protected, private等），则需要通过`BindingFlags`枚举类型对查找的成员进行筛选
+## BindingFlags 筛选方法修饰符
+反射调用方法时，默认调用Public成员，要查询其他成员（protected, private等），则需要通过`BindingFlags`枚举类型对查找的成员进行筛选
 
 |`BindingFlags`枚举值|含义|
 |--|--|
@@ -46,6 +45,12 @@ class Program
 |`Public`|公共成员|
 |`NonPublic`|非公共成员（public以外的）|
 - 添加`BindingFlags`后，`Instance`与`Static`必须二选一
+
+
+## 反射直接获取构造方法
+* 获取某个类的构造方法
+- `GetConstructors()`只能查询public成员，要查询其他成员（protected, private等），则需要通过`BindingFlags`枚举类型对查找的成员进行筛选
+
     ```csharp
     Assembly assembly4 = Assembly.LoadForm("SqlDB.dll");
     Type type = assembly4.GetType("SqlDB.ReflectionTest");
@@ -190,6 +195,16 @@ public class ReflectionTest
     // 这时仅靠方法名无法获取我们想要的方法(比如Show 就有两个重载方法)，所以需要在GetMethod(方法名, 参数类型列表)来获取想要的方法
     var res1 = obj.GetType().GetMethod("Show", new Type[] { typeof(string) }).Invoke(obj, new object[] { "hello" });
     ```
+
+## 调用私有静态方法
+需要满足静态（`BindingFlags.Static`）和私有（`BindingFlags.NonPublic`）
+```csharp
+var obj = getDll.CreateInstance("fifaReflection.ReflectionDemo");
+var private_statics_method = tp.GetMethod("staticMethod", BindingFlags.Static | BindingFlags.NonPublic); 
+
+// 当涉及到重载方法时，需要添加参数信息对同名函数进行区分
+var private_statics_method_with_param = tp.GetMethod("staticMethod", BindingFlags.Static | BindingFlags.NonPublic, null, new Type[]{ typeof(string), typeof(string), typeof(string) }, null);
+```
 
 # 反射实现工厂类
 - 工厂类就是输入特定字符，返回初始化好的类

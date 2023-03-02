@@ -103,6 +103,38 @@ tb.Rows.Add(row);
         newTb.ImportRow(row); // 不用担心 itemArray 出现的列差异导致插入失败
     }
     ```
+## 行状态
+`DataRow.RowState()`可返回该行的状态，状态类型如下
+```cs
+DataRowState.Added;  // DataTable() 执行了.Add()方法之后的状态
+DataRowState.Deleted;  // Added状态下执行DataRow.Delete() 方法，才会直接删除（变为Detached状态）行数-1；其余情况下该行不会直接删除，而是将状态置为deleted，table行数不变
+DataRowState.Detached;  // 游离态，此时的DataRow不属于任何表，当执行了DataTable.Add(DataRow) 方法后，其状态才会切换至 Added
+DataRowState.Modified;  // 行修改，但执行 DataTable.AcceptChanges() 前的状态
+DataRowState.Unchanged;  // 非deleted状态下，执行完 DataTable.AcceptChanges()后， 行状态变为Unchanged 从数据库直接获取的数据 也是该状态
+```
+- 通过代码演示`RowState`的变化
+```cs
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var dt = new DataTable();
+        dt.Columns.Add("Name");
+        var newDr = dt.NewRow();  // 此时 newDr的行状态为 Detached 因为该行目前不属于任何表
+        dt.Rows.Add(newDr); // 此时行状态为Added
+        dt.AcceptChanges();  // 状态变为 Unchanged
+        newDr["Name"] = "FIFA";  // 行状态变为 Modified
+        newDr.Delete(); // 非Added状态转换为Deleted，表行数不变
+        dt.RejectChanges(); // 取消删除行操作
+
+        // added状态下执行delete(), 状态直接变为detached
+        var newDr1 = dt.NewRow();
+        dt.Rows.Add(newDr1);
+        dt.Row.Delete(newDr1); // 此时newDr1状态为Detached
+    } 
+}
+
+```
 
 # DataTable
 ## select 筛选数据

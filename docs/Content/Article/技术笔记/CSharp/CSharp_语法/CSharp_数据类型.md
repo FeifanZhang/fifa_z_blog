@@ -238,7 +238,33 @@ var b = "hello".PadLeft(7, 'Q');  //右侧补充2个Q helloQQ
   }
   ```
 
+# DateTimeOffset
+* 解决了`DateTime`无法存储时区的问题，DateTime虽然有存储时间的字段，但是枚举类型，总是默认自己存储时间的时区为计算机设置的时区
+* `DateTimeOffset` 显示时间
+  ```csharp
+  // 北京时间（东八区）：2020-01-02 09:08:07.123
+  var baseTime = new DateTimeOffset(2020, 01, 02, 09, 08, 07, 123, TimeSpan.FromHours(8));
+
+  // 格式化输出时间 (不考虑时区)
+  var str = baseTime.ToString("yyyy-MM-dd hh:mm:ss");  // 2020-01-02 09:08:07
+  str = baseTime.ToString("yyyy-MM-dd hh:mm:ss.fff");  // 2020-01-02 09:08:07.123
+
+  // 格式化输出时间（考虑时区）
+  var str = baseTime.ToString("yyyy-MM-dd hh:mm:ssZ");  // 2020-01-02 09:08:07 +08:00
+  str = baseTime.ToString("yyyy-MM-dd hh:mm:ss.fffZ");  // 2020-01-02 09:08:07.123 +08:00
+
+  // 比较两个时间的时区
+  var compare1 = DateTimeOffset.Parse("2020-01-02 09:08:04.123");
+  Console.WriteLine($"{compare1 == str}"); // 输出 true
+  ```
+* 获取时间戳
+  * 时间戳定义：`1970-01-01 00:00:00.000` 起到今天的时间段数值
+  ```csharp
+  var timeStamp1 = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds(); // 1970-01-01 00:00:00.000 起到今天的秒数
+  var timeStamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(); // 1970-01-01 00:00:00.000 起到今天的毫秒数
+  ```
+
 # 参考
 * [c#数组的count()和length的区别](https://www.cnblogs.com/lip-blog/p/7560458.html)
 * [C#中的Dictionary字典类介绍](https://www.cnblogs.com/txw1958/archive/2012/11/07/csharp-dictionary.html)
-
+* [c#：细说时区、DateTime和DateTimeOffset在国际化中的应用](https://blog.csdn.net/u010476739/article/details/118339679)
