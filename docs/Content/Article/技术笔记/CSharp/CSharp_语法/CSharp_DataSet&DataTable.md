@@ -82,7 +82,7 @@ var row = tb.NewRow();  // newRow 后 DataRow的 列结构与 tb一样
 row["Product"] = "My second book";
 row["Price"] = 2.00;
 row["Description"] = "Better than first one";
-tb.Rows.Add(row);
+tb.Rows.Add(row);  // 务必使用Rows.Add() 而不是ImportRow() 原因在【行状态】中解释
 ```
 
 ## 将DataRow赋值给其他table
@@ -103,16 +103,17 @@ tb.Rows.Add(row);
         newTb.ImportRow(row); // 不用担心 itemArray 出现的列差异导致插入失败
     }
     ```
+
 ## 行状态
 `DataRow.RowState()`可返回该行的状态，状态类型如下
 ```cs
 DataRowState.Added;  // DataTable() 执行了.Add()方法之后的状态
 DataRowState.Deleted;  // Added状态下执行DataRow.Delete() 方法，才会直接删除（变为Detached状态）行数-1；其余情况下该行不会直接删除，而是将状态置为deleted，table行数不变
-DataRowState.Detached;  // 游离态，此时的DataRow不属于任何表，当执行了DataTable.Add(DataRow) 方法后，其状态才会切换至 Added
+DataRowState.Detached;  // 游离态，此时的DataRow不属于任何表，当执行了DataTable.Add(DataRow) 方法后，会将其添加至DataRowCollection，其状态才会切换至 Added
 DataRowState.Modified;  // 行修改，但执行 DataTable.AcceptChanges() 前的状态
 DataRowState.Unchanged;  // 非deleted状态下，执行完 DataTable.AcceptChanges()后， 行状态变为Unchanged 从数据库直接获取的数据 也是该状态
 ```
-- 通过代码演示`RowState`的变化
+- 代码演示`RowState`的变化
 ```cs
 public class Program
 {
@@ -134,6 +135,16 @@ public class Program
     } 
 }
 
+```
+
+- `New.Row()`创建的`DataRow` 只能通过`Row.Add()` 加入table，而不能通过`ImportRow()` 添加
+```cs
+DataTable dt = datatable;
+DataRow dr = dt.NewRow();
+dr["FileName"] = fileName;
+dr["DbName"] = DbName;
+dt.ImportRow(dr);  // dt表不会显示dr，因为此时dr的行状态为 Detached
+dt.Rows.Add(dr);  // dt会显示dr，因为此时dr的行状态为 Added
 ```
 
 # DataTable
@@ -166,6 +177,14 @@ public class Program
     var infoTable = new DataTable();
     var idList = (infoTable.AsEnumerable()).Select(i => i["ID"]).ToList();
     ```
+
+## DataTable删除数据
+* `DataTable.Rows.Remove(DataRow)`, `DataTable.Rows.RemoveAt(idx)` 
+  * 并不改变行状态，而是直接删除行
+  * 无法通过`foreach`进行批量删除。因为删除时会改变行的索引，导致删除后无法继续遍历余下数据
+* `DataTable.Rows[idx].Delete()`
+  * 并不是直接删除行，而是更改行状态（将行状态改为`Deleted`）, 通过`DataTable.RejectChanges()`进行回滚；或`DataTable.AcceptChanges()`提交修改
+  * 可以通过`foreach`进行批量删除，之后通过回滚（`RejectChanges`） 或提交修改（`AcceptChanges`）
 
 ## DataTable join
 * 主表（`dtMain`）与子表（`dtChild`）进行join，其中主表的`ID`与子表`FK_ID`相关联
@@ -225,3 +244,7 @@ public class Program
     //dt只想要dv中的某几列
     DataTable dataTablene = dv.ToTable(false, new string[] { "字段1", "字段2" });
     ```
+
+# 参考
+* [C#中DataTable.ImportRow()与DataTable.Rows.Add()的区别](https://www.cnblogs.com/Yannik/p/4446962.html)
+* [C#删除datatable一行数据](https://blog.csdn.net/weixin_50179860/article/details/125043076)

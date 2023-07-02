@@ -9,6 +9,7 @@
 |coalesce|前面为若干变量，最后一个为默认值；从第一个表达式开始读取，返回第一个非空值；若所有表达式都为null，返回最后的默认值|`coalesce(value1, value2, ... , valueN, 默认值)`|
 |decode|第一个参数为变量, 程序会按顺序遍历value1 ~ valueN,返回与变量相等的value; 若未发现相等的value,返回默认值|`decode(变量名, value1, value2, ..., valueN, 默认值)`|
 |to_char|将日期格式化的转为字符串|`to_char(sysdate, 'yyyy-mm-dd')`|
+|`\|\|`|用于字符串拼接|`select a \|\| b from dual` |
 
 ## null对sql语句计算的影响
 * `where`语句中，判断是否为空，只能用`is null` 和 `is not null`
@@ -213,6 +214,12 @@
 </tr>
 </table>
 
+## \|\| 的用法
+* 用于拼接
+  ```sql
+  select a || b from dual -- 将 a b 两个字段进行拼接
+  select a || '*' || b  -- 将 a b 通过 * 拼接
+  ```
 
 # 参考
 * [oracle怎么将日期转为字符串](https://www.php.cn/oracle/489480.html)

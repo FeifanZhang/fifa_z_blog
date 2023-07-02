@@ -29,7 +29,6 @@
 |COLUMN_NAME|列名称|varchar|该约束对应的列|
 |COMMENTS|字段的COMMENT描述|varchar||
 
-
 # 示例
 ## 获取表对应的主键
 通过 `ALL_CONSTRAINTS` 找到表所有的约束，再联结`ALL_CONS_COLUMNS` 查找主键
@@ -39,9 +38,10 @@ from all_cons_columns a, all_constraints b
 where a.constraint_name = b.constraint_name 
 and b.constraint_type = 'P' and a.table_name = 'TABLE_TEST'
 ```
-## 获取字段对应的COMMENT
+
+## 获取某张表所有字段对应的COMMENT
 ```sql
-select COMMENTS from ALL_COL_COMMENTS where TABLE_NAME = 'TABLE_TEST' AND COMMENTS = 'COL_TEST'
+select COMMENTS, COLUMN_NAME from ALL_COL_COMMENTS where TABLE_NAME = 'TABLE_TEST'
 ```
 
 ## 获取主键对应的COMMENT

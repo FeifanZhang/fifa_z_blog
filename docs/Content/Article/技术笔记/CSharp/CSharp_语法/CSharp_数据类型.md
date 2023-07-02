@@ -237,6 +237,16 @@ var b = "hello".PadLeft(7, 'Q');  //右侧补充2个Q helloQQ
       Console.WriteLine("value = {0}", pair.key, pair.value);
   }
   ```
+* 静态声明
+```cs
+var demo_dict = new Dictionary<string, string>
+{
+    {"A", "a"},
+    {"B", "b" },
+    {"C", "c" },
+    {"D", "d"}  //  最后一个 不要有 , 号
+};
+```
 
 # DateTimeOffset
 * 解决了`DateTime`无法存储时区的问题，DateTime虽然有存储时间的字段，但是枚举类型，总是默认自己存储时间的时区为计算机设置的时区
@@ -263,8 +273,34 @@ var b = "hello".PadLeft(7, 'Q');  //右侧补充2个Q helloQQ
   var timeStamp1 = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds(); // 1970-01-01 00:00:00.000 起到今天的秒数
   var timeStamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(); // 1970-01-01 00:00:00.000 起到今天的毫秒数
   ```
+# 可空类型（Nullable）
+* 类似于基础类型（`string`, `int`, `double`），但在此基础上，增加了空值（null）
+  ```cs
+  var nullable_int = new Nullable<int>(); 
+  var nullable_double = new Nullable<double>();
+  // 获取可空类型的数值
+  var a = nullable_int.Value() + nullable_double.Value();
+
+  // 当变量为空时，返回默认值 1
+  var default_while_null = nullable_int.GetValueOrDefault(1);
+
+  // 若变量为空返回false，非空返回true
+  var res = nullable_int.HasValue();
+  ```
+
+# 类型转换
+## 直接转换
+```cs
+Covnert.ToDouble(obj);
+Covnert.ToDecimal(obj);
+Covnert.ToInt32(obj);
+```
+## 动态转换
+* 根据参数，动态转换成需要的类型
+* 语法：`Convert.ChangeType(Object obj, Type type)`，输入数值 以及要转换成的`type` 即可自动转换
 
 # 参考
 * [c#数组的count()和length的区别](https://www.cnblogs.com/lip-blog/p/7560458.html)
 * [C#中的Dictionary字典类介绍](https://www.cnblogs.com/txw1958/archive/2012/11/07/csharp-dictionary.html)
 * [c#：细说时区、DateTime和DateTimeOffset在国际化中的应用](https://blog.csdn.net/u010476739/article/details/118339679)
+* [C#中的可空类型](https://www.cnblogs.com/minotauros/p/11111516.html)

@@ -95,7 +95,10 @@
   - **T** : `select distinct job, ename from emp;`
   - **F** : `select ename, distinct job from emp;`
 * 统计工作岗位的数量
-  * `select count(distinct job) from emp;`
+  * `select count(distinct job) from emp;` （会过滤掉`job` 为 `null`的数据）
+* 注意：`Distinct` 使用时，必须放在所有字段的前面
+  * `select distinct job, ename from emp` OK
+  * `select job, distinct ename from emp` 啥玩意儿？！
 
 # 关键字执行顺序
 * from -> where -> group by -> having -> select -> order by

@@ -3,9 +3,14 @@
 	* [MySql_窗口函数](./Content/Article/数据库/Mysql/MySql_窗口函数.md)
 * **Oracle**
 	* [Oracle_connection、session、process](./Content/Article/数据库/Oracle/Oracle_connection、session、process.md)
+	* [Oracle_Listagg()函数](./Content/Article/数据库/Oracle/Oracle_Listagg()函数.md)
+	* [Oracle_NULL的困扰](./Content/Article/数据库/Oracle/Oracle_NULL的困扰.md)
 	* [Oracle_单行处理函数](./Content/Article/数据库/Oracle/Oracle_单行处理函数.md)
 	* [Oracle_基础表介绍](./Content/Article/数据库/Oracle/Oracle_基础表介绍.md)
+	* [Oracle_序列](./Content/Article/数据库/Oracle/Oracle_序列.md)
 	* [Oracle_报错解决方式](./Content/Article/数据库/Oracle/Oracle_报错解决方式.md)
+	* [Oracle_自增序列](./Content/Article/数据库/Oracle/Oracle_自增序列.md)
+	* [Oracle_递归](./Content/Article/数据库/Oracle/Oracle_递归.md)
 * **Redis**
 	* [Redis_安装](./Content/Article/数据库/Redis/Redis_安装.md)
 * **Sql_server**

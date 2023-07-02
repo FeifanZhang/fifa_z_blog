@@ -1,4 +1,9 @@
 * **其他**
+	* **写作技巧**
+		* [得、地、的用法](./Content/Article/其他/写作技巧/得、地、的用法.md)
+		* [标点符号的使用](./Content/Article/其他/写作技巧/标点符号的使用.md)
+		* [精简行文的技巧](./Content/Article/其他/写作技巧/精简行文的技巧.md)
+		* [远离形容词](./Content/Article/其他/写作技巧/远离形容词.md)
 	* **小项目**
 		* [按键精灵](./Content/Article/其他/小项目/按键精灵.md)
 	* **我的世界**
@@ -8,8 +13,14 @@
 		* [MC_工具简介](./Content/Article/其他/我的世界/MC_工具简介.md)
 		* [MinecraftGameTest](./Content/Article/其他/我的世界/MinecraftGameTest.md)
 		* [Minecraft存档管理](./Content/Article/其他/我的世界/Minecraft存档管理.md)
+	* **运动**
+		* [跑步](./Content/Article/其他/运动/跑步.md)
+	* **金融**
+		* [国债逆回购](./Content/Article/其他/金融/国债逆回购.md)
 	* **钢铁**
 		* [炼钢流程](./Content/Article/其他/钢铁/炼钢流程.md)
+	* **随笔**
+		* [被讨厌的勇气](./Content/Article/其他/随笔/被讨厌的勇气.md)
 * **包管理工具**
 	* [Maven_简介](./Content/Article/包管理工具/Maven_简介.md)
 	* [npm](./Content/Article/包管理工具/npm.md)
@@ -32,8 +43,10 @@
 			* [CSharp_.Net技术简介](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_.Net技术简介.md)
 			* [CSharp_DataSet&DataTable](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_DataSet&DataTable.md)
 			* [CSharp_GetType()与typeof()的区别](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_GetType()与typeof()的区别.md)
-			* [CSharp_Lambda表达式](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Lambda表达式.md)
 			* [CSharp_Linq](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Linq.md)
+			* [CSharp_Math函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Math函数.md)
+			* [CSharp_Newtonsoft](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Newtonsoft.md)
+			* [CSharp_SpirePdf](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_SpirePdf.md)
 			* [CSharp_函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_函数.md)
 			* [CSharp_反射](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_反射.md)
 			* [CSharp_基础语法](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_基础语法.md)
@@ -47,7 +60,9 @@
 			* [CSharp_面向对象](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_面向对象.md)
 			* [CSharp_项目创建](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_项目创建.md)
 		* **DevExpress**
+			* [DevExpress_DataEdit](./Content/Article/技术笔记/CSharp/DevExpress/DevExpress_DataEdit.md)
 			* [DevExpress_GridControl&GridView](./Content/Article/技术笔记/CSharp/DevExpress/DevExpress_GridControl&GridView.md)
+			* [DevExpress_TabbedControlGroup](./Content/Article/技术笔记/CSharp/DevExpress/DevExpress_TabbedControlGroup.md)
 		* **GDI+**
 			* [GDI+_闪烁](./Content/Article/技术笔记/CSharp/GDI+/GDI+_闪烁.md)
 		* **WinForm**
@@ -129,6 +144,11 @@
 			* [Pytorch_神经网络简介](./Content/Article/技术笔记/Python/Pytorch/Pytorch_神经网络简介.md)
 			* [Pytorch_线性回归](./Content/Article/技术笔记/Python/Pytorch/Pytorch_线性回归.md)
 			* [Pytorch_语音识别简介](./Content/Article/技术笔记/Python/Pytorch/Pytorch_语音识别简介.md)
+	* **ThreeJs**
+		* [ThreeJs_坐标轴辅助器](./Content/Article/技术笔记/ThreeJs/ThreeJs_坐标轴辅助器.md)
+		* [ThreeJs_物体](./Content/Article/技术笔记/ThreeJs/ThreeJs_物体.md)
+		* [ThreeJs_简介](./Content/Article/技术笔记/ThreeJs/ThreeJs_简介.md)
+		* [ThreeJs_轨道控制器](./Content/Article/技术笔记/ThreeJs/ThreeJs_轨道控制器.md)
 	* **Vue**
 		* [Vue_axios](./Content/Article/技术笔记/Vue/Vue_axios.md)
 		* [Vue_props](./Content/Article/技术笔记/Vue/Vue_props.md)
@@ -146,9 +166,14 @@
 		* [MySql_窗口函数](./Content/Article/数据库/Mysql/MySql_窗口函数.md)
 	* **Oracle**
 		* [Oracle_connection、session、process](./Content/Article/数据库/Oracle/Oracle_connection、session、process.md)
+		* [Oracle_Listagg()函数](./Content/Article/数据库/Oracle/Oracle_Listagg()函数.md)
+		* [Oracle_NULL的困扰](./Content/Article/数据库/Oracle/Oracle_NULL的困扰.md)
 		* [Oracle_单行处理函数](./Content/Article/数据库/Oracle/Oracle_单行处理函数.md)
 		* [Oracle_基础表介绍](./Content/Article/数据库/Oracle/Oracle_基础表介绍.md)
+		* [Oracle_序列](./Content/Article/数据库/Oracle/Oracle_序列.md)
 		* [Oracle_报错解决方式](./Content/Article/数据库/Oracle/Oracle_报错解决方式.md)
+		* [Oracle_自增序列](./Content/Article/数据库/Oracle/Oracle_自增序列.md)
+		* [Oracle_递归](./Content/Article/数据库/Oracle/Oracle_递归.md)
 	* **Redis**
 		* [Redis_安装](./Content/Article/数据库/Redis/Redis_安装.md)
 	* **Sql_server**
@@ -188,6 +213,7 @@
 	* **操作系统**
 		* [cmd命令](./Content/Article/计算机基础/操作系统/cmd命令.md)
 		* [Liunx实用命令](./Content/Article/计算机基础/操作系统/Liunx实用命令.md)
+		* [Windows快捷键](./Content/Article/计算机基础/操作系统/Windows快捷键.md)
 	* **正则表达式**
 		* [常用正则表达式](./Content/Article/计算机基础/正则表达式/常用正则表达式.md)
 	* **算法**

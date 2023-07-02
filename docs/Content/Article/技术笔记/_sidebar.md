@@ -5,8 +5,10 @@
 		* [CSharp_.Net技术简介](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_.Net技术简介.md)
 		* [CSharp_DataSet&DataTable](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_DataSet&DataTable.md)
 		* [CSharp_GetType()与typeof()的区别](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_GetType()与typeof()的区别.md)
-		* [CSharp_Lambda表达式](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Lambda表达式.md)
 		* [CSharp_Linq](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Linq.md)
+		* [CSharp_Math函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Math函数.md)
+		* [CSharp_Newtonsoft](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Newtonsoft.md)
+		* [CSharp_SpirePdf](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_SpirePdf.md)
 		* [CSharp_函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_函数.md)
 		* [CSharp_反射](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_反射.md)
 		* [CSharp_基础语法](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_基础语法.md)
@@ -20,7 +22,9 @@
 		* [CSharp_面向对象](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_面向对象.md)
 		* [CSharp_项目创建](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_项目创建.md)
 	* **DevExpress**
+		* [DevExpress_DataEdit](./Content/Article/技术笔记/CSharp/DevExpress/DevExpress_DataEdit.md)
 		* [DevExpress_GridControl&GridView](./Content/Article/技术笔记/CSharp/DevExpress/DevExpress_GridControl&GridView.md)
+		* [DevExpress_TabbedControlGroup](./Content/Article/技术笔记/CSharp/DevExpress/DevExpress_TabbedControlGroup.md)
 	* **GDI+**
 		* [GDI+_闪烁](./Content/Article/技术笔记/CSharp/GDI+/GDI+_闪烁.md)
 	* **WinForm**
@@ -102,6 +106,11 @@
 		* [Pytorch_神经网络简介](./Content/Article/技术笔记/Python/Pytorch/Pytorch_神经网络简介.md)
 		* [Pytorch_线性回归](./Content/Article/技术笔记/Python/Pytorch/Pytorch_线性回归.md)
 		* [Pytorch_语音识别简介](./Content/Article/技术笔记/Python/Pytorch/Pytorch_语音识别简介.md)
+* **ThreeJs**
+	* [ThreeJs_坐标轴辅助器](./Content/Article/技术笔记/ThreeJs/ThreeJs_坐标轴辅助器.md)
+	* [ThreeJs_物体](./Content/Article/技术笔记/ThreeJs/ThreeJs_物体.md)
+	* [ThreeJs_简介](./Content/Article/技术笔记/ThreeJs/ThreeJs_简介.md)
+	* [ThreeJs_轨道控制器](./Content/Article/技术笔记/ThreeJs/ThreeJs_轨道控制器.md)
 * **Vue**
 	* [Vue_axios](./Content/Article/技术笔记/Vue/Vue_axios.md)
 	* [Vue_props](./Content/Article/技术笔记/Vue/Vue_props.md)

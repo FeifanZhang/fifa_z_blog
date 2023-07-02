@@ -74,7 +74,7 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
             // 当col中包含“时”这个字时，将存储的内容通过时间格式进行显示
             if (col.FieldName.Contains("时"))
             {
-                col.ColumnEdit = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+                col.ColumnEdit = new RepositoryItemSearchLookUpEdit();
                 col.ColumnEdit.EditFormat.FormatType = FormatType.Custom;
                 col.ColumnEdit.EditFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
                 col.ColumnEdit.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
@@ -82,6 +82,8 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
                 // 设置该列不允许修改 & 只读
                 col.OptionsColumn.AllowEdit = false;  // 不管 gridView.OptionsBehavior.Editable 如何设置，单元格是否可编辑仅基于这一条语句
                 col.OptionsColumn.ReadOnly = true;
+                // 为该列添加背景颜色
+                col.AppearanceCell.BackColor = Color.LightGreen;
             }
 
             // 审批状态中存储的是数字编码，需要通过文字进行显示
@@ -103,7 +105,7 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
 
                 // .ValueMember是表中真实存储的那一列的列名
                 lookUpEditSymbol.ValueMember = "VAL";  // 通过VAL这一列与表中的数据进行匹配，当匹配到一行的VAL与表中的数据相等时，将该行的DISPLAY呈现出来
-
+                lookUpEditSymbol.EditValueChanging += new ChangingEventHandler(this.lookUpEditSymbo_EditValueChanging); // 当该组件的数值发生变化时，调用 lookUpEditSymbo_EditValueChanged 方法（注意：lookUpEditSymbo_EditValueChanged 方法的参数为 object sender, ChangingEventArgs e）
                 // 将前面设置的组件加入该列
                 col.ColumnEdit = lookUpEditSymbol;
             }
@@ -115,6 +117,14 @@ public void InitGrid(ref DevExpress.XtraGrid.Views.Grid.GridView gridView, ref D
     }
     
 }
+
+// sender: 调用该方法的控件，e: 包含oldValue（调整前控件的数值）；newValue（调整后控件内新的数值）
+private void lookUpEditSymbo_EditValueChanged(object sender, ChangingEventArgs e)
+{
+    var newVal = e.NewValue;
+    return; // gridView中的下拉组件调用的方法
+}
+
 ```
 
 ## GridView 对列进行排序

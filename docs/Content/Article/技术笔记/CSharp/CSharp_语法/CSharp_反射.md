@@ -30,11 +30,8 @@ class Program
 }
 ```
 
-## 泛型类
-
-# 反射调用方法
-## BindingFlags 筛选方法修饰符
-反射调用方法时，默认调用Public成员，要查询其他成员（protected, private等），则需要通过`BindingFlags`枚举类型对查找的成员进行筛选
+# BindingFlags 筛选方法修饰符
+反射调用字段、属性或是方法时，默认调用`Public`类型成员，要查询其他类型成员（`protected`, `private`等），则需要通过`BindingFlags`枚举类型对查找的成员进行筛选
 
 |`BindingFlags`枚举值|含义|
 |--|--|
@@ -46,7 +43,51 @@ class Program
 |`NonPublic`|非公共成员（public以外的）|
 - 添加`BindingFlags`后，`Instance`与`Static`必须二选一
 
+# 反射调用字段
+## 定义演示用的类型
+```cs
+public class TestCls
+{
+    public string A;
+    public int B;
 
+    private string C;
+    private int D;
+}
+```
+
+## 调用 public 字段
+* `GetField()` 用于调用字段
+```cs
+var inst = new TestCls();
+FieldInfo fieldA = typeOf(TestCls).GetField("A");  // 获取A字段信息
+FieldInfo fieldB = typeOf(TestCls).GetField("B");  // 获取B字段信息
+
+// 获取字段值
+Object valA = typeOf(TestCls).GetField("A").GetValue(inst);
+Object valB = typeOf(TestCls).GetField("B").GetValue(inst);
+```
+
+## 调用 private 字段
+* 通过`GetField(fieldName, BindingFlags)`操作私有类型字段
+```cs
+var inst = new TestCls();
+
+// 不添加 BindingFlags 获取私有字段信息，则返回null
+typeOf(TestCls).GetField("C");  // 返回null
+typeOf(TestCls).GetField("D");  // 返回null
+
+// 添加 BindingFlags 获取字段
+FieldInfo FieldC = typeOf(TestCls).GetField("C", BindingFlags.Instance | BindingFlags.NonPublic);
+FieldInfo FieldD = typeOf(TestCls).GetField("D", BindingFlags.Instance | BindingFlags.NonPublic);
+
+// 获取字段值
+Object valC = typeOf(TestCls).GetField("C", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(inst);
+Object valD = typeOf(TestCls).GetField("D", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(inst);
+```
+
+
+# 反射调用方法
 ## 反射直接获取构造方法
 * 获取某个类的构造方法
 - `GetConstructors()`只能查询public成员，要查询其他成员（protected, private等），则需要通过`BindingFlags`枚举类型对查找的成员进行筛选
@@ -206,6 +247,8 @@ var private_statics_method = tp.GetMethod("staticMethod", BindingFlags.Static | 
 var private_statics_method_with_param = tp.GetMethod("staticMethod", BindingFlags.Static | BindingFlags.NonPublic, null, new Type[]{ typeof(string), typeof(string), typeof(string) }, null);
 ```
 
+
+
 # 反射实现工厂类
 - 工厂类就是输入特定字符，返回初始化好的类
 - 这些类初始化的参数数量和类型一样
@@ -263,6 +306,53 @@ var private_statics_method_with_param = tp.GetMethod("staticMethod", BindingFlag
     ```
 
 - 好处：每次添加新的类进来时，只需要每个类中加入`TABLE_NAME`常亮即可，不需要对代码本体进行修改
+
+# 例子
+* 将界面不同组件的的数值进行抓取 & 放入Model对应的字段
+```cs
+/// <summary>
+/// 用法：将界面组件的 Name 换成Model的属性名，即可直接生成Model
+/// Author: Feifan_Zhang 2023_05_18
+/// </summary>
+/// <param name="tarrif"></param>
+/// <returns></returns>
+private PaTariff UpdModelFromGUIWithName(PaTariff tarrif)
+{
+    var thisCls = this.GetType();
+    foreach (var property in tarrif.GetType().GetProperties())
+    {
+        try
+        {
+            // 获取组件
+            if (thisCls.GetField(property.Name, BindingFlags.Instance | BindingFlags.NonPublic) == null)
+            {
+                Console.WriteLine($"{thisCls.Name} 类型界面中，不存在名称为 {property.Name} 的组件");
+                continue;
+            }
+            var gui = thisCls.GetField(property.Name, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(this);
+
+            // 读取组件String
+            var guiValObj = gui.GetType().GetProperty("Text").GetValue(gui);
+            if (string.IsNullOrEmpty(guiValObj.ToString()))
+            {
+                continue; // 直接进入下一个循环
+            }
+
+            // 获取属性的 类型
+            var propType = property.PropertyType;
+
+            // GUI组件值 转换成属性对应的数据类型
+            dynamic valOfProp = Convert.ChangeType(guiValObj, propType);
+            property.SetValue(tariff, valOfProp);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"{tarrif.TariffNo} 的Model, {property.Name} 属性解析时出现问题：\n {ex.Message}");
+        }
+
+    }
+    return tarrif;
+```
 ---
 # 参考
 - [详解(C#) .NET反射中的BindingFlags以及常用的BindingFlags使用方](https://blog.csdn.net/f_957995490/article/details/107872442)
