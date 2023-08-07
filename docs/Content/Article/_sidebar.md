@@ -14,27 +14,25 @@
 		* [MinecraftGameTest](./Content/Article/其他/我的世界/MinecraftGameTest.md)
 		* [Minecraft存档管理](./Content/Article/其他/我的世界/Minecraft存档管理.md)
 	* **运动**
+		* [腹肌训练](./Content/Article/其他/运动/腹肌训练.md)
 		* [跑步](./Content/Article/其他/运动/跑步.md)
 	* **金融**
 		* [国债逆回购](./Content/Article/其他/金融/国债逆回购.md)
 	* **钢铁**
 		* [炼钢流程](./Content/Article/其他/钢铁/炼钢流程.md)
 	* **随笔**
+		* [翦商](./Content/Article/其他/随笔/翦商.md)
 		* [被讨厌的勇气](./Content/Article/其他/随笔/被讨厌的勇气.md)
-* **包管理工具**
-	* [Maven_简介](./Content/Article/包管理工具/Maven_简介.md)
-	* [npm](./Content/Article/包管理工具/npm.md)
 * **博客**
 	* **Docsify**
 		* [Docsify_基础配置指南](./Content/Article/博客/Docsify/Docsify_基础配置指南.md)
+		* [Docsify_部署](./Content/Article/博客/Docsify/Docsify_部署.md)
 	* **Hexo**
 		* [Hexo_MathJax数学公式](./Content/Article/博客/Hexo/Hexo_MathJax数学公式.md)
 		* [Hexo_mermaid插件](./Content/Article/博客/Hexo/Hexo_mermaid插件.md)
 		* [Hexo_NexT主题](./Content/Article/博客/Hexo/Hexo_NexT主题.md)
 		* [Hexo_VSCode插件](./Content/Article/博客/Hexo/Hexo_VSCode插件.md)
 		* [Hexo_使用指南](./Content/Article/博客/Hexo/Hexo_使用指南.md)
-* **开发平台**
-	* [VSCode](./Content/Article/开发平台/VSCode.md)
 * **技术笔记**
 	* **Canvas**
 		* [Canvas_基础](./Content/Article/技术笔记/Canvas/Canvas_基础.md)
@@ -51,6 +49,7 @@
 			* [CSharp_反射](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_反射.md)
 			* [CSharp_基础语法](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_基础语法.md)
 			* [CSharp_委托&匿名方法&匿名函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_委托&匿名方法&匿名函数.md)
+			* [CSharp_字段与属性](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_字段与属性.md)
 			* [CSharp_数据类型](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_数据类型.md)
 			* [CSharp_枚举](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_枚举.md)
 			* [CSharp_正则表达式](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_正则表达式.md)
@@ -104,6 +103,16 @@
 					* [完全注解开发](./Content/Article/技术笔记/Java/Spring/IOC/注解方式/完全注解开发.md)
 					* [属性注入注解简介](./Content/Article/技术笔记/Java/Spring/IOC/注解方式/属性注入注解简介.md)
 			* [Spring概述](./Content/Article/技术笔记/Java/Spring/Spring概述.md)
+	* **JavaScript**
+		* **NodeJs**
+			* [NodeJs_Buffer](./Content/Article/技术笔记/JavaScript/NodeJs/NodeJs_Buffer.md)
+			* [NodeJs_Http模块](./Content/Article/技术笔记/JavaScript/NodeJs/NodeJs_Http模块.md)
+			* [NodeJs_简介](./Content/Article/技术笔记/JavaScript/NodeJs/NodeJs_简介.md)
+		* **正则表达式**
+			* [JavaScript_正则表达式_分组和分支](./Content/Article/技术笔记/JavaScript/正则表达式/JavaScript_正则表达式_分组和分支.md)
+			* [JavaScript_正则表达式_边界符](./Content/Article/技术笔记/JavaScript/正则表达式/JavaScript_正则表达式_边界符.md)
+			* [JavaScript_正则表达式_量词](./Content/Article/技术笔记/JavaScript/正则表达式/JavaScript_正则表达式_量词.md)
+			* [JavaScript_正则表达式方法](./Content/Article/技术笔记/JavaScript/正则表达式/JavaScript_正则表达式方法.md)
 	* **Python**
 		* **Django**
 			* [Django-cross-site](./Content/Article/技术笔记/Python/Django/Django-cross-site.md)
@@ -166,6 +175,7 @@
 		* [MySql_窗口函数](./Content/Article/数据库/Mysql/MySql_窗口函数.md)
 	* **Oracle**
 		* [Oracle_connection、session、process](./Content/Article/数据库/Oracle/Oracle_connection、session、process.md)
+		* [Oracle_EXPDP&IMPDP](./Content/Article/数据库/Oracle/Oracle_EXPDP&IMPDP.md)
 		* [Oracle_Listagg()函数](./Content/Article/数据库/Oracle/Oracle_Listagg()函数.md)
 		* [Oracle_NULL的困扰](./Content/Article/数据库/Oracle/Oracle_NULL的困扰.md)
 		* [Oracle_单行处理函数](./Content/Article/数据库/Oracle/Oracle_单行处理函数.md)
@@ -192,17 +202,7 @@
 		* [SQL_系列文章简介](./Content/Article/数据库/SQL语句/SQL_系列文章简介.md)
 		* [SQL_表的操作](./Content/Article/数据库/SQL语句/SQL_表的操作.md)
 		* [SQL_连接查询](./Content/Article/数据库/SQL语句/SQL_连接查询.md)
-* **版本管理**
-	* **Git**
-		* [Github](./Content/Article/版本管理/Git/Github.md)
-		* [Git_安装](./Content/Article/版本管理/Git/Git_安装.md)
-	* **SVN**
-		* [SVN_基础操作](./Content/Article/版本管理/SVN/SVN_基础操作.md)
 * **计算机基础**
-	* **Http**
-		* [HTTP](./Content/Article/计算机基础/Http/HTTP.md)
-		* [Http_状态码](./Content/Article/计算机基础/Http/Http_状态码.md)
-		* [HTTP_请求方法](./Content/Article/计算机基础/Http/HTTP_请求方法.md)
 	* **代码规范**
 		* [代码规范_Function](./Content/Article/计算机基础/代码规范/代码规范_Function.md)
 		* [代码规范_命名规则](./Content/Article/计算机基础/代码规范/代码规范_命名规则.md)
@@ -210,10 +210,6 @@
 	* **其他小知识**
 		* [不同语言注释符](./Content/Article/计算机基础/其他小知识/不同语言注释符.md)
 		* [数据格式](./Content/Article/计算机基础/其他小知识/数据格式.md)
-	* **操作系统**
-		* [cmd命令](./Content/Article/计算机基础/操作系统/cmd命令.md)
-		* [Liunx实用命令](./Content/Article/计算机基础/操作系统/Liunx实用命令.md)
-		* [Windows快捷键](./Content/Article/计算机基础/操作系统/Windows快捷键.md)
 	* **正则表达式**
 		* [常用正则表达式](./Content/Article/计算机基础/正则表达式/常用正则表达式.md)
 	* **算法**
@@ -221,8 +217,6 @@
 		* [摩尔投票法](./Content/Article/计算机基础/算法/摩尔投票法.md)
 		* [算法_双指针](./Content/Article/计算机基础/算法/算法_双指针.md)
 		* [阿拉伯数字转汉字读法](./Content/Article/计算机基础/算法/阿拉伯数字转汉字读法.md)
-	* **网络信息安全**
-		* [MD5](./Content/Article/计算机基础/网络信息安全/MD5.md)
 	* **设计模式**
 		* [设计模式_代理模式](./Content/Article/计算机基础/设计模式/设计模式_代理模式.md)
 		* [设计模式_单例模式](./Content/Article/计算机基础/设计模式/设计模式_单例模式.md)
@@ -234,3 +228,41 @@
 		* [设计模式_策略模式](./Content/Article/计算机基础/设计模式/设计模式_策略模式.md)
 		* [设计模式_适配器模式](./Content/Article/计算机基础/设计模式/设计模式_适配器模式.md)
 		* [设计模式_面向对象设计](./Content/Article/计算机基础/设计模式/设计模式_面向对象设计.md)
+* **运维与部署**
+	* **Git**
+		* [Github_添加SSH](./Content/Article/运维与部署/Git/Github_添加SSH.md)
+		* [Git_.git结构](./Content/Article/运维与部署/Git/Git_.git结构.md)
+		* [Git_branch](./Content/Article/运维与部署/Git/Git_branch.md)
+		* [Git_gitignore](./Content/Article/运维与部署/Git/Git_gitignore.md)
+		* [Git_merge](./Content/Article/运维与部署/Git/Git_merge.md)
+		* [Git_pull](./Content/Article/运维与部署/Git/Git_pull.md)
+		* [Git_push](./Content/Article/运维与部署/Git/Git_push.md)
+		* [Git_基础概念](./Content/Article/运维与部署/Git/Git_基础概念.md)
+		* [Git_安装](./Content/Article/运维与部署/Git/Git_安装.md)
+		* [Git_连接失败如何修复](./Content/Article/运维与部署/Git/Git_连接失败如何修复.md)
+	* **Http**
+		* [HTTP](./Content/Article/运维与部署/Http/HTTP.md)
+		* [Http_状态码](./Content/Article/运维与部署/Http/Http_状态码.md)
+		* [HTTP_请求方法](./Content/Article/运维与部署/Http/HTTP_请求方法.md)
+	* **Linux**
+		* [Linux_Systemctl与Service](./Content/Article/运维与部署/Linux/Linux_Systemctl与Service.md)
+		* [Liunx_常用命令](./Content/Article/运维与部署/Linux/Liunx_常用命令.md)
+		* **进程**
+			* [Linux_kill&killall&pkill命令](./Content/Article/运维与部署/Linux/进程/Linux_kill&killall&pkill命令.md)
+			* [Linux_ps命令](./Content/Article/运维与部署/Linux/进程/Linux_ps命令.md)
+			* [Linux_top命令](./Content/Article/运维与部署/Linux/进程/Linux_top命令.md)
+			* [Linux_进程简介](./Content/Article/运维与部署/Linux/进程/Linux_进程简介.md)
+	* **Nginx**
+		* [Nginx_介绍](./Content/Article/运维与部署/Nginx/Nginx_介绍.md)
+		* [Nginx_基础指令](./Content/Article/运维与部署/Nginx/Nginx_基础指令.md)
+	* **SVN**
+		* [SVN_基础操作](./Content/Article/运维与部署/SVN/SVN_基础操作.md)
+	* **Tomcat**
+		* [Tomcat_内存](./Content/Article/运维与部署/Tomcat/Tomcat_内存.md)
+		* [Tomcat_报错笔记](./Content/Article/运维与部署/Tomcat/Tomcat_报错笔记.md)
+	* **Windows**
+		* [cmd命令](./Content/Article/运维与部署/Windows/cmd命令.md)
+		* [Windows快捷键](./Content/Article/运维与部署/Windows/Windows快捷键.md)
+	* **包管理工具**
+		* [Maven_简介](./Content/Article/运维与部署/包管理工具/Maven_简介.md)
+		* [npm](./Content/Article/运维与部署/包管理工具/npm.md)

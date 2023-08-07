@@ -13,10 +13,12 @@
 	* [MinecraftGameTest](./Content/Article/其他/我的世界/MinecraftGameTest.md)
 	* [Minecraft存档管理](./Content/Article/其他/我的世界/Minecraft存档管理.md)
 * **运动**
+	* [腹肌训练](./Content/Article/其他/运动/腹肌训练.md)
 	* [跑步](./Content/Article/其他/运动/跑步.md)
 * **金融**
 	* [国债逆回购](./Content/Article/其他/金融/国债逆回购.md)
 * **钢铁**
 	* [炼钢流程](./Content/Article/其他/钢铁/炼钢流程.md)
 * **随笔**
+	* [翦商](./Content/Article/其他/随笔/翦商.md)
 	* [被讨厌的勇气](./Content/Article/其他/随笔/被讨厌的勇气.md)

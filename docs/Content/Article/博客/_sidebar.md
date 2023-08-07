@@ -1,5 +1,6 @@
 * **Docsify**
 	* [Docsify_基础配置指南](./Content/Article/博客/Docsify/Docsify_基础配置指南.md)
+	* [Docsify_部署](./Content/Article/博客/Docsify/Docsify_部署.md)
 * **Hexo**
 	* [Hexo_MathJax数学公式](./Content/Article/博客/Hexo/Hexo_MathJax数学公式.md)
 	* [Hexo_mermaid插件](./Content/Article/博客/Hexo/Hexo_mermaid插件.md)
