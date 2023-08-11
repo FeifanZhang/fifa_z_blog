@@ -74,22 +74,43 @@ PS D:\git_learning\source_code\.git\hooks> ls
       -ar---          2023/8/2     14:48             45 9829e28eb93e21910f84964e9a28279ee82441
   ```
 
-## objects保存数据逻辑：
+## objects保存数据逻辑
 * 分支或是修改文件，objects仅保存的增量或修改信息，不会重复保存相同信息
 * 因为是根据**文件内容**做的校验，所以当**两个文件的名称不同**，但**文件内容相同**时，objects目录下**仅会有一条SHA-1记录保存**
 
 ## objects下的文件类型&内容
 * commit，tree（workspace的文件夹信息），blob（workspace的文件内容信息）
+* blob对象：存储添加 or 修改的文件内容信息
+* tree对象：存储blob对象对应的文件名 & hash值
+* commit对象：`git commit`所提交的tree对象对应的hash值 & 作者 + 提交者信息
+* `git add`、`git rm` 时 blob类型文件会发生改变
+* `git commit` 时，会让 tree类型和commit类型文件发生改变, 但blob结对不会改变
+
 ## 查看文件类型
 * 通过`git cat-file -t hashcode`进行查看对象类型，**注意：hashcode 参数务必文件夹名称（SHA-1前两位）+ 文件名（SHA-1后38位）**
     ```cmd
     PS D:\git_learning\source_code\.git\objects\00> git cat-file -t 001070b677ab3a705a8e6dd16f89578bbd47c4d8
     blob
     ```
-* 查看文件内容：通过`git cat-file -p hashcode`进行查看对象内容，**注意事项同上**，若对象为blob类型，则显示文件内容
+## 查看文件内容
+* 通过`git cat-file -p hashcode`进行查看对象内容，**注意事项同上**
+  * 若对象为blob类型，则显示文件内容
     ```cmd
     PS D:\git_learning\source_code\.git\objects\00> git cat-file -p 001070b677ab3a705a8e6dd16f89578bbd47c4d8
     hello world
+    ```
+  * 对象为commit类型，包含**tree对象 & 对应hash值**、本次commit的 **username** 、**邮箱**、**时间戳**、**时区**、**commit message**
+    ```cmd
+    git cat-file -p dObde7c
+    tree 29d3f358addb2b6e16ebfb981716fa75cc562ee7          # tree 对象 & 对应hash值（hash值后38位即tree文件文件名，前两位为文件夹名称）
+    author FIFA <feifan_z@qmail.com> 1590009304 +0200      # 作者信息（名字 + 邮箱 + 时间戳 + 时区）
+    committer FIFA <feifan_z@gmail.com> 1590009304 +0200   # commit信息（名字 + 邮箱 + 时间戳 + 时区）
+    1st commit message
+    ```
+  * 对象为tree类型，包含文件权限、文件类型、hash值、文件名（`git ls-files -s` 出来的信息）
+    ```cmd
+    git cat-file -p 29d3f3
+    100644 blob ca5a43e53e012b6fd3b2a8a06ebb6c2ee24a24e5   file1.txt
     ```
 * 查看文件大小：通过`git cat-file -s hashcode`进行查看对象类型，**注意事项同上**，显示文件大小
   ```cmd
@@ -109,18 +130,28 @@ PS D:\git_learning\source_code\.git\hooks> ls
         d-----         2023/7/30     10:53                tags
   ```
 
-* `heads`：保存的是本地分支，文件名是本地分支名称（文件与本地分支一一对应），文件内容是commit id
-  ```cmd
-  PS D:\git_learning\source_code\.git\refs\heads> ls
-    Mode                 LastWriteTime         Length Name
-    ----                 -------------         ------ ----
-    -a----          2023/8/2     15:23             41 dev_others
-    -a----          2023/8/3     14:19             41 dev_feifan_zhang
-    -a----          2023/8/3     23:57             41 master
-  PS D:\git_learning\source_code\.git\refs\heads> cat .\master
-  50e9c6531cf84d2cafff162c90f47da9f5008a9b
-  ```
-* `remotes`: 文件夹为远程主机信息，文件夹内为该主机对应的远程分支
+## heads
+  * 保存的是本地分支，文件名是本地分支名称（文件与本地分支一一对应），文件内容是该分支最新的`commit`的hash值
+    ```cmd
+    PS D:\git_learning\source_code\.git\refs\heads> ls
+      Mode                 LastWriteTime         Length Name
+      ----                 -------------         ------ ----
+      -a----          2023/8/2     15:23             41 dev_others
+      -a----          2023/8/3     14:19             41 dev_feifan_zhang
+      -a----          2023/8/3     23:57             41 master
+    PS D:\git_learning\source_code\.git\refs\heads> cat .\master
+    50e9c6531cf84d2cafff162c90f47da9f5008a9b
+    ```
+  * 若两个分支同步，则所指向的hash值相等（都指向同一个commit）
+    ```cmd
+    PS D:\git_learning\source_code\.git\refs\heads> cat .\master
+    50e9c6531cf84d2cafff162c90f47da9f5008a9b
+    PS D:\git_learning\source_code\.git\refs\heads> cat .\dev_feifan_zhang
+    50e9c6531cf84d2cafff162c90f47da9f5008a9b  # master & dev_feifan_zhang 两个分支同步，故保存的commit文件的hash值相等
+    ```
+
+## remotes 
+* 文件夹为远程主机信息，文件夹内为该主机对应的远程分支
   ```cmd
   PS D:\git_learning\source_code\.git\refs\remotes> ls
     Mode                 LastWriteTime         Length Name
@@ -134,18 +165,29 @@ PS D:\git_learning\source_code\.git\hooks> ls
     -a----         2023/7/30     10:54             32 HEAD
     -a----          2023/8/3     15:41             41 master
   ```
-* `tags`: tags目录保存的是本地仓库的tag和head信息。一个tag对应一个和tag同名的文件，文件内容是该tag对应commit id
+
+## tags 
+* tags目录保存的是本地仓库的tag和head信息。一个tag对应一个和tag同名的文件，文件内容是该tag对应commit id
 
 # HEAD
-* 一个文件，用于存储当前的开发所使用的分支，`git checkout` 时，该文件内容会被改写
+* 文件类型，用于存储当前**开发所在的分支**
   ```cmd
   PS D:\git_learning\source_code\.git> cat head
   ref: refs/heads/master
   ```
+* 指向当前分支的最新commit
+* `git checkout` 时，该文件内容会被改写
+  ```cmd
+  PS D:\git_learning\source_code\.git> cat head
+  ref: refs/heads/master
+  PS D:\git_learning\source_code\.git> git checkout dev
+  ref: refs/heads/dev
+  ```
+
 
 # index
 * 通过`git ls-files` 查看暂存区的全部文件名称 & 其路径
-* 通过 `git ls-files -s` 查看暂存区文件的文件权限、哈希值以及文件名
+* 通过 `git ls-files -s` 查看暂存区文件的文件权限、哈希值以及文件名（查询的是`objects`路径下的tree类型文件）
   ```cmd
   PS D:\git_learning\source_code\.git> git ls-files -s
   100644 db4a1490254687655f863447c84e46404d4de99c 0       .gitignore

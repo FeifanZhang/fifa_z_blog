@@ -1,14 +1,20 @@
-# 基本概念
-对Github中出现的专有名词（尤其是本文中出现的专有名词）进行“入门扫盲级”的介绍，有了解的可以直接跳过。
-## Git工作区域简介
-* **工作区（Working Directory）**：该区域在电脑本地，该区域用于开发人员进行项目开发
-* **暂存区（Staging Area）**：当**工作区**内项目进行了部分改动但未经测试，不宜提交至仓库中时，可先存储至**缓存区**（将增量或修改的内容存储在项目的`.git`路径下），待代码测试合格后，再统一提交至**仓库**；或是通过`.gitignore`对文件是否纳入版本控制进行筛选
-* **仓库（Repository）**：仓库负责管理被托管的项目。每个项目对应一个仓库，仓库除了存放代码，还会记录每一次提交的代码修改，方便进行版本控制。仓库分为**本地仓库（local repo）**以及**远程仓库（remote repo）**
-  * 本地仓库：位置在本地电脑上，设置`git config --global user.name "Your Name"`以及`git config --global user.email you@example.com`即可使用
-  * 远程仓库：位置在github、gitee或gitlab等云端仓库，用以实现代码的备份、线上托管以及多人协同开发
-  * 本地仓库需和远程仓库进行连接后，才可通过`git push`命令将本地仓库代码提交至远程仓库
-Github三大工作区域的介绍以及三者的关系就介绍到这里，三个区域的创建以及代码如何在三个区域中进行流转请参考文章后面部分[Github创建首个项目](#github创建首个项目)。
-* 以下是git工作区域关系简介：
+# Git工作区域简介
+## **工作区（Working Directory）**
+* 该区域在电脑本地，该区域用于开发人员进行项目开发
+
+## **暂存区（Staging Area）**
+* 当**工作区**内项目进行了部分改动但未经测试，不宜提交至仓库中时，可先存储至**缓存区**（将增量或修改的内容存储在项目的`.git`路径下），待代码测试合格后，再统一提交至**仓库**
+* 或是通过`.gitignore`对文件是否纳入版本控制进行筛选
+
+## **仓库（Repository）**
+* 仓库负责管理被托管的项目。每个项目对应一个仓库，仓库除了存放代码，还会记录每一次提交的代码修改，方便进行版本控制。仓库分为**本地仓库（local repo）**以及**远程仓库（remote repo）**
+* 本地仓库需和远程仓库进行连接后，才可通过`git push`命令将本地仓库代码提交至远程仓库
+### 本地仓库
+* 位置在本地电脑上，设置`git config --global user.name "Your Name"`以及`git config --global user.email you@example.com`即可使用
+### 远程仓库
+* 位置在github、gitee或gitlab等云端仓库，用以实现代码的备份、线上托管以及多人协同开发
+
+## 工作区域通过git命令进行区域转移
 
   ```mermaid
   graph TD
@@ -16,8 +22,47 @@ Github三大工作区域的介绍以及三者的关系就介绍到这里，三�
     temp -->|git commit| local[本地仓库];
     local --> |git push| repo[远程仓库];
   ```
+* Github三大工作区域的介绍以及三者的关系就介绍到这里，三个区域的创建以及代码如何在三个区域中进行流转请参考文章后面部分[Github创建首个项目](#github创建首个项目)
 
-## 仓库的操作以及git协作流程
+# 文件状态简介
+|状态名称|所在区域|说明|
+|--|--|--|
+|Untracked|工作区|未纳入git版本控制|
+|Modified|暂存区|纳入版本控制，但暂存区与工作区文件内容不一致|
+|Staged|暂存区|该文件有被修改，但目前**工作区**与**暂存区**一致，且只有staged状态文件才可以commit|
+|Unmodified|暂存区|该文件没有修改，且目前**工作区**与**暂存区**一致|
+
+```mermaid
+sequenceDiagram
+    box 工作区
+    participant untracked
+    end
+    box 暂存区
+    participant modified
+    participant unmodified
+    participant staged
+    end
+    box 本地仓库
+    participant committed
+    end
+    box 远程仓库 
+    participant repo
+    end
+    untracked->>staged: git add 
+    modified->>staged: git add
+    staged->>untracked: git -rm
+    staged ->> modified: 修改工作区文件
+    staged ->> committed: git commit
+    committed ->> modified: 修改工作区文件
+    staged ->> modified: git reset HEAD
+    committed ->> staged: git reset HEAD
+    committed ->> repo: git push
+    repo ->> unmodified: git clone
+    unmodified ->> untracked: git rm
+    modified ->> unmodified: git checkout -- filename
+```
+
+# 仓库的操作以及git协作流程
 * **创建分支仓库（Fork）**：当用户想将其他人的开源项目做修改以便自己使用时，通过该功能**创建分支仓库**到自己的主页中，该分支仓库包括项目全部代码，且与被分支的项目完全独立（即在分支仓库内的任何修改不会对原有项目产生任何影响），同时可以在该分支上继续分支，各个分支之间互不影响。
 * **发起请求（Pull Request）**：书接上文，用户**Fork**一个项目后，进行了修改，发现修改后的项目比原版还要好，你想让更多人受益，可以原版项目**发起请求**。项目创始人收到请求后，会review代码以及测试，对方同意你的修改，便会合并（Merge）到源代码仓库中，那么你对项目的修改就会出现在原版项目代码里了。这就是开源项目的好处，为项目努力的不仅仅是项目创始人，还有许许多多“轮子”的使用者一起优化“轮子”。
 * **合并（Merge）**：在对方同意你的pull request之后，会将你的代码合并至源代码仓库中，这个过程就叫Merge。
@@ -120,4 +165,6 @@ dce31a0 HEAD@{2}: clone: from https://github.com/FeifanZhang/fifa_z_blog.git
 * 在线阅读源码时，Github网站的排版对阅读并不友好，可在url的`github`后加`1s`,即可得到vs code排版,如下图所示：
 {% asset_img github0.png %}  
 * [Git版本控制的沙盒游戏小网站](https://learngitbranching.js.org/?locale=zh_CN)，在这里可以对基础的git命令进行练习，直观的图形化界面可以对指令有更深的了解。
+* [Git文件的4种状态](https://www.cnblogs.com/utank/p/12180531.html)
+* [Git之文件的4种状态](https://www.cnblogs.com/StarChen20/p/14016509.html)
 

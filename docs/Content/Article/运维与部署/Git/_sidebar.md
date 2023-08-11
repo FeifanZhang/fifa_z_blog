@@ -1,6 +1,7 @@
 * [Github_添加SSH](./Content/Article/运维与部署/Git/Github_添加SSH.md)
 * [Git_.git结构](./Content/Article/运维与部署/Git/Git_.git结构.md)
 * [Git_branch](./Content/Article/运维与部署/Git/Git_branch.md)
+* [Git_checkout](./Content/Article/运维与部署/Git/Git_checkout.md)
 * [Git_gitignore](./Content/Article/运维与部署/Git/Git_gitignore.md)
 * [Git_merge](./Content/Article/运维与部署/Git/Git_merge.md)
 * [Git_pull](./Content/Article/运维与部署/Git/Git_pull.md)

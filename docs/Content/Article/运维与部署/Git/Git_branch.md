@@ -1,3 +1,15 @@
+# branches 简介
+* 定义：指向某个commit的指针
+* 查询当前branch：在.git结构下执行命令
+  ```cmd
+  cat .git/HEAD
+  ref: refs/heads/master
+  ```
+* 查询当前branch所指向的最新一次提交的commit hash值()
+  ```cmd
+  cat .git/refs/heads/master
+  897fb065bac775a0f9cb9f247b3576e85ba71196
+  ```
 # git branch 参数简介
 
 |指令|说明|
@@ -45,6 +57,11 @@ PS D:\xxx\source_code> git branch -a
 ```
 
 # 新建分支
+## git branch branch_name
+* `branch_name` 是新建分支名称
+* 新建分支，若branch_name 已存在 则直接报错
+* 并不切换至新分支，而是仍在当前分支
+
 ## git branch -f branch_name
 * 新建分支，但并不切换至新分支，而是仍在当前分支
 * `branch_name` 是新建分支名称
@@ -58,11 +75,18 @@ PS D:\xxx\source_code> git branch -a
 * 删除后，通过`push`命令推送到服务器
 ```cmd
 git branch -d -r origin/dev_branch
-
 git push origin : dev_branch
 ```
+
 ## git -D branch_name
 * 强制删除`git -D branch_name`, 相当于 `git -d -f branch_name`
+* 使用场景：当分支没有完全合并至主干时，执行`git -d`会有报错提示，此时通过`git -D`强制删除
+  ```cmd
+  git -d dev
+  error: The branch'dev' is not fully merged.                   # 分支有commit未合并
+  If you are sure you want to delete it,run git branch -D dev   # 若希望删除分支，通过强制操作进行删除
+  ```
+* 建议尽量通过`git -d`进行删除操作
 
 # 重命名分支
 ## 重命名本地&远程的正确操作顺序
@@ -77,6 +101,9 @@ git push origin : dev_branch
 
 ## git branch -M old_branch_name new_branch_name
 * 与强制重命名，除此以外与`-m`参数无异
+
+# 切换分支
+* `git checkout branch_name`进行切换
 
 # 参考
 * [git branch用法总结，查看、新建、删除、重命名](https://blog.csdn.net/afei__/article/details/51567155?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-2.control)
