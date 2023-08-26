@@ -18,8 +18,11 @@ D:\git_learning\.git>dir
 |refs|目录|包含了git引用信息，如分支、标签等，用于跟踪代码提交的历史记录|
 |objects|目录|git提交代码的实际数据|
 |config|文件|git本地配置信息（用户信息、远程仓库等）|
-|heads|文件|该文件指向当前工作分支的最新提交|
+|HEAD|文件|该文件指向当前工作分支的最新提交|
+|ORIG_HEAD|文件|`git merge`、`git pull`之前 `HEAD`指向的版本（40位的`commit_id`），用于回滚操作|
+|FETCH_HEAD|文件|`git fetch`执行后，生成的文件，当前本地分支连接的远程分支最新commit的SHA1值|
 |index|文件|存储缓存区的文件|
+
 
 # hooks
 * hooks文件夹内，是针对各种git操作的钩子函数示例：`pre-commit.sample` 是 执行`commit`前会触发的钩子函数
@@ -83,8 +86,10 @@ PS D:\git_learning\source_code\.git\hooks> ls
 * blob对象：存储添加 or 修改的文件内容信息
 * tree对象：存储blob对象对应的文件名 & hash值
 * commit对象：`git commit`所提交的tree对象对应的hash值 & 作者 + 提交者信息
+* tag对象：用于存放tag相关信息，`git tag`命令会对其造成改变
 * `git add`、`git rm` 时 blob类型文件会发生改变
 * `git commit` 时，会让 tree类型和commit类型文件发生改变, 但blob结对不会改变
+* 执行改变缓存区文件的命令时（`git add` 或 `git rm`等）时会导致`objects`目录下的文件发生改变
 
 ## 查看文件类型
 * 通过`git cat-file -t hashcode`进行查看对象类型，**注意：hashcode 参数务必文件夹名称（SHA-1前两位）+ 文件名（SHA-1后38位）**
@@ -92,32 +97,51 @@ PS D:\git_learning\source_code\.git\hooks> ls
     PS D:\git_learning\source_code\.git\objects\00> git cat-file -t 001070b677ab3a705a8e6dd16f89578bbd47c4d8
     blob
     ```
+
 ## 查看文件内容
 * 通过`git cat-file -p hashcode`进行查看对象内容，**注意事项同上**
-  * 若对象为blob类型，则显示文件内容
-    ```cmd
-    PS D:\git_learning\source_code\.git\objects\00> git cat-file -p 001070b677ab3a705a8e6dd16f89578bbd47c4d8
-    hello world
-    ```
-  * 对象为commit类型，包含**tree对象 & 对应hash值**、本次commit的 **username** 、**邮箱**、**时间戳**、**时区**、**commit message**
-    ```cmd
-    git cat-file -p dObde7c
-    tree 29d3f358addb2b6e16ebfb981716fa75cc562ee7          # tree 对象 & 对应hash值（hash值后38位即tree文件文件名，前两位为文件夹名称）
-    author FIFA <feifan_z@qmail.com> 1590009304 +0200      # 作者信息（名字 + 邮箱 + 时间戳 + 时区）
-    committer FIFA <feifan_z@gmail.com> 1590009304 +0200   # commit信息（名字 + 邮箱 + 时间戳 + 时区）
-    1st commit message
-    ```
-  * 对象为tree类型，包含文件权限、文件类型、hash值、文件名（`git ls-files -s` 出来的信息）
-    ```cmd
-    git cat-file -p 29d3f3
-    100644 blob ca5a43e53e012b6fd3b2a8a06ebb6c2ee24a24e5   file1.txt
-    ```
-* 查看文件大小：通过`git cat-file -s hashcode`进行查看对象类型，**注意事项同上**，显示文件大小
-  ```cmd
-  PS D:\git_learning\source_code\.git\objects\00> git cat-file -s 001070b677ab3a705a8e6dd16f89578bbd47c4d8
-  181
-  ```
-* 执行改变缓存区文件的命令时（`git add` 或 `git rm`）时会导致`objects`目录下的文件发生改变
+
+### BLOB类型
+* 若对象为blob类型，则显示文件内容
+```cmd
+PS D:\git_learning\source_code\.git\objects\00> git cat-file -p 001070b677ab3a705a8e6dd16f89578bbd47c4d8
+hello world
+```
+
+### COMMIT类型
+* 对象为commit类型，包含**tree对象 & 对应hash值**、本次commit的 **username** 、**邮箱**、**时间戳**、**时区**、**commit message**
+```cmd
+git cat-file -p dObde7c
+tree 29d3f358addb2b6e16ebfb981716fa75cc562ee7          # tree 对象 & 对应hash值（hash值后38位即tree文件文件名，前两位为文件夹名称）
+author FIFA <feifan_z@qmail.com> 1590009304 +0200      # 作者信息（名字 + 邮箱 + 时间戳 + 时区）
+committer FIFA <feifan_z@gmail.com> 1590009304 +0200   # commit信息（名字 + 邮箱 + 时间戳 + 时区）
+1st commit message
+```
+
+### TREE类型
+* 对象为tree类型，包含文件权限、文件类型、hash值、文件名（`git ls-files -s` 出来的信息）
+```cmd
+git cat-file -p 29d3f3
+100644 blob ca5a43e53e012b6fd3b2a8a06ebb6c2ee24a24e5   file1.txt
+```
+
+### TAG类型
+
+```cmd
+git cat-file -p c267
+object b8a8bc8c63394642e490b113e6541330e892dec8           # 指向的commit的SHA1值
+type commit                                               # 指向对象的类型：commit
+tag v1.0.0                                                # tag名称
+tagger Peng Xiao <xiaoquwl@gmail.com> 1594161583 +0200    # tag创建人、邮箱、时间戳、时区
+version v1.0.1                                            # tag信息
+```
+
+## 查看文件大小
+* 通过`git cat-file -s hashcode`进行查看对象类型，**注意事项同上**，显示文件大小
+```cmd
+PS D:\git_learning\source_code\.git\objects\00> git cat-file -s 001070b677ab3a705a8e6dd16f89578bbd47c4d8
+181
+```
 
 # refs
 * 存储git各种引用的目录，包括分支（heads）、远程分支（remotes）和标签（tags）
@@ -167,7 +191,9 @@ PS D:\git_learning\source_code\.git\hooks> ls
   ```
 
 ## tags 
-* tags目录保存的是本地仓库的tag和head信息。一个tag对应一个和tag同名的文件，文件内容是该tag对应commit id
+* tags目录保存的是本地仓库的tag和head信息。每个文件名为tag_name，文件内容是该tag指向的commit的 SHA1 值
+* `git tag`命令添加tag，该目录下会生成对应文件
+* `git tag -d`删除tag 本质就是删除该目录下的同名文件
 
 # HEAD
 * 文件类型，用于存储当前**开发所在的分支**
@@ -184,6 +210,19 @@ PS D:\git_learning\source_code\.git\hooks> ls
   ref: refs/heads/dev
   ```
 
+# ORIG_HEAD
+* 文件类型，记录`git merge` 之前的commit id
+* 只有`git merge`后 才会生成该文件
+* 文件存在意义：`git reset`进行回滚时，会根据该文件所记录的commit id 进行回滚
+
+# FETCH_HEAD
+* 第一行，表示当前本地分支连接的远程仓库最新commit SHA1值
+* 剩下若干行为其他分支
+```cmd
+cat .git/FETCH_HEAD
+ce8735168b320bd7afca62cd19ebe1dcc2cc4ba6    branch 'master' of https://github.com/git2022/git-demo 
+d0c6c15dd11263bf41334ae2b6cee3b962fc7f9c    not-for-merge branch 'dev' of https://github.com/git2022/git-demo
+```
 
 # index
 * 通过`git ls-files` 查看暂存区的全部文件名称 & 其路径
@@ -200,6 +239,28 @@ PS D:\git_learning\source_code\.git\hooks> ls
 * `git status`的本质：
   * `untracked file`：index中没有的文件
   * `modified`： **index中文件的hash值**与**工作区的对应文件的hash值**不相等
+
+# config
+* 获取本地配置信息（当前分支、连接的远程仓库等）
+```cmd
+cat .git/config
+[core]
+        repositoryformatversion = 0
+        filemode = false
+        bare = false
+        logallrefupdates = true
+        symlinks = false
+        ignorecase = true
+[remote "origin"]
+        url = https://github.com/FeifanZhang/fifa_z_blog.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+```
+
+* `[remote "origin"]`: 该内容在连接远程仓库（`git remote add origin 远程仓库url`）后才有
+* 
 
 # 参考
 * [Git目录结构和作用详解](https://www.itzhimei.com/archives/3613.html)

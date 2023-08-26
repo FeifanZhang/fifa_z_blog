@@ -3,7 +3,6 @@
 ```js
 const reg = /前端/  // 查看字符串是否包含前端字样
 const reg1 = /abc/  // 查看字符串是否包含abc字样
-
 ```
 
 # test
@@ -11,7 +10,6 @@ const reg1 = /abc/  // 查看字符串是否包含abc字样
 * 返回值：布尔类型
 ```js
 const reg = /前端/
-
 console.log(reg.test("学前端太难了"))  // true
 console.log(reg.test("学后端太难了"))  // false
 ```
@@ -21,7 +19,6 @@ console.log(reg.test("学后端太难了"))  // false
 * 返回值：数组（具体形式代码示例中说明）
 ```js
 const reg = /前端/ 
-
 let res0 = reg.exec("学前端太难了") // [ '前端', index: 1, input: '学前端太难了', groups: undefined ]
 let res1 = reg.exec("学好前端太难了")  // [ '前端', index: 2, input: '学前端太难了', groups: undefined ]
 // 返回值说明：
@@ -57,6 +54,7 @@ console.log(str.replace(reg, "java")) // 学java太难了
 * 返回值：数组
   * 正则表达式为全局类型：返回全部匹配到的子串
   * 正则表达式非全局类型：格式与`exec`方法相同
+
 ```js
 const reg = /前端/
 const str = "学前端太难了，前端挣得不少"

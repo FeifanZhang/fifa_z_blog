@@ -26,13 +26,8 @@ const http = require('http')
 
 // 创建服务对象
 const server = http.createServer((request, response)=>{
-    response.setHeader('content-type', 'text/html;charset=utf-8');
+    response.setHeader('content-type', 'text/html;charset=utf-8');  // 不设置charset，返回中文为乱码
     response.end('您好');  // 返回为乱码
-});
-
-// 监听端口，启动服务（两个参数，第一个是端口号，第二个是启动成功时的回调函数）
-server.listen(9000, () => {
-    console.log('服务已经启动......')
 });
 ```
 
@@ -52,10 +47,11 @@ server.listen(9000, () => {
 |请求方法|`request.method`|GET POST 等大写操作名|字符串|
 |请求版本|`request.httpVersion`|1.1|字符串|
 |请求路径|`request.url`|二级子路径+get参数|字符串|
-|URL路径|`require('url').parse(request.url).pathname`|||
-|URL查询字符串|`require('url').parse(request.url).query`|||
-|请求头|`request.headers`|请求头生成的对象，且属性名称都是请求头中属性名的小写|js对象|
-|请求体|`request.on('data', function(chunk){})` \n `request.on('end', function(){});`|
+|URL路径|`require('url').parse(request.url).pathname`|二级子路径|字符串|
+|URL查询字符串|`require('url').parse(request.url).query` </br> `require('url').parse(request.url, false).query`|get参数|字符串|
+|URL查询字符串|`require('url').parse(request.url, true).query`|get参数|对象|
+|请求头|`request.headers`|请求头生成的对象，且属性名称都是请求头中属性名的小写|对象|
+|请求体|`request.on('data', function(chunk){})` </br> `request.on('end', function(){});`|
 
 ## request.method
 
@@ -85,26 +81,81 @@ const server = http.createServer((request, response)=>{
 ```
 
 ## request.url
+### 返回值
 * 返回值为**二级子路径** + **get参数**，如
-  * `127.0.0.1`
-    * 返回值`/` 
-    * 无二级路径，且无GET方法传递查询词
-  * `127.0.0.1/index` 
-    * 返回值 `index` 
-    * 有二级路径（`index`），但无GET方法传递查询词
-  * `127.0.0.1/search?keyword=hahaha&num=1` 
-    * 返回值 `search?keyword=hahaha&num=1` 
-    * 有二级路径(`search`)，且有GET方法传递查询词（`keyword=hahaha` & `num=1`）
+  |url|返回值|说明|
+  |--|--|--|
+  |`127.0.0.1`|`/`|无二级路径，且无GET方法传递查询词|
+  |`127.0.0.1/index`|`index`|有二级路径（`index`），但无GET方法传递查询词|
+  |`127.0.0.1/search?keyword=hahaha&num=1`|`search?keyword=hahaha&num=1` |有二级路径(`search`)，且有GET方法传递查询词（`keyword=hahaha` & `num=1`）|
+
+### 用法示例
 ```js
 // 导入http模块
 const http = require('http')
-
 // 创建服务对象
 const server = http.createServer((request, response)=>{
     console.log(request.url);
     response.end('http'); 
 });
 ```
+
+### url.parse(request.url, bool)
+* request.url 仅返回部分url信息，若需要更详细信息，通过nodejs的`url`模块对url进行解析
+* 所需参数
+  |参数|说明|是否必填|
+  |--|--|--|
+  |request.url|请求体url|是|
+  |bool|`url.parse(request.url, false).query`返回类型为string </br> `url.parse(request.url, true).query`则返回object</br>默认为false|否|
+* 返回值为object
+
+### url.parse(request.url, false)
+  ```js
+  const url = require('url');
+  const server = http.createServer((request, response)=>{
+    let res = url.parse(request.url);
+    // res结果如下
+    // Url {
+    //     protocol: null,
+    //     slashes: null,
+    //     auth: null,
+    //     host: null,
+    //     port: null,
+    //     hostname: null,
+    //     hash: null,
+    //     search: '?keyword=h5',
+    //     query: 'keyword=h5',
+    //     pathname: '/search',
+    //     path: '/search?keyword=h5',
+    //     href: '/search?keyword=h5'
+    //   }
+
+    // 获取路径
+    let path_name = res.pathname
+
+    // 获取查询字符串（返回string）
+    let query_word = res.query  // keyword=h5 字符串
+
+    response.end('http'); 
+  });
+  ```
+
+### url.parse(request.url, true)
+  ```js
+  const url = require('url');
+  const server = http.createServer((request, response)=>{
+    let res = url.parse(request.url, true);
+
+    // 获取查询字符串（返回object）
+    let query_word = res.query  // {keyword: 'h5'}
+
+    // 提取keyword
+    let kw = res.query.keyword;  // 'h5'
+
+    response.end('http'); 
+  });
+  ```
+
 
 ## request.headers
 
@@ -114,7 +165,7 @@ const http = require('http')
 
 // 创建服务对象
 const server = http.createServer((request, response)=>{
-        // 获取请求头（返回的是一个对象，且属性名是请求头属性的小写名称）
+    // 获取请求头（返回的是一个对象，且属性名是请求头属性的小写名称）
     console.log(request.headers);
     // request.headers 返回结果如下：
     // {
@@ -137,4 +188,28 @@ const server = http.createServer((request, response)=>{
 ```
 
 # response 操作
+## 响应头设置
+```js
+const server = http.createServer((request, response)=>{
+
+    // 响应状态
+    response.statusCode = 200;
+    response.statusMessage = 'I LOVE YOU';  // 用到很少，一般直接与状态码对应
+
+    // 响应头
+    // response.setHeader(key, value)
+    response.setHeader('content/type', 'text/html;charset:utf-8');  
+
+    // 除了设置响应头已有的键值对，还可自定义新的键值对
+    response.setHeader('myname', 'FIFA'); 
+
+    // 响应头多个键值对同名，value用数组代替
+    response.setHeader('myname', ['a', 'b', 'c']); 
+    response.end('http'); 
+});
+```
+## 响应体设置
+```js
+
+```
 

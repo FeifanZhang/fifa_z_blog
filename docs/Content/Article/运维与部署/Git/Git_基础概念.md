@@ -97,69 +97,7 @@ n file changed, x insertions(+), y deletions(-)
 ## 小问题
 目前github支持通过ssh进行安全认证，而不再是用户名称和密码，官网给大家提供了在[本地生成ssh的方法](https://docs.github.com/cn/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)以及[将ssh添加到github账户的方法](https://docs.github.com/cn/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)。还是那句话，能上官网查就尽量去官网
 
-# 常用Git小命令
-## `git log` 命令
-### 命令简介
-根据commit的时间，由进到远展示每一次commit的索引指针、作者、时间、介绍等信息。
-```bash
-feifanzhang@fifamba fifa_z_blog % git log
-commit 86a730caca26a52c7f320244afa86d0112502820 (HEAD -> master, origin/master, origin/HEAD)
-Author: FeifanZhang <zhangff970329@163.com>
-Date:   Fri Jul 9 15:21:11 2021 +0800
 
-gitignore改动
-
-commit 5e7d85cc10965fea595fc5959f313bb56840e191
-Author: FeifanZhang <zhangff970329@163.com>
-Date:   Fri Jul 9 10:58:06 2021 +0800
-
-更改主题为Next,增加文章若干
-```
-此时光标会停在最后的`:`后面，`空格键`向后翻页查找更早期记录，`b键`往回翻一页查看近期记录，`q键`退出。  
-### 日志显示的其他几种方式
-1. 为追求简洁，使用`git log --pretty=oneline`仅显示索引以及commit描述
-```bash
-feifanzhang@fifamba fifa_z_blog % git log --pretty=oneline
-86a730caca26a52c7f320244afa86d0112502820 (HEAD -> master, origin/master, origin/HEAD) gitignore改动
-5e7d85cc10965fea595fc5959f313bb56840e191 更改主题为Next,增加文章若干
-dce31a051a6819a7338bc9ccc523d3e197c88f2e 1
-505fbfd954af9270f6c62b754c94c1936a2233e4 add gallery function in it
-53b76ca83c407ac647a9cfb957eba254fe89dadb update
-86f66dd41bbfc4daf25a73375faa8be89b5e4b48 add the self-define icarus in github
-91f90e9deff4b1074ff107af08960d03ecee2be5 add node_module
-846204a4e745bc82965fd4ec5c08de8f5acf6ee2 first commit
-```
-2. 索引过长，使用`git log --oneline`将索引截取前7位
-```bash
-feifanzhang@fifamba fifa_z_blog % git log --oneline
-86a730c (HEAD -> master, origin/master, origin/HEAD) gitignore改动
-5e7d85c 更改主题为Next,增加文章若干
-dce31a0 1
-505fbfd add gallery function in it
-53b76ca update
-86f66dd add the self-define icarus in github
-91f90e9 add node_module
-846204a first commit
-```
-3. `git reflog` 显示的信息会增加 **HEAD@{数字}** 意味着退回到该commit版本需要的步数
-``` bash
-feifanzhang@fifamba fifa_z_blog % git reflog
-86a730c (HEAD -> master, origin/master, origin/HEAD) HEAD@{0}: commit: gitignore改动
-5e7d85c HEAD@{1}: commit: 更改主题为Next,增加文章若干
-dce31a0 HEAD@{2}: clone: from https://github.com/FeifanZhang/fifa_z_blog.git
-```
-
-## `git reset` 命令
-通过`git log`命令中可查看到每个commit对应的指针索引，reset命令根据这些索引跳转至任意commit版本，（可以使用`git reflog`中的简短索引进行跳转）。对commit的代码进行版本控制，也就是对本地库进行版本控制，但是可能会造成工作区、暂存区与本地库代码版本的不同步，一般通过`hard、mix以及soft参数来确认版本改变的区域`。
-1. `git reset --hard`命令：除了重置本地库的版本指针外，还会同步重置工作区以及暂存区版本。
-2. `git reset --mix`命令：同步重置暂存区以及本地库，不会对工作区产生影响。
-3. `git reset --soft`命令：仅重置本地库，对工作区、暂存区无影响。
-
-## `git diff` 命令
-该命令查询工作区、暂存区以及本地库的项目文件的内容差异（diff means differences）。注意：git记录修改信息的最小单位为行。该命令显示的内容包括：文件名称，以及对应文件中的删除的代码以及添加的代码。
-1. `git diff`命令：显示工作区与暂存区所有文件的内容差异。
-2. `git diff filename` 命令：查看某个文件工作区与暂存区的内容差异。
-3. `git diff index filename`命令：显示暂存区与`index`版本本地库的内容差异，index是`git reflog`中的版本指针索引，可查询任何版本本地库与现暂存区的代码差异，如果查询当前版本本地库与暂存区的内容差异，则使用`git diff HEAD filename`即可。
 
 # 幸福的“小插件”
 * 在线阅读源码时，Github网站的排版对阅读并不友好，可在url的`github`后加`1s`,即可得到vs code排版,如下图所示：

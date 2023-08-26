@@ -13,10 +13,10 @@
   |git clone|代码copy至本地，本质上是初始化ref|
 
 * 与`git log`区别
-  |命令|日志范围|
-  |--|--|
-  |`git log`|HEAD以及之前的全部操作日志|
-  |`git reflog`|当前分支的全部操作变更日志|
+  |命令|日志范围|记录的命令|
+  |--|--|--|
+  |`git log`|HEAD以及之前的全部操作日志|commit|
+  |`git reflog`|当前分支的全部操作变更日志|commit、被删除的commit、reset |
 
 
 # git reflog

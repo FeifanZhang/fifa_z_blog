@@ -105,5 +105,16 @@ git push origin : dev_branch
 # 切换分支
 * `git checkout branch_name`进行切换
 
+# `git branch -vv`
+* 查看本地与远程分支的差异
+* 也可用来查看本地分支是否与远程关联
+```cmd
+git branch -vv
+* dev_feifan_zhang      097f19f [origin/dev_feifan_zhang] 张非凡：修复了 基础数据管理 -> 实际价格管理 -> 模板下载功能报错的问题
+  master                50e9c65 [origin/master: ahead 1, behind 1] 张非凡：gitignore 添加了mysql & redis config
+```
+* `[origin/dev_feifan_zhang] `：本地与远程无版本差异
+* `origin/master: behind n`：本地落后于线上（`origin/master`）n个版本
+
 # 参考
 * [git branch用法总结，查看、新建、删除、重命名](https://blog.csdn.net/afei__/article/details/51567155?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-2.control)
