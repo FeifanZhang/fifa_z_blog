@@ -30,6 +30,15 @@ class Program
 }
 ```
 
+## 获取父类
+* `BaseType`获取父类
+* 示例：获取student变量的父类类型
+  ```cs
+  var std = this.GetType().GetField("Student").FieldType;
+  father = std.BaseType;
+  ```
+
+
 # BindingFlags 筛选方法修饰符
 反射调用字段、属性或是方法时，默认调用`Public`类型成员，要查询其他类型成员（`protected`, `private`等），则需要通过`BindingFlags`枚举类型对查找的成员进行筛选
 
@@ -62,7 +71,6 @@ public class TestCls
 var inst = new TestCls();
 FieldInfo fieldA = typeOf(TestCls).GetField("A");  // 获取A字段信息
 FieldInfo fieldB = typeOf(TestCls).GetField("B");  // 获取B字段信息
-
 // 获取字段值
 Object valA = typeOf(TestCls).GetField("A").GetValue(inst);
 Object valB = typeOf(TestCls).GetField("B").GetValue(inst);
@@ -72,20 +80,73 @@ Object valB = typeOf(TestCls).GetField("B").GetValue(inst);
 * 通过`GetField(fieldName, BindingFlags)`操作私有类型字段
 ```cs
 var inst = new TestCls();
-
 // 不添加 BindingFlags 获取私有字段信息，则返回null
 typeOf(TestCls).GetField("C");  // 返回null
 typeOf(TestCls).GetField("D");  // 返回null
-
 // 添加 BindingFlags 获取字段
 FieldInfo FieldC = typeOf(TestCls).GetField("C", BindingFlags.Instance | BindingFlags.NonPublic);
 FieldInfo FieldD = typeOf(TestCls).GetField("D", BindingFlags.Instance | BindingFlags.NonPublic);
-
 // 获取字段值
 Object valC = typeOf(TestCls).GetField("C", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(inst);
 Object valD = typeOf(TestCls).GetField("D", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(inst);
 ```
 
+## 反射操作字段
+* 演示用的类型
+    ```cs
+    Public Class Student
+    {
+        public string name;
+        public int age;
+    }
+    ```
+
+* 通过`fieldInfo.SetValue(对象, 数值)`进行赋值
+    ```cs
+    Student stu1 = new Student();
+    Type t = stu1.GetType();
+    // 获取字段信息
+    FieldInfo filedInfo1 = t.GetField("name");
+    FieldInfo filedInfo2 = t.GetField("age");
+    // 根据字段信息，直接赋值
+    fieldInfo1.SetValue(stu1,"小明");
+    fieldInfo2.SetValue(stu1,15);
+    ```
+
+# 反射调用属性
+* 与操作字段没有太大区别，将`GetField()`换成`GetProperty()`即可
+## 属性与字段的区别
+* 属性与字段在外部调用时类似
+* 属性有get set方法，对字段进行保护
+
+```cs
+Public Class Student
+{
+    // 字段
+    private string _firstName;
+
+    private int _age;
+
+    // 属性
+    public string DateOfBirth {get; set;}
+
+    // 属性设置默认值
+    public string school {get; set} = "翻斗幼儿园";
+
+    // 属性的特点在于get set方法
+    public int Age {
+        get {return _age;}
+        set{ _age = value;}
+    }
+
+    // get set方法可以用于保护字段，规避非法数值
+    public string FirstName{
+        get => _firstName;
+        set => _firstName = value;
+    }
+}
+```
+* 更具体区别，参考[Csharp_字段与属性](./CSharp_%E5%AD%97%E6%AE%B5%E4%B8%8E%E5%B1%9E%E6%80%A7.md)
 
 # 反射调用方法
 ## 反射直接获取构造方法

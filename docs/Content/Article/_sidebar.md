@@ -43,8 +43,6 @@
 			* [CSharp_GetType()与typeof()的区别](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_GetType()与typeof()的区别.md)
 			* [CSharp_Linq](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Linq.md)
 			* [CSharp_Math函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Math函数.md)
-			* [CSharp_Newtonsoft](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Newtonsoft.md)
-			* [CSharp_SpirePdf](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_SpirePdf.md)
 			* [CSharp_函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_函数.md)
 			* [CSharp_反射](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_反射.md)
 			* [CSharp_基础语法](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_基础语法.md)
@@ -131,10 +129,14 @@
 		* **Pynput**
 			* [Pynput_组件笔记](./Content/Article/技术笔记/Python/Pynput/Pynput_组件笔记.md)
 		* **Python语法**
+			* [Python_aiohttp](./Content/Article/技术笔记/Python/Python语法/Python_aiohttp.md)
+			* [Python_asyncio](./Content/Article/技术笔记/Python/Python语法/Python_asyncio.md)
 			* [Python_bit_operation](./Content/Article/技术笔记/Python/Python语法/Python_bit_operation.md)
+			* [Python_bs4](./Content/Article/技术笔记/Python/Python语法/Python_bs4.md)
 			* [Python_closure](./Content/Article/技术笔记/Python/Python语法/Python_closure.md)
 			* [Python_concurrent](./Content/Article/技术笔记/Python/Python语法/Python_concurrent.md)
 			* [Python_encoding](./Content/Article/技术笔记/Python/Python语法/Python_encoding.md)
+			* [Python_Exception](./Content/Article/技术笔记/Python/Python语法/Python_Exception.md)
 			* [Python_file_process](./Content/Article/技术笔记/Python/Python语法/Python_file_process.md)
 			* [Python_format_output](./Content/Article/技术笔记/Python/Python语法/Python_format_output.md)
 			* [Python_grabage_collection](./Content/Article/技术笔记/Python/Python语法/Python_grabage_collection.md)
@@ -144,8 +146,12 @@
 			* [Python_logging](./Content/Article/技术笔记/Python/Python语法/Python_logging.md)
 			* [Python_magic_method](./Content/Article/技术笔记/Python/Python语法/Python_magic_method.md)
 			* [Python_max&min](./Content/Article/技术笔记/Python/Python语法/Python_max&min.md)
+			* [Python_multiProcessing](./Content/Article/技术笔记/Python/Python语法/Python_multiProcessing.md)
 			* [Python_re](./Content/Article/技术笔记/Python/Python语法/Python_re.md)
+			* [Python_request](./Content/Article/技术笔记/Python/Python语法/Python_request.md)
+			* [Python_threading](./Content/Article/技术笔记/Python/Python语法/Python_threading.md)
 			* [Python_time](./Content/Article/技术笔记/Python/Python语法/Python_time.md)
+			* [Python_xpath](./Content/Article/技术笔记/Python/Python语法/Python_xpath.md)
 		* **Pytorch**
 			* [Pytorch_安装](./Content/Article/技术笔记/Python/Pytorch/Pytorch_安装.md)
 			* [Pytorch_张量](./Content/Article/技术笔记/Python/Pytorch/Pytorch_张量.md)
@@ -203,6 +209,9 @@
 		* [SQL_表的操作](./Content/Article/数据库/SQL语句/SQL_表的操作.md)
 		* [SQL_连接查询](./Content/Article/数据库/SQL语句/SQL_连接查询.md)
 * **计算机基础**
+	* **Http**
+		* [HTTP](./Content/Article/计算机基础/Http/HTTP.md)
+		* [Http_状态码&请求方法](./Content/Article/计算机基础/Http/Http_状态码&请求方法.md)
 	* **代码规范**
 		* [代码规范_Function](./Content/Article/计算机基础/代码规范/代码规范_Function.md)
 		* [代码规范_命名规则](./Content/Article/计算机基础/代码规范/代码规范_命名规则.md)
@@ -211,6 +220,8 @@
 		* [Cron表达式](./Content/Article/计算机基础/其他小知识/Cron表达式.md)
 		* [不同语言注释符](./Content/Article/计算机基础/其他小知识/不同语言注释符.md)
 		* [数据格式](./Content/Article/计算机基础/其他小知识/数据格式.md)
+	* **并发**
+		* [并发](./Content/Article/计算机基础/并发/并发.md)
 	* **正则表达式**
 		* [常用正则表达式](./Content/Article/计算机基础/正则表达式/常用正则表达式.md)
 	* **算法**
@@ -218,6 +229,10 @@
 		* [摩尔投票法](./Content/Article/计算机基础/算法/摩尔投票法.md)
 		* [算法_双指针](./Content/Article/计算机基础/算法/算法_双指针.md)
 		* [阿拉伯数字转汉字读法](./Content/Article/计算机基础/算法/阿拉伯数字转汉字读法.md)
+	* **网络通信**
+		* [网络通信_简介](./Content/Article/计算机基础/网络通信/网络通信_简介.md)
+	* **计算机内存**
+		* [存储单位](./Content/Article/计算机基础/计算机内存/存储单位.md)
 	* **设计模式**
 		* [设计模式_代理模式](./Content/Article/计算机基础/设计模式/设计模式_代理模式.md)
 		* [设计模式_单例模式](./Content/Article/计算机基础/设计模式/设计模式_单例模式.md)
@@ -253,10 +268,6 @@
 		* [Git_安装](./Content/Article/运维与部署/Git/Git_安装.md)
 		* [Git_本地分支&远程分支](./Content/Article/运维与部署/Git/Git_本地分支&远程分支.md)
 		* [Git_连接失败如何修复](./Content/Article/运维与部署/Git/Git_连接失败如何修复.md)
-	* **Http**
-		* [HTTP](./Content/Article/运维与部署/Http/HTTP.md)
-		* [Http_状态码](./Content/Article/运维与部署/Http/Http_状态码.md)
-		* [HTTP_请求方法](./Content/Article/运维与部署/Http/HTTP_请求方法.md)
 	* **Linux**
 		* [Linux_Systemctl与Service](./Content/Article/运维与部署/Linux/Linux_Systemctl与Service.md)
 		* [Liunx_常用命令](./Content/Article/运维与部署/Linux/Liunx_常用命令.md)

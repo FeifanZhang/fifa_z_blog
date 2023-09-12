@@ -21,10 +21,6 @@
 	* [Git_安装](./Content/Article/运维与部署/Git/Git_安装.md)
 	* [Git_本地分支&远程分支](./Content/Article/运维与部署/Git/Git_本地分支&远程分支.md)
 	* [Git_连接失败如何修复](./Content/Article/运维与部署/Git/Git_连接失败如何修复.md)
-* **Http**
-	* [HTTP](./Content/Article/运维与部署/Http/HTTP.md)
-	* [Http_状态码](./Content/Article/运维与部署/Http/Http_状态码.md)
-	* [HTTP_请求方法](./Content/Article/运维与部署/Http/HTTP_请求方法.md)
 * **Linux**
 	* [Linux_Systemctl与Service](./Content/Article/运维与部署/Linux/Linux_Systemctl与Service.md)
 	* [Liunx_常用命令](./Content/Article/运维与部署/Linux/Liunx_常用命令.md)

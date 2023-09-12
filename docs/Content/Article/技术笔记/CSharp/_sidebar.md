@@ -4,8 +4,6 @@
 	* [CSharp_GetType()与typeof()的区别](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_GetType()与typeof()的区别.md)
 	* [CSharp_Linq](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Linq.md)
 	* [CSharp_Math函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Math函数.md)
-	* [CSharp_Newtonsoft](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_Newtonsoft.md)
-	* [CSharp_SpirePdf](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_SpirePdf.md)
 	* [CSharp_函数](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_函数.md)
 	* [CSharp_反射](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_反射.md)
 	* [CSharp_基础语法](./Content/Article/技术笔记/CSharp/CSharp_语法/CSharp_基础语法.md)
